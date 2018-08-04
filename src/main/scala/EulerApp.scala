@@ -1,11 +1,11 @@
 abstract class EulerApp {
-  def execute(): Unit
+  def execute(): Any
 
   def main(args: Array[String]): Unit = {
     warmUp()
 
     val start = System.currentTimeMillis()
-    execute()
+    println(execute())
     val time = System.currentTimeMillis() - start
 
     println(s"Elapsed time: $time ms")

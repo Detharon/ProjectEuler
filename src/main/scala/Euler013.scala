@@ -1,7 +1,7 @@
 import scala.io.Source
 
 object Euler013 extends EulerApp {
-  override def execute(): Unit = {
+  override def execute(): String = {
     val data = prepareData()
 
     var sum: Long = 0;
@@ -12,7 +12,7 @@ object Euler013 extends EulerApp {
       sum *= 10
     }
 
-    println(sum.toString.substring(0, 10))
+    sum.toString.substring(0, 10)
   }
 
   def prepareData(): Array[Array[Int]] = {

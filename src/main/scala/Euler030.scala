@@ -2,13 +2,11 @@ import EulerHelper.BigIntExp
 
 object Euler030 extends EulerApp {
 
-  override def execute(): Unit = {
-    val result = Stream.from(2)
+  override def execute(): Int = {
+    Stream.from(2)
       .takeWhile(_ < 354285)
       .filter(n => digitsToPower(n, 5) == n)
       .sum
-
-    println(result)
   }
 
   def digitsToPower(n: BigInt, power: Int): BigInt = {

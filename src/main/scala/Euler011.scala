@@ -2,8 +2,8 @@ import scala.io.Source
 
 object Euler011 extends EulerApp {
 
-  override def execute() {
-    println(findLagestProduct(prepareData))
+  override def execute(): Long = {
+    findLagestProduct(prepareData)
   }
 
   def prepareData(): Array[Array[Int]] = {

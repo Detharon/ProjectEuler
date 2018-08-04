@@ -1,12 +1,10 @@
 object Euler028 extends EulerApp {
 
-  override def execute(): Unit = {
-    val result = 1 + Stream.from(3, 2)
+  override def execute(): Long = {
+    1 + Stream.from(3, 2)
       .takeWhile(_ <= 1001)
       .map(sumForDiagonal(_))
       .sum
-
-    println(result)
   }
 
   def sumForDiagonal(n: Long): Long = {
