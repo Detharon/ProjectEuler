@@ -1,5 +1,7 @@
 import EulerHelper._
 
+import scala.language.postfixOps
+
 object Euler020 extends EulerApp {
   override def execute(): Any = {
     readDigits(BigInt(100).factorial()) sum

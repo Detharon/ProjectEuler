@@ -1,3 +1,5 @@
+import scala.language.postfixOps
+
 object Euler001 extends EulerApp {
 
     /**
