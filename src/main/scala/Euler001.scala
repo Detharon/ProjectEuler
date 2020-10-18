@@ -7,6 +7,8 @@ object Euler001 extends EulerApp {
      * If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
      * Find the sum of all the multiples of 3 or 5 below 1000.
      *
+     * --------------------------------------------------
+     *
      * Explanation: The only tricky part of this exercise comes from the fact that we cannot simply count the multiplies of 3,
      * then calculate the multiplies of 5, and add these two numbers up. If we did that, then the numbers that are divisible
      * by 3 and 5 would be calculated twice.
