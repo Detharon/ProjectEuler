@@ -18,4 +18,17 @@ object EulerHelper {
     }
   }
 
+  implicit class StringExp(s: String) {
+    def isPalindrome: Boolean = {
+      @tailrec
+      def isPalindrome(s: String): Boolean = {
+        if (s.length < 2) true
+        else if (s.head == s.last) isPalindrome(s.substring(1, s.length - 1))
+        else false
+      }
+
+      isPalindrome(s)
+    }
+  }
+
 }
