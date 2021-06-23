@@ -1,20 +1,24 @@
 import scala.io.Source
+import scala.util.Using
 
 object Euler011 extends EulerApp {
 
   override def execute(): Long = {
-    findLagestProduct(prepareData)
+    findLargestProduct(prepareData())
   }
 
   def prepareData(): Array[Array[Int]] = {
-    (for (line <- Source.fromURL(getClass.getResource("Euler011.data")).getLines())
-      yield line.split(" ").map(_.toInt)).toArray
+    Using(Source.fromURL(getClass.getResource("Euler011.data")))(_.getLines().toSeq).map { lines =>
+      lines.map { line =>
+        line.split(" ").map(_.toInt)
+      }
+    }.get.toArray
   }
 
-  def findLagestProduct(matrix: Array[Array[Int]]): Long = {
+  def findLargestProduct(matrix: Array[Array[Int]]): Long = {
     var max: Long = 0
 
-    for (x <- 0 until matrix.length; j <- 0 until matrix(x).length) {
+    for (x <- matrix.indices; j <- matrix(x).indices) {
       if (x < matrix.length - 3) {
         max = Math.max(max, matrix(x)(j) * matrix(x + 1)(j) * matrix(x + 2)(j) * matrix(x + 3)(j))
       }

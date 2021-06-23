@@ -4,7 +4,7 @@ abstract class EulerApp {
 
   def main(args: Array[String]): Unit = {
     warmUp()
-    measure(execute)
+    measure(execute _)
   }
 
   def warmUp(): Unit = {
