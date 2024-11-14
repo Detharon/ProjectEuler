@@ -6,9 +6,8 @@ abstract class EulerApp {
     measure(execute)
   }
 
-  private def warmUp(): Unit = {
+  private def warmUp(): Unit = 
     (0 to 25).foreach(_ ^ 5)
-  }
 
   private def measure(f: () => Any): Unit = {
     val start = System.currentTimeMillis()
