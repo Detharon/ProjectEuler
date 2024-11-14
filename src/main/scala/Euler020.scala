@@ -2,7 +2,7 @@ import EulerHelper._
 
 object Euler020 extends EulerApp {
   override def execute(): Any = {
-    readDigits(BigInt(100).factorial()).sum
+    readDigits(BigInt(100).factorial).sum
   }
 
   private def readDigits(n: BigInt): LazyList[Short] = {

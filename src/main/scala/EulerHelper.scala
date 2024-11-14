@@ -3,22 +3,21 @@ import scala.math.BigInt
 
 object EulerHelper {
 
-  implicit class BigIntExp(n: BigInt) {
-    def **(power: Int): BigInt = {
-      n.pow(power)
-    }
+  extension (n: BigInt) {
+    def **(power: Int): BigInt = n.pow(power)
 
-    def factorial(): BigInt = {
+    def factorial: BigInt = {
       @tailrec
       def factorial(n: BigInt, acc: BigInt): BigInt = {
         if (n == 0) acc
         else factorial(n - 1, acc * n)
       }
+
       factorial(n, 1)
     }
   }
-
-  implicit class StringExp(s: String) {
+  
+  extension (s: String) {
     def isPalindrome: Boolean = {
       @tailrec
       def isPalindrome(s: String): Boolean = {
@@ -30,5 +29,4 @@ object EulerHelper {
       isPalindrome(s)
     }
   }
-
 }

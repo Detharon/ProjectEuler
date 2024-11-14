@@ -1,4 +1,4 @@
-import EulerHelper.BigIntExp
+import EulerHelper._
 
 object Euler030 extends EulerApp {
 
