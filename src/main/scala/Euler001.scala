@@ -1,5 +1,3 @@
-import scala.language.postfixOps
-
 object Euler001 extends EulerApp {
 
     /**
@@ -17,9 +15,9 @@ object Euler001 extends EulerApp {
      * 3 until 1000 filter(n => n % 3 == 0 || n % 5 == 0) sum
      */
     override def execute(): Int = {
-        val threes = 3 until 1000 by 3 sum
-        val fives = 5 until 1000 by 5 sum
-        val fifteens = 15 until 1000 by 15 sum
+        val threes = (3 until 1000 by 3).sum
+        val fives = (5 until 1000 by 5).sum
+        val fifteens = (15 until 1000 by 15).sum
 
         threes + fives - fifteens
     }
