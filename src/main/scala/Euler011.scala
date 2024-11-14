@@ -8,14 +8,14 @@ object Euler011 extends EulerApp {
   }
 
   def prepareData(): Array[Array[Int]] = {
-    Using(Source.fromURL(getClass.getResource("Euler011.data")))(_.getLines().toSeq).map { lines =>
+    Using(Source.fromResource("Euler011.data"))(_.getLines().toSeq).map { lines =>
       lines.map { line =>
         line.split(" ").map(_.toInt)
       }
     }.get.toArray
   }
 
-  def findLargestProduct(matrix: Array[Array[Int]]): Long = {
+  private def findLargestProduct(matrix: Array[Array[Int]]): Long = {
     var max: Long = 0
 
     for (x <- matrix.indices; j <- matrix(x).indices) {

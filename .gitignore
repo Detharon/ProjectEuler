@@ -1,6 +1,6 @@
 /.gradle
 /.idea
 /build
-/project/target
+/project/*
 /target
 /.bsp
