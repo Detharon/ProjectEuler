@@ -1,0 +1,1 @@
+object Euler005
