@@ -3,9 +3,9 @@ import scala.annotation.tailrec
 object Euler033 extends EulerApp {
 
   override def execute(): Int = (for {
-    nominator <- 1 to 99
+    numerator <- 1 to 99
     denominator <- 1 to 99
-  } yield Fraction(nominator, denominator))
+  } yield Fraction(numerator, denominator))
     .filter(_.isDigitCancelling)
     .reduce((a, b) => a.product(b))
     .denominator
