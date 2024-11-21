@@ -12,7 +12,7 @@ object Euler003 extends EulerApp {
    * The numbers are low enough that we don't need any optimisations to solve it in a matter of milliseconds.
    *
    */
-  override def execute(): Long = nextPrimeFactor(600851475143L, primesIterator)
+  override def execute(): Long = nextPrimeFactor(600851475143L, primes.iterator)
 
   @tailrec
   private def nextPrimeFactor(n: Long, primesIterator: Iterator[Int]): Long = {
@@ -26,7 +26,6 @@ object Euler003 extends EulerApp {
   }
 
   private val primes: LazyList[Int] = 2 #:: nextPrime(3)
-  private val primesIterator: Iterator[Int] = primes.iterator
 
   private def nextPrime(from: Int): LazyList[Int] = {
     if (isPrime(from)) from #:: nextPrime(from + 1)
