@@ -1,4 +1,4 @@
-object Euler011 extends EulerApp {
+object Euler011M extends EulerApp {
 
   override def execute(): Long = findLargestProduct(prepareData())
 
