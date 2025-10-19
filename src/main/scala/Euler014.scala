@@ -19,16 +19,21 @@ import scala.annotation.tailrec
  *
  * --------------------------------------------------
  *
- * Explanation: A brute-force solution, but it works quite fast as it is.
+ * Explanation: A brute-force solution, but it works quite fast as it is. There's just one optimization, but it cuts the
+ * execution time in half. Due to how the sequences are calculated, a collatzLength(2n) is always bigger than
+ * collatzLength(n) by 1. So we can check only the upper half of the range to get the maximum length of the sequence.
  *
  * My first though when seeing this problem was to use the dynamic programming. After all, we'll keep hitting the same
  * sub-sequences (such as 16 -> 8 -> 4 -> 2 -> 1) many times. In practice, however, it turns out that cost of storing all
- * the previous results outweighs the benefits and the app runs 50% slower.
+ * the previous results outweighs the benefits and the app runs 50% slower. That was unexpected!
+ * On the other hand, this is why it's worth starting out from a simple solution and only then try to optimize.
  *
+ * Still, just to have more practice, let's also build a mutable solution, which will try to address the problem
+ * of too many memoized results and will push the performance even further.
  */
 object Euler014 extends EulerApp {
 
-  override def execute(): Any = (1 until 1_000_000).maxBy(collatzLength)
+  override def execute(): Any = (500_000 until 1_000_000).maxBy(collatzLength)
 
   private def collatzLength(n: Int): Int = {
     @tailrec
