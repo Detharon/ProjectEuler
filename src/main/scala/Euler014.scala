@@ -24,12 +24,15 @@ import scala.annotation.tailrec
  * collatzLength(n) by 1. So we can check only the upper half of the range to get the maximum length of the sequence.
  *
  * My first though when seeing this problem was to use the dynamic programming. After all, we'll keep hitting the same
- * sub-sequences (such as 16 -> 8 -> 4 -> 2 -> 1) many times. In practice, however, it turns out that cost of storing all
- * the previous results outweighs the benefits and the app runs 50% slower. That was unexpected!
- * On the other hand, this is why it's worth starting out from a simple solution and only then try to optimize.
+ * sub-sequences (such as 16 -> 8 -> 4 -> 2 -> 1) many times. I implemented it using a map while keeping it
+ * immutable, and it wasn't a great idea. The code ran much slower. In fact, even with a mutable map it was around
+ * 50% slower than the brute-force. 
  *
- * Still, just to have more practice, let's also build a mutable solution, which will try to address the problem
- * of too many memoized results and will push the performance even further.
+ * On the other hand, this is why it's worth starting out from a simple solution and only then try to optimize.
+ * There's less room for mistake, and we have a baseline result that we can improve further.
+ *
+ * Even though this solution is good enough, just to have more practice, let's also build a mutable one,
+ * which will try to address the problem I ran into in the beginning and will push the performance even further.
  */
 object Euler014 extends EulerApp {
 
