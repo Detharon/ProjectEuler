@@ -18,7 +18,9 @@ object Euler041 extends EulerApp {
 
   private def generatePandigitals(from: String): LazyList[Int] =
     if (from.isEmpty) LazyList.empty
-    else LazyList.from(from.permutations.map(_.toInt)).sorted(Ordering[Int].reverse) #::: generatePandigitals(from.tail)
+    else LazyList
+      .from(from.permutations.map(_.toInt))
+      .sorted(using Ordering[Int].reverse) #::: generatePandigitals(from.tail)
 
   private def isPrime(n: Int): Boolean = n match
     case n if n < 2 => false
