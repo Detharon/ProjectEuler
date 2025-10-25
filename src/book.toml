@@ -1,0 +1,5 @@
+[book]
+authors = ["Piotr Strąk"]
+language = "en"
+src = "src"
+title = "A Guide to Project Euler in Scala"
