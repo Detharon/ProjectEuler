@@ -3,7 +3,7 @@ import EulerHelper._
 object Euler030 extends EulerApp {
 
   override def execute(): Int = 
-    LazyList.from(2)
+    Iterator.from(2)
       .takeWhile(_ < 354285)
       .filter(n => digitsToPower(n, 5) == n)
       .sum
