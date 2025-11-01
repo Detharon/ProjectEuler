@@ -1,4 +1,4 @@
-import EulerHelper.isPrime
+import EulerHelper.naiveIsPrime
 
 import scala.annotation.tailrec
 
@@ -19,7 +19,7 @@ object Euler003 extends EulerApp {
   @tailrec
   private def primeFactors(n: Long, i: Int = 2, primesFound: List[Int] = List.empty): List[Int] =
     if (n == 1) primesFound
-    else if (n % i == 0 && isPrime(i)) primeFactors(n / i, i + 1, primesFound :+ i)
+    else if (n % i == 0 && naiveIsPrime(i)) primeFactors(n / i, i + 1, primesFound :+ i)
     else primeFactors(n, i + 1, primesFound)
 
 }

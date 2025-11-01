@@ -4,7 +4,7 @@ import scala.math.BigInt
 object EulerHelper {
 
   extension (n: Int) {
-    def isPrime: Boolean = n match {
+    def naiveIsPrime: Boolean = n match {
       case n if n < 2 => false
       case _ => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }

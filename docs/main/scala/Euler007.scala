@@ -1,4 +1,4 @@
-import EulerHelper.isPrime
+import EulerHelper.naiveIsPrime
 
 /** Problem 7: By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
  *
@@ -16,7 +16,7 @@ import EulerHelper.isPrime
 object Euler007 extends EulerApp {
 
   override def execute(): Any = Iterator.from(2)
-    .filter(isPrime)
+    .filter(naiveIsPrime)
     .drop(10000)
     .next()
 }
