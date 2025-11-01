@@ -242,16 +242,16 @@ Not really, because <code>LazyList</code> memoizes all the elements, but we need
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="largest-prime-factor"><a class="header" href="#largest-prime-factor">Largest Prime Factor</a></h1>
-<p>The prime factors of 13195 are 5, 7, 13 and 29.
-What is the largest prime factor of the number 600851475143.</p>
+<p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
+<p>What is the largest prime factor of the number 600851475143?</p>
 <h2 id="solution-2"><a class="header" href="#solution-2">Solution</a></h2>
 <p>Before implementing anything, let's think how finding the prime factors works.
 Let's consider the number from the description, 13195. We can just try all the numbers until we hit a prime, then
 check if it's divisible by this prime. Once we found a factor, we can just divide the original number by it.</p>
-<p>So, the 13195 turns into 13195 / 5 = 2639.
-Then 2639 / 7 = 377.
-Then 377 / 13 = 29.
-And finally 29 / 29 = 1.</p>
+<p>So, the 13195 turns into 13195 / 5 = 2639.</p>
+<p>Then 2639 / 7 = 377.</p>
+<p>Then 377 / 13 = 29.</p>
+<p>And finally 29 / 29 = 1.</p>
 <p>In fact, we could check each result to see if it's a prime, because if it is, then we know that we've found
 the biggest prime factor and can just return it.</p>
 <p>But there are some reasons not to do that as well. Let's take a look at a complete solution, without that final
