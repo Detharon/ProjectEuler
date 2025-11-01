@@ -58,7 +58,46 @@
  * Explanation: It's a pretty good example from the business domain modeling perspective, which is where Scala shines.
  *
  */
-class Euler054 extends EulerApp {
+object Euler054 extends EulerApp {
 
-  override def execute(): Any = ???
+  override def execute(): Any = {
+    loadFileAsLines().map { line =>
+      val (player1cards, player2cards) = parseLine(line)
+    }
+  }
+
+  enum Color(val symbol: Char) {
+    case Spades extends Color('S')
+    case Hearts extends Color('H')
+    case Clubs extends Color('C')
+    case Diamonds extends Color('D')
+  }
+
+  private object Color {
+    def fromChar(c: Char): Option[Color] = Color.values.find(_.symbol == c)
+  }
+
+  trait Card(color: Color)
+  opaque type CardNumber <: Int = Int
+  opaque type CardFace <: Char = Char
+  case class NumberedCard(value: CardNumber, color: Color) extends Card(color)
+  case class FaceCard(value: CardFace, color: Color) extends Card(color)
+
+  private def parseLine(line: String): (List[Card], List[Card]) =
+    line.split(" ")
+      .map(parseCard)
+      .zipWithIndex
+      .toList
+      .partitionMap {
+        case (card, idx) if idx < 6 => Left(card)
+        case (card, idx) => Right(card)
+      }
+
+  private def parseCard(card: String): Card = card.toList match {
+    case value :: colorChar :: Nil =>
+      val color = Color.fromChar(colorChar).getOrElse(throw new RuntimeException(s"Found unknown color $colorChar"))
+      if (value.isDigit) NumberedCard(value, color)
+      else FaceCard(value, color)
+    case unknown => throw new RuntimeException(s"Found unsupported card $unknown, aborting.")
+  }
 }
