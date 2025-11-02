@@ -17,7 +17,7 @@ object Euler005 extends EulerApp {
    * because 19 * 20 = 380. We can, thus, check every 380 numbers. Obviously we could go further and decrease
    * the numbers to be checked much more, but it already gives a result in a matter of milliseconds, so we can stop here.
    */
-  override def execute(): Long = LazyList.from(380, 380).find { n =>
+  override def execute(): Int = Iterator.from(380, 380).find { n =>
     (2 to 20).forall( k => n % k == 0)
   }.get
 
