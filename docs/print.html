@@ -359,6 +359,31 @@ we're good to go. Scala's expressiveness makes this task a breeze and the result
   }
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="10-001st-prime"><a class="header" href="#10-001st-prime">10 001st Prime</a></h1>
+<p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
+<p>What is the 10001st prime number?</p>
+<h2 id="solution-6"><a class="header" href="#solution-6">Solution</a></h2>
+<p>We can simply brute-force this problem by using the most naive prime check, since the 10001st prime will be a low
+number. This solution is pretty fast, even though the algorithm is not very efficient.</p>
+<p>As you can see, we don't even filter out even numbers higher than 2 (or all the multiplies of already found primes),
+but we'll need these methods later on. For now, a basic algorithm does pretty well.</p>
+<pre><code class="language-scala">import EulerHelper.naiveIsPrime
+
+object Euler007 extends EulerApp {
+  override def execute(): Any = Iterator.from(2)
+    .filter(naiveIsPrime)
+    .drop(10000)
+    .next()
+}
+</code></pre>
+<p>And for the reference, that's how we check if a number is a prime. A brute-force solution.</p>
+<pre><code class="language-scala">  extension (n: Int) {
+    def naiveIsPrime: Boolean = n match {
+      case n if n &lt; 2 =&gt; false
+      case _ =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+    }
+  }
+</code></pre>
 
                     </main>
 

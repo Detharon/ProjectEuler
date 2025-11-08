@@ -8,3 +8,4 @@
   - [Largest Palindrome Product](explanations/4.md)
   - [Smallest Multiple](explanations/5.md)
   - [Sum Square Difference](explanations/6.md)
+  - [10 001st Prime](explanations/7.md)
