@@ -376,7 +376,8 @@ object Euler007 extends EulerApp {
     .next()
 }
 </code></pre>
-<p>And for the reference, that's how we check if a number is a prime. A brute-force solution.</p>
+<p>And for the reference, that's how we check if a number is a prime. A brute-force solution, that ran in 13 ms on my
+machine, which is pretty good already.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n &lt; 2 =&gt; false
