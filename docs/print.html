@@ -31,6 +31,8 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
@@ -333,6 +335,30 @@ number we're looking for is divisible by all these prime numbers, then it must b
 divisible by all these prime numbers. Also, multiplies of these numbers, such as 6 (2 * 3), no need to be checked either.</p>
 <p>That's because every number that's divisible by both 2 and 3 must be divisible by 6.</p>
 <p>We don't need to make it more complex than necessary. The current solution already runs in 1-2 ms on my machine.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sum-square-difference"><a class="header" href="#sum-square-difference">Sum Square Difference</a></h1>
+<p>The sum of the squares of the first ten natural numbers is,</p>
+<p>\(1^2 + 2^2 + ... + 10^2 = 385\)</p>
+<p>The square of the sum of the first ten natural numbers is,</p>
+<p>\((1 + 2 + ... + 10)^2 = 55^2 = 3025\)</p>
+<p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is</p>
+<p>\(3025 - 385 = 2640\)</p>
+<p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
+<h2 id="solution-5"><a class="header" href="#solution-5">Solution</a></h2>
+<p>It's a pretty straightforward problem. We can simply write down the problem literally, without any optimizations, and
+we're good to go. Scala's expressiveness makes this task a breeze and the resulting code is easy to understand.</p>
+<p>To make it extra concise, let's also define a "square" extension method.</p>
+<pre><code class="language-scala">object Euler006 extends EulerApp {
+  override def execute(): Int = squareOfSums(100) - sumOfSquares(100)
+
+  private def sumOfSquares(n: Int) = (1 to n).map(_.square).sum
+
+  private def squareOfSums(n: Int) = (1 to n).sum.square
+
+  extension (i: Int) {
+    def square: Int = i * i
+  }
+}
+</code></pre>
 
                     </main>
 
@@ -371,7 +397,9 @@ divisible by all these prime numbers. Also, multiplies of these numbers, such as
 
         <script>
         window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
         });
         </script>
 
