@@ -1,6 +1,10 @@
 # About this repository
 
-This repository contains solutions for the first 100 problems from the Project Euler website.
+This repository will eventually contain solutions for the first 100 problems from the Project Euler website.
+
+> [!WARNING]
+> It's still a work in progress. Some solutions are missing, some are not explained and some are only explained in the
+> code.
 
 The code is shared for educational purposes, demonstrating how these problems can be approached using Scala.
 The focus of the implementations is on readability rather than raw performance, though most of the solutions should
@@ -8,10 +12,17 @@ complete within a few seconds on typical hardware.
 
 Where possible, a functional programming style is used, avoiding mutable state and vars.
 Some solutions intentionally deviate from this approach for performance comparison; these are marked with an ‘M’ suffix
-in their filenames. 
+in their filenames.
 
 While the non-functional style may yield greater efficiency by reducing object allocations, it often results in less
 readable and more error-prone code, so it is included primarily for contrast and learning purposes.
+
+## The book format
+
+Problem solutions and the explanations can be viewed as a webpage:
+https://detharon.github.io/ProjectEuler/solutions.html
+
+All the code is present in `src/main/scala` while the associated files can be found in `src/main/resources`.
 
 ## About Project Euler
 
