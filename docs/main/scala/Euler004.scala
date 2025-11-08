@@ -5,6 +5,6 @@ object Euler004 extends EulerApp {
   } yield a * b)
     .filter(n => isPalindrome(n.toString))
     .max
-  
+
   def isPalindrome(s: String): Boolean = s == s.reverse
 }

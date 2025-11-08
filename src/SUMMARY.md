@@ -6,3 +6,4 @@
   - [Even Fibonacci Numbers](explanations/2.md)
   - [Largest Prime Factor](explanations/3.md)
   - [Largest Palindrome Product](explanations/4.md)
+  - [Smallest Multiple](explanations/5.md)

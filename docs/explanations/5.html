@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Largest Palindrome Product - A Guide to Project Euler in Scala</title>
+        <title>Smallest Multiple - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -175,43 +175,40 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="largest-palindrome-product"><a class="header" href="#largest-palindrome-product">Largest Palindrome Product</a></h1>
-<p>A palindromic number reads the same both ways. The largest palindrome made from the product of two
-2-digit numbers is 9009 = 91 * 99</p>
-<p>Find the largest palindrome made from the product of two 3-digit numbers.</p>
+                        <h1 id="smallest-multiple"><a class="header" href="#smallest-multiple">Smallest Multiple</a></h1>
+<p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
+<p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
+<h2 id="lets-make-it-easier"><a class="header" href="#lets-make-it-easier">Let's make it easier</a></h2>
+<p>First, let's try to decrease a bit the number of numbers we'll need to check. We can analyze the simpler problem for
+which we already know the answer.</p>
+<p>The 2520 is divisible by all numbers from 1 to 10. We know that among those numbers, 2, 3, 5, 7 are primes. So, if the
+number we're looking for is divisible by all these prime numbers, then it must be a multiple of (2 * 3 * 5 * 7) = 210.</p>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
-<p>A brute-force solution would also work reasonably well, but we can actually reduce the number of numbers to be checked.</p>
-<p>We know that multiplying two 3-digit numbers will give us a 6-digit number at most,
-so the palindrome we're looking for has the "abccba" form, or: 100000a + 10000b + 1000c + 100c + 10b + a.</p>
-<p>If we add those numbers we get "100001a + 10010b + 1100c".
-We can then factor out 11, which means that our palindrome has to be divisible by 11: 11(9091a + 910b + 100c)</p>
-<p>One of the numbers then has to be divisible by 11, because it's a prime number.
-We can start from 990 instead of 999 and decrease the numbers checked by 11.</p>
-<p>As for checking if a string is a palindrome, there are many ways to do that. It can be done iteratively, recursively,
-or with built-in functions like here. Neither changes the run time, so it doesn't matter much for this problem.</p>
-<pre><code class="language-scala">object Euler004 extends EulerApp {
-  override def execute(): Int = (for {
-    a &lt;- 990 to 100 by -11
-    b &lt;- 999 to 100 by -1
-  } yield a * b)
-    .filter(n =&gt; isPalindrome(n.toString))
-    .max
+<p>We can follow the same logic to find a number that's evenly divisible by all numbers from 1 to 20.</p>
+<p>Prime numbers in this set are: 2, 3, 5, 7, 11, 13, 17, 19. The number we're looking for, then, must be a multiple of
+2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690.</p>
+<p>Let's try to find that number!</p>
+<pre><code class="language-scala">object Euler005 extends EulerApp {
+  // 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690
+  override def execute(): Int = Iterator.from(9699690, 9699690).find { n =&gt;
+    (2 to 20).forall( k =&gt; n % k == 0)
+  }.get
 
-  def isPalindrome(s: String): Boolean = s == s.reverse
 }
 </code></pre>
+<p>If we wanted to improve it even further, then we can notice that we don't need to check again if our numbers are
+divisible by all these prime numbers. Also, multiplies of these numbers, such as 6 (2 * 3), no need to be checked either.</p>
+<p>That's because every number that's divisible by both 2 and 3 must be divisible by 6.</p>
+<p>We don't need to make it more complex than necessary. The current solution already runs in 1-2 ms on my machine.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../explanations/3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../explanations/4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../explanations/5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -219,13 +216,10 @@ or with built-in functions like here. Neither changes the run time, so it doesn'
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../explanations/3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../explanations/4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../explanations/5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
