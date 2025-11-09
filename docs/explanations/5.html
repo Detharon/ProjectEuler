@@ -192,9 +192,12 @@ number we're looking for is divisible by all these prime numbers, then it must b
 <p>Let's try to find that number!</p>
 <pre><code class="language-scala">object Euler005 extends EulerApp {
   // 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690
-  override def execute(): Int = Iterator.from(9699690, 9699690).find { n =&gt;
-    (2 to 20).forall( k =&gt; n % k == 0)
-  }.get
+  override def execute(): Int = Iterator
+    .from(9699690, 9699690)
+    .find { n =&gt;
+      (2 to 20).forall(k =&gt; n % k == 0)
+    }
+    .get
 
 }
 </code></pre>

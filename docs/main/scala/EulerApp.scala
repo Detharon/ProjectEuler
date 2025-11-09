@@ -10,9 +10,11 @@ abstract class EulerApp {
   }
 
   def loadFileAsLines(): List[String] =
-    Using(Source.fromResource(s"${getClass.getSimpleName.init}.txt"))(_.getLines().toList).get
+    Using(Source.fromResource(s"${getClass.getSimpleName.init}.txt"))(
+      _.getLines().toList
+    ).get
 
-  private def warmUp(): Unit = 
+  private def warmUp(): Unit =
     (0 to 25).foreach(_ ^ 5)
 
   private def measure(f: () => Any): Unit = {

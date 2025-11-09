@@ -29,10 +29,21 @@ object Euler047 extends EulerApp {
 
   private def factorsFor(n: Int): List[Int] = {
     @tailrec
-    def factorsHelper(n: Int, currentPrime: Int, primesIterator: Iterator[Int], factors: List[Int]): List[Int] = {
+    def factorsHelper(
+        n: Int,
+        currentPrime: Int,
+        primesIterator: Iterator[Int],
+        factors: List[Int]
+    ): List[Int] = {
       if (isPrime(n)) factors :+ n
       else {
-        if (n % currentPrime == 0) factorsHelper(n / currentPrime, currentPrime, primesIterator, factors :+ currentPrime)
+        if (n % currentPrime == 0)
+          factorsHelper(
+            n / currentPrime,
+            currentPrime,
+            primesIterator,
+            factors :+ currentPrime
+          )
         else {
           factorsHelper(n, primesIterator.next(), primesIterator, factors)
         }
@@ -52,6 +63,6 @@ object Euler047 extends EulerApp {
 
   private def isPrime(n: Long): Boolean = n match
     case n if n < 2 => false
-    case _ => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+    case _          => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
 
 }

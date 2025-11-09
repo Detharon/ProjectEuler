@@ -6,14 +6,14 @@ object EulerHelper {
   extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n < 2 => false
-      case _ => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+      case _          => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }
   }
 
   extension (n: Long) {
     def naiveIsPrime: Boolean = n match {
       case n if n < 2 => false
-      case _ => (2L to Math.sqrt(n.toDouble).toLong).forall(n % _ != 0)
+      case _          => (2L to Math.sqrt(n.toDouble).toLong).forall(n % _ != 0)
     }
   }
 

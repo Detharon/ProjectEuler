@@ -10,7 +10,8 @@ object Euler099 extends EulerApp {
   private def readFile(): List[BigExponential] =
     loadFileAsLines().zipWithIndex.map { case (line, index) =>
       line.split(",") match {
-        case Array(base, exponent) => BigExponential(base.toInt, exponent.toInt, index + 1)
+        case Array(base, exponent) =>
+          BigExponential(base.toInt, exponent.toInt, index + 1)
       }
     }
 

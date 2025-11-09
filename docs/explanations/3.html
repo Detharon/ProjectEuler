@@ -213,7 +213,7 @@ check on longs rather than integers, made the app run 5 times as long.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n &lt; 2 =&gt; false
-      case _ =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+      case _          =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }
   }
 </code></pre>

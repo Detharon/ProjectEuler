@@ -8,20 +8,35 @@ object Euler019 extends EulerApp {
       if (calendar.isInTwentyFirstCentury) sundays
       else if (calendar.isInTwentiethCentury) {
         println(calendar.toString + " " + calendar.dayOfWeek)
-        val newSundays = if (calendar.dayOfWeek == "Sunday" && calendar.dayNumber == 1) sundays + 1 else sundays
+        val newSundays =
+          if (calendar.dayOfWeek == "Sunday" && calendar.dayNumber == 1)
+            sundays + 1
+          else sundays
         nextDay(calendar.nextDay(), newSundays)
-      }
-      else nextDay(calendar.nextDay(), sundays)
+      } else nextDay(calendar.nextDay(), sundays)
     }
 
     nextDay(Calendar.StartDate, 0)
   }
 
-  case class Calendar(dayNumber: Int, dayOfWeekNumber: Int, monthNumber: Int, yearNumber: Int) {
+  case class Calendar(
+      dayNumber: Int,
+      dayOfWeekNumber: Int,
+      monthNumber: Int,
+      yearNumber: Int
+  ) {
     type DayOfWeek = String
     type Month = String
 
-    private val daysOfWeek: List[DayOfWeek] = List("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    private val daysOfWeek: List[DayOfWeek] = List(
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    )
 
     private def daysPerMonth(year: Int): Array[Int] = Array(
       31, // January
@@ -43,7 +58,8 @@ object Euler019 extends EulerApp {
 
     def nextDay(): Calendar = {
       val newDay = dayNumber + 1
-      val newDayOfWeek = if (dayOfWeekNumber + 1 == 7) 0 else dayOfWeekNumber + 1
+      val newDayOfWeek =
+        if (dayOfWeekNumber + 1 == 7) 0 else dayOfWeekNumber + 1
 
       if (newDay > daysPerMonth(yearNumber)(monthNumber)) {
         if (monthNumber == 11) Calendar(1, newDayOfWeek, 0, yearNumber + 1)

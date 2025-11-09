@@ -15,17 +15,17 @@ object Euler033 extends EulerApp {
       if (numerator >= denominator) false
       else {
         numerator.toString.find(d => d != '0' && denominator.toString.contains(d)) match
-          case None => false
+          case None              => false
           case Some(commonDigit) => this.cancelDigit(commonDigit).contains(this)
       }
     }
 
     private def cancelDigit(digit: Int): Option[Fraction] = for {
       newNumerator <- numerator.toString.filterNot(_ == digit) match
-        case "" => None
+        case ""     => None
         case digits => Some(digits)
       newDenominator <- denominator.toString.filterNot(_ == digit) match
-        case "" => None
+        case ""     => None
         case digits => Some(digits)
     } yield Fraction(newNumerator.toInt, newDenominator.toInt)
 
@@ -40,7 +40,10 @@ object Euler033 extends EulerApp {
       val newDenominator = this.denominator * fraction.denominator
       val greatestCommonDenominator = gcd(newNumerator, newDenominator)
 
-      Fraction(newNumerator / greatestCommonDenominator, newDenominator / greatestCommonDenominator)
+      Fraction(
+        newNumerator / greatestCommonDenominator,
+        newDenominator / greatestCommonDenominator
+      )
     }
 
     override def equals(obj: Any): Boolean = {

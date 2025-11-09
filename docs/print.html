@@ -279,7 +279,7 @@ check on longs rather than integers, made the app run 5 times as long.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n &lt; 2 =&gt; false
-      case _ =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+      case _          =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }
   }
 </code></pre>
@@ -325,9 +325,12 @@ number we're looking for is divisible by all these prime numbers, then it must b
 <p>Let's try to find that number!</p>
 <pre><code class="language-scala">object Euler005 extends EulerApp {
   // 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690
-  override def execute(): Int = Iterator.from(9699690, 9699690).find { n =&gt;
-    (2 to 20).forall( k =&gt; n % k == 0)
-  }.get
+  override def execute(): Int = Iterator
+    .from(9699690, 9699690)
+    .find { n =&gt;
+      (2 to 20).forall(k =&gt; n % k == 0)
+    }
+    .get
 
 }
 </code></pre>
@@ -370,7 +373,8 @@ but we'll need these methods later on. For now, a basic algorithm does pretty we
 <pre><code class="language-scala">import EulerHelper.naiveIsPrime
 
 object Euler007 extends EulerApp {
-  override def execute(): Any = Iterator.from(2)
+  override def execute(): Any = Iterator
+    .from(2)
     .filter(naiveIsPrime)
     .drop(10000)
     .next()
@@ -381,7 +385,7 @@ machine, which is pretty good already.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n &lt; 2 =&gt; false
-      case _ =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+      case _          =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }
   }
 </code></pre>

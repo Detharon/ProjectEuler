@@ -188,7 +188,8 @@ but we'll need these methods later on. For now, a basic algorithm does pretty we
 <pre><code class="language-scala">import EulerHelper.naiveIsPrime
 
 object Euler007 extends EulerApp {
-  override def execute(): Any = Iterator.from(2)
+  override def execute(): Any = Iterator
+    .from(2)
     .filter(naiveIsPrime)
     .drop(10000)
     .next()
@@ -199,7 +200,7 @@ machine, which is pretty good already.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
       case n if n &lt; 2 =&gt; false
-      case _ =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
+      case _          =&gt; (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
     }
   }
 </code></pre>
