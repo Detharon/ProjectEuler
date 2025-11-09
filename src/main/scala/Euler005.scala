@@ -6,5 +6,4 @@ object Euler005 extends EulerApp {
       (2 to 20).forall(k => n % k == 0)
     }
     .get
-
 }
