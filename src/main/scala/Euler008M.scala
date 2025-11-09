@@ -1,36 +1,5 @@
 import scala.collection.mutable.ListBuffer
 
-/**
- * Problem 8:
- * The four adjacent digits in the 1000-digit number that have the greatest product are:
- * 9 × 9 × 8 × 9 = 5832
- *
- * Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
- * What is the value of this product?
- *
- * --------------------------------------------------
- *
- * Explanation:
- * This implementation improves upon the previous functional solution. That version was concise and easy to reason about,
- * but its performance suffered as a result.
- *
- * In the earlier approach, the sliding windows were completely independent of one another.
- * This meant that when calculating the product of 13 elements, we were performing 11 redundant multiplications
- * in each neighboring window. Instead, we can maintain a running product — dividing by the digit that leaves the window
- * and multiplying by the new digit that enters it. The only catch here are the zeroes that break the computation chain.
- *
- * While this approach is definitely faster, it’s also more error-prone and harder to read.
- * For example, consider the following line:
- *
- * {{{
- * previous = buffer.remove(0).asDigit
- * }}}
- *
- * It’s not immediately clear that `remove(0)` returns the element being removed.
- * Moreover, if the `.asDigit` call were omitted, the code would still compile and run,
- * but it would silently produce an incorrect result. For such a small task, the optimization is not worth
- * the effort, so treat it merely as a mental exercise.
- */
 object Euler008M extends EulerApp {
   override def execute(): Any = {
     val number = "73167176531330624919225119674426574742355349194934" +

@@ -1,18 +1,3 @@
-/**
- * Problem 8: The four adjacent digits in the 1000-digit number that have the greatest product are
- * 9 * 9 * 8 * 9 = 5832
- *
- * Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
- *
- * --------------------------------------------------
- *
- * Explanation: The number might look daunting, but for any algorithm it's small enough that we don't need to optimize it much.
- *
- * This is the shortest solution (code-wise), but also the least efficient. We split the string into 13-element sliding windows, 
- * then calculate the product of the digits in each window. Once we have the list of products, we simply take the maximum. Easy-peasy. 
- * Could you explain why this solution is inefficient and what could significantly improve it, even if it's no longer functional?
- *
- */
 object Euler008 extends EulerApp {
   override def execute(): Any = {
     val number = "73167176531330624919225119674426574742355349194934" +
