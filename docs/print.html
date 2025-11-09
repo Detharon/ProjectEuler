@@ -331,7 +331,6 @@ number we're looking for is divisible by all these prime numbers, then it must b
       (2 to 20).forall(k =&gt; n % k == 0)
     }
     .get
-
 }
 </code></pre>
 <p>If we wanted to improve it even further, then we can notice that we don't need to check again if our numbers are
@@ -441,6 +440,77 @@ For example, consider the following line:</p>
 Moreover, if the <code>.asDigit</code> call were omitted, the code would still compile and run,
 but it would silently produce an incorrect result. For such a small task, the optimization is not worth
 the effort, so treat it merely as a mental exercise.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="special-pythagorean-triplet"><a class="header" href="#special-pythagorean-triplet">Special Pythagorean Triplet</a></h1>
+<p>A Pythagorean triplet is a set of three natural numbers, a &lt; b &lt; c, for which,</p>
+<p>\(a^2 + b^2 = c^2\)</p>
+<p>For example \(3^2 + 4^2 = 9 + 16 = 25 = 5^2\).</p>
+<p>There exists exactly one Pythagorean triplet for which a + b + c = 1000.</p>
+<p>Find the product abc.</p>
+<h2 id="solution-8"><a class="header" href="#solution-8">Solution</a></h2>
+<p>The numbers are low enough for a naive approach, so let's use it, while keeping the code nice and clean.</p>
+<p>We need to check all combinations of a, b, c for which a + b + c = 1000 and find those that form a
+Pythagorean triplet.</p>
+<p>This naive algorithm starts from the highest possible 'c', keeps the sum of parameters at 1000, while gradually
+incrementing 'b' and decrementing 'c' until this it's possible. This condition (b == c - 2 || b == c - 1) indicates
+that the next triangle can't be created this way, so we need to increase the 'a' instead, while resetting the other
+two parameters: 'b' to the lowest possible one, 'c' to whatever will give a sum of 1000.</p>
+<p>It uses a LazyList which does keeps all the previous elements in memory. That's not something we need, but it makes
+the code pretty concise. Let's also try a mutable approach.</p>
+<pre><code class="language-scala">object Euler009 extends EulerApp {
+  override def execute(): Any = {
+    triangles.dropWhile(!isPythagorean(_)).head.product
+  }
+
+  type Triangle = (Int, Int, Int)
+  val triangles: LazyList[Triangle] = triangles(1, 2, 997)
+
+  private def triangles(a: Int, b: Int, c: Int): LazyList[Triangle] = {
+    (a, b, c) #:: {
+      if (b == c - 2 || b == c - 1) triangles(a + 1, a + 2, 997 - (2 * a))
+      else triangles(a, b + 1, c - 1)
+    }
+  }
+
+  private def isPythagorean(triangle: Triangle): Boolean = {
+    val Triangle(a, b, c) = triangle
+    a * a + b * b == c * c
+  }
+
+  extension (t: Triangle) {
+    def product: Int = t._1 * t._2 * t._3
+  }
+}
+</code></pre>
+<h2 id="mutable-solution-1"><a class="header" href="#mutable-solution-1">Mutable solution</a></h2>
+<p>This time let's aim for maximum efficiency. Even though the idiomatic solution found the solution pretty fast
+on my machine, the optimized one is about 10 to 15 times faster, even though they share the same algorithm.</p>
+<p>It's also more concise. It looks rather enigmatic, which is the usual pitfalls for the optimized solutions, but
+in this case the difference in performance was quite substantial.</p>
+<pre><code class="language-scala">object Euler009M extends EulerApp {
+  override def execute(): Any = {
+    var a = 1
+    var b = 2
+    var c = 997
+    var found = false
+
+    while (!found) {
+      if (a * a + b * b == c * c) found = true
+      else {
+        if (b == c - 1 || b == c - 2) {
+          a = a + 1
+          b = a + 1
+          c = 1000 - b - a
+        } else {
+          b = b + 1
+          c = c - 1
+        }
+      }
+    }
+
+    a * b * c
+  }
+}
+</code></pre>
 
                     </main>
 
