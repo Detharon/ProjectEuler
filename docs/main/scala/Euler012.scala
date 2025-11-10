@@ -1,21 +1,20 @@
 import scala.annotation.tailrec
 
 object Euler012 extends EulerApp {
+  override def execute(): Any = findTriangleNumber()
+
   private val primes: Seq[Int] =
-    (2 to 65550)
+    (2 to Math.sqrt(Integer.MAX_VALUE).toInt)
       .filter(EulerHelper.naiveIsPrime)
 
-  override def execute(): Any = divisors(28)
-
   @tailrec
-  private def findTriangleNumber(n: Int = 1, k: Int = 2): Long =
-    if (divisors(n) > 10) n
+  private def findTriangleNumber(n: Int = 1, k: Int = 2): Int =
+    if (divisors(n) > 500) n
     else findTriangleNumber(n + k, k + 1)
 
-  // 28 = 2^2 * 7*1 = (2 + 1) * (1 + 1) = 6
   @tailrec
   private def divisors(
-      n: Long,
+      n: Int,
       primes: Seq[Int] = primes,
       divisorsFound: Map[Int, Int] = Map.empty
   ): Int = {
@@ -31,8 +30,8 @@ object Euler012 extends EulerApp {
         primes,
         divisorsFound + (prime -> newFactor)
       )
-    } else if (prime >= n) divisorsFound.foldLeft(1) { case (accumulator, (divisor, factor)) =>
-      accumulator * (divisor * factor + 1)
+    } else if (prime >= n) divisorsFound.foldLeft(1) { case (accumulator, (_, factor)) =>
+      accumulator * (factor + 1)
     }
     else divisors(n, primes.tail, divisorsFound)
   }
