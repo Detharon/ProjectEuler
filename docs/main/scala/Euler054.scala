@@ -34,6 +34,7 @@ object Euler054 extends EulerApp {
   override def execute(): Any = {
     loadFileAsLines().map { line =>
       val (player1cards, player2cards) = parseLine(line)
+      (player1cards, player2cards)
     }
   }
 
@@ -48,11 +49,13 @@ object Euler054 extends EulerApp {
     def fromChar(c: Char): Option[Color] = Color.values.find(_.symbol == c)
   }
 
-  trait Card(color: Color)
+  trait Card {
+    val color: Color
+  }
   opaque type CardNumber <: Int = Int
   opaque type CardFace <: Char = Char
-  case class NumberedCard(value: CardNumber, color: Color) extends Card(color)
-  case class FaceCard(value: CardFace, color: Color) extends Card(color)
+  case class NumberedCard(value: CardNumber, color: Color) extends Card
+  case class FaceCard(value: CardFace, color: Color) extends Card
 
   private def parseLine(line: String): (List[Card], List[Card]) =
     line
@@ -72,9 +75,19 @@ object Euler054 extends EulerApp {
         .getOrElse(
           throw new RuntimeException(s"Found unknown color $colorChar")
         )
-      if (value.isDigit) NumberedCard(value, color)
+      if (value.isDigit) NumberedCard(value.asDigit, color)
       else FaceCard(value, color)
     case unknown =>
       throw new RuntimeException(s"Found unsupported card $unknown, aborting.")
+  }
+
+  opaque type Hand = List[Card]
+  private trait RankedHand {
+    def numericalValue: Int
+  }
+
+  private def determineHand(hand: Hand): RankedHand = {
+    val groupedByColors = hand.groupBy(_.color)
+    ???
   }
 }

@@ -12,3 +12,4 @@
   - [Largest Product in a Series](explanations/8.md)
   - [Special Pythagorean Triplet](explanations/9.md)
   - [Summation of Primes](explanations/10.md)
+  - [Largest Product in a Grid](explanations/11.md)

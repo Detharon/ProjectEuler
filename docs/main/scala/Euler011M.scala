@@ -8,21 +8,27 @@ object Euler011M extends EulerApp {
   private def findLargestProduct(matrix: Array[Array[Int]]): Long = {
     var max: Long = 0
 
-    for (x <- matrix.indices; j <- matrix(x).indices) {
-      if (x < matrix.length - 3) {
-        max = Math.max(max, matrix(x)(j) * matrix(x + 1)(j) * matrix(x + 2)(j) * matrix(x + 3)(j))
+    for (col <- matrix.indices; row <- matrix(col).indices) {
+      if (row < matrix.length - 3) {
+        max = Math.max(max, matrix(row)(col) * matrix(row + 1)(col) * matrix(row + 2)(col) * matrix(row + 3)(col))
       }
 
-      if (j < matrix(x).length - 3) {
-        max = Math.max(max, matrix(x)(j) * matrix(x)(j + 1) * matrix(x)(j + 2) * matrix(x)(j + 3))
+      if (col < matrix(row).length - 3) {
+        max = Math.max(max, matrix(row)(col) * matrix(row)(col + 1) * matrix(row)(col + 2) * matrix(row)(col + 3))
       }
 
-      if ((j < matrix(x).length - 3) && (x > 3)) {
-        max = Math.max(max, matrix(x)(j) * matrix(x - 1)(j + 1) * matrix(x - 2)(j + 2) * matrix(x - 3)(j + 3))
+      if ((col < matrix(row).length - 3) && (row > 3)) {
+        max = Math.max(
+          max,
+          matrix(row)(col) * matrix(row - 1)(col + 1) * matrix(row - 2)(col + 2) * matrix(row - 3)(col + 3)
+        )
       }
 
-      if ((j < matrix(x).length - 3) && (x < matrix.length - 3)) {
-        max = Math.max(max, matrix(x)(j) * matrix(x + 1)(j + 1) * matrix(x + 2)(j + 2) * matrix(x + 3)(j + 3))
+      if ((col < matrix(row).length - 3) && (row < matrix.length - 3)) {
+        max = Math.max(
+          max,
+          matrix(row)(col) * matrix(row + 1)(col + 1) * matrix(row + 2)(col + 2) * matrix(row + 3)(col + 3)
+        )
       }
     }
 
