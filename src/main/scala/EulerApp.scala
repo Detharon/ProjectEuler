@@ -18,7 +18,16 @@ abstract class EulerApp {
     }
   }
 
-  /** */
+  /** Helper method to get the name of the data file that corresponds to the class name. Data files have the same name
+    * as the class files, but a different extension. This method also strips the M suffix.
+    *
+    * Examples:
+    *   - Euler010M.scala returns Euler010.txt
+    *   - Euler011.scala returns Euler011.txt
+    *
+    * @return
+    *   the file name
+    */
   private def problemFileName: String =
     (getClass.getSimpleName.init match {
       case mutable if mutable.endsWith("M") => mutable.init
