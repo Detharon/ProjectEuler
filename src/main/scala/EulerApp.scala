@@ -1,5 +1,5 @@
 import scala.io.Source
-import scala.util.Using
+import scala.util.{Failure, Success, Using}
 
 abstract class EulerApp {
   def execute(): Any
@@ -9,10 +9,23 @@ abstract class EulerApp {
     measure(execute)
   }
 
-  def loadFileAsLines(): List[String] =
-    Using(Source.fromResource(s"${getClass.getSimpleName.init}.txt"))(_.getLines().toList).get
+  def loadFileAsLines(): List[String] = {
+    Using(Source.fromResource(problemFileName)) { file =>
+      file.getLines().toList
+    } match {
+      case Failure(exception) => throw new Exception(s"File $problemFileName was not found or couldn't be processed.")
+      case Success(value)     => value
+    }
+  }
 
-  private def warmUp(): Unit = 
+  /** */
+  private def problemFileName: String =
+    (getClass.getSimpleName.init match {
+      case mutable if mutable.endsWith("M") => mutable.init
+      case other                            => other
+    }) + ".txt"
+
+  private def warmUp(): Unit =
     (0 to 25).foreach(_ ^ 5)
 
   private def measure(f: () => Any): Unit = {
