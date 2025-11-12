@@ -184,11 +184,11 @@
 <p>First, let's try to decrease a bit the number of numbers we'll need to check. We can analyze the simpler problem for
 which we already know the answer.</p>
 <p>The 2520 is divisible by all numbers from 1 to 10. We know that among those numbers, 2, 3, 5, 7 are primes. So, if the
-number we're looking for is divisible by all these prime numbers, then it must be a multiple of (2 * 3 * 5 * 7) = 210.</p>
+number we're looking for is divisible by all these prime numbers, then it must be a multiple of (2 × 3 × 5 × 7) = 210.</p>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
 <p>We can follow the same logic to find a number that's evenly divisible by all numbers from 1 to 20.</p>
 <p>Prime numbers in this set are: 2, 3, 5, 7, 11, 13, 17, 19. The number we're looking for, then, must be a multiple of
-2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690.</p>
+2 × 3 × 5 × 7 × 11 × 13 × 17 × 19 = 9699690.</p>
 <p>Let's try to find that number!</p>
 <pre><code class="language-scala">object Euler005 extends EulerApp {
   // 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690

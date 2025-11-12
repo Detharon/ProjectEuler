@@ -30,7 +30,7 @@ object Euler012 extends EulerApp {
         primes,
         divisorsFound + (prime -> newFactor)
       )
-    } else if (prime >= n) divisorsFound.foldLeft(1) { case (accumulator, (_, factor)) =>
+    } else if (prime > n) divisorsFound.foldLeft(1) { case (accumulator, (_, factor)) =>
       accumulator * (factor + 1)
     }
     else divisors(n, primes.tail, divisorsFound)

@@ -13,3 +13,4 @@
   - [Special Pythagorean Triplet](explanations/9.md)
   - [Summation of Primes](explanations/10.md)
   - [Largest Product in a Grid](explanations/11.md)
+  - [Highly Divisible Triangular Number](explanations/12.md)
