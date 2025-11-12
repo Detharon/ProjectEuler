@@ -1,5 +1,3 @@
-import EulerHelper._
-
 object Euler030 extends EulerApp {
 
   override def execute(): Int =
@@ -10,7 +8,7 @@ object Euler030 extends EulerApp {
       .sum
 
   private def digitsToPower(n: BigInt, power: Int): BigInt =
-    getDigits(n).map(BigInt(_) ** power).sum
+    getDigits(n).map(BigInt(_) ^ power).sum
 
   private def getDigits(n: BigInt): List[Int] =
     n.toString().map(_.asDigit).toList

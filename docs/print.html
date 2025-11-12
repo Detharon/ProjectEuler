@@ -792,6 +792,19 @@ one is not a divisor and we're not finished yet.</p>
 next prime number we simply maintained an index of which prime we're processing.</p>
 <p>Likewise, creating a new <code>divisorsFound</code> map after every change will be less efficient than reusing a single map
 and mutating it.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="power-digit-sum"><a class="header" href="#power-digit-sum">Power Digit Sum</a></h1>
+<p>\(2^{15} = 32768\) and the sum of its digits is \(3 + 2 + 7 + 6 + 8 = 26\).</p>
+<p>What is the sum of the digits of the number \(2^{1000}\)?</p>
+<h2 id="solution-12"><a class="header" href="#solution-12">Solution</a></h2>
+<p>Due to the rich standard library in Scala, this problem is extremely easy. We can solve it in one line only!</p>
+<pre><code class="language-scala">object Euler016 extends EulerApp {
+  override def execute(): Int = (BigInt(2) ^ 1000).toString().map(_.asDigit).sum
+}
+</code></pre>
+<p>It even runs very fast. If we wanted to avoid using <code>BigInt</code>, then it wouldn't be much harder. We could store the
+individual digits in an array and each multiplication would double all the indexes by two. We'd also need to handle
+the carrying over.</p>
+<p>Still pretty straightforward, not really worth the effort to go through it.</p>
 
                     </main>
 

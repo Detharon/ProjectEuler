@@ -14,3 +14,4 @@
   - [Summation of Primes](explanations/10.md)
   - [Largest Product in a Grid](explanations/11.md)
   - [Highly Divisible Triangular Number](explanations/12.md)
+  - [Power Digit Sum](explanations/16.md)
