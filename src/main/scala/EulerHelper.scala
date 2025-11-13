@@ -18,8 +18,6 @@ object EulerHelper {
   }
 
   extension (n: BigInt) {
-    def **(power: Int): BigInt = n.pow(power)
-
     def factorial: BigInt = {
       @tailrec
       def factorial(n: BigInt, acc: BigInt): BigInt = {
