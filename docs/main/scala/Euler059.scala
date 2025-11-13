@@ -4,7 +4,6 @@ object Euler059 extends EulerApp {
 
     val a = 'a'.toInt
     val z = 'z'.toInt
-
     val possibleCiphers = for {
       first <- a to z
       second <- a to z
@@ -21,6 +20,7 @@ object Euler059 extends EulerApp {
 
   private def containsManyWords(input: Array[Int]): Boolean = {
     val string = input.map(_.toChar).mkString
+    // TODO: Try finding words (alphanumeric tokens)
     if (string.contains("Euler")) {
       println(string)
       true
