@@ -1,4 +1,7 @@
-# About this repository
+# A Guide to Project Euler in Scala
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Scala](https://img.shields.io/badge/Scala-3.x-green)](https://www.scala-lang.org/)
 
 This repository will eventually contain solutions for the first 100 problems from the Project Euler website.
 
@@ -20,7 +23,7 @@ readable and more error-prone code, so it is included primarily for contrast and
 ## The book format
 
 Problem solutions and the explanations can be viewed as a webpage:
-https://detharon.github.io/ProjectEuler/solutions.html
+https://detharon.github.io/ProjectEuler/about.html
 
 All the code is present in `src/main/scala` while the associated files can be found in `src/main/resources`.
 
