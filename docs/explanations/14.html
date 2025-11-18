@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Power Digit Sum - A Guide to Project Euler in Scala</title>
+        <title>Longest Collatz Sequence - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -177,28 +177,103 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="power-digit-sum"><a class="header" href="#power-digit-sum">Power Digit Sum</a></h1>
-<p>\(2^{15} = 32768\) and the sum of its digits is \(3 + 2 + 7 + 6 + 8 = 26\).</p>
-<p>What is the sum of the digits of the number \(2^{1000}\)?</p>
+                        <h1 id="longest-collatz-sequence"><a class="header" href="#longest-collatz-sequence">Longest Collatz Sequence</a></h1>
+<p>The following iterative sequence is defined for the set of positive integers:</p>
+<p>\(n \to n/2\) (\(n\) is even)</br>
+\(n \to 3n + 1\) (\(n\) is odd)</p>
+<p>Using the rule above and starting with \(13\), we generate the following sequence:
+\begin{align}
+13 \to 40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1.
+\end{align}</p>
+<p>It can be seen that this sequence (starting at \(13\) and finishing at \(1\)) contains \(10\) terms.
+Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at \(1\).</p>
+<p>Which starting number, under one million, produces the longest chain?</p>
+<p><strong>NOTE:</strong> Once the chain starts the terms are allowed to go above one million.</p>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
-<p>Due to the rich standard library in Scala, this problem is extremely easy. We can solve it in one line only!</p>
-<pre><code class="language-scala">object Euler016 extends EulerApp {
-  override def execute(): Int = (BigInt(2) ^ 1000).toString().map(_.asDigit).sum
+<p>Let's make aa brute-force solution and see how it works.</p>
+<p>We can add one optimization that cuts the execution time in half. Due to how the sequences are calculated,
+a collatzLength(2n) is always bigger than collatzLength(n) by 1.</p>
+<p>So, we can check only the upper half of the range to get the maximum length of the sequence. Here's the code.</p>
+<pre><code class="language-scala">import scala.annotation.tailrec
+
+object Euler014 extends EulerApp {
+
+  override def execute(): Any = (500_000 until 1_000_000).maxBy(collatzLength)
+
+  private def collatzLength(n: Int): Int = {
+    @tailrec
+    def collatzLength(n: Long, currentLength: Int): Int = n match {
+      case 1 =&gt; currentLength + 1
+      case n if n % 2 == 0 =&gt; collatzLength(n / 2, currentLength + 1)
+      case n =&gt; collatzLength(n * 3 + 1, currentLength + 1)
+    }
+
+    collatzLength(n, 0)
+  }
 }
 </code></pre>
-<p>It even runs very fast. If we wanted to avoid using <code>BigInt</code>, then it wouldn't be much harder. We could store the
-individual digits in an array and each multiplication would double all the indexes by two. We'd also need to handle
-the carrying over.</p>
-<p>Still pretty straightforward, not really worth the effort to go through it.</p>
+<p>My first though when seeing this problem was to use the dynamic programming. After all, we'll keep hitting the same
+sub-sequences (such as 16 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1) many times.</p>
+<p>I implemented it using a map while keeping it immutable, but it wasn't a great idea.
+The code ran much slower. In fact, even with a mutable map it was around 50% slower than the brute-force one.</p>
+<p>Often it's worth starting out from a basic solution. This way there's less room for mistake,
+and we have a baseline result that we can improve further.</p>
+<h2 id="mutable-solution"><a class="header" href="#mutable-solution">Mutable solution</a></h2>
+<p>Let's think for a while how can we improve the brute-force solution.</p>
+<p>As I've mentioned, some operations are done multiple times. We can memoize them, in an array-based cache for
+fast lookups. Why array? Because map would be much slowe, and we know its max size.</p>
+<p>In fact, we don't have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code> to 100_000.
+It should be slower, but still faster than the brute-force solution.</p>
+<pre><code class="language-scala">import scala.annotation.tailrec
+
+object Euler014M extends EulerApp {
+
+  override def execute(): Any = (1 until 1_000_000).maxBy(collatzLength)
+
+  private val cacheLimit = 1_000_000
+  private val cache = new Array[Int](cacheLimit)
+  cache(1) = 1
+
+  private def collatzLength(base: Int): Int = {
+    @tailrec
+    def compute(n: Long, length: Int): Int = {
+      if (n &lt; cacheLimit &amp;&amp; cache(n.toInt) != 0) {
+        length + cache(n.toInt)
+      } else if (n % 2 == 0) {
+        compute(n / 2, length + 1)
+      } else {
+        compute(n * 3 + 1, length + 2)
+      }
+    }
+
+    val result = compute(base, 0)
+    if (base &lt; cacheLimit) cache(base) = result
+    result
+  }
+}
+</code></pre>
+<p>As you see we get rid of the optimization to start from 500_000. That's because, it turns out, it works slightly
+slower than starting from the beginning, because our cache has a lot of misses this way, and we don't backtrace the
+values to fill it.</p>
+<p>We could try to do it, but is it worth increasing the complexity of the solution even further, if it already runs in
+milliseconds? Sometimes it is, but here, I'll pass.</p>
+<h2 id="epilogue"><a class="header" href="#epilogue">Epilogue</a></h2>
+<p>If it wasn't a computational problem, but a business-oriented one, then the base, immutable solution would be the one
+preferred in almost all the cases, due to how simple and safe it is.</p>
+<p>The mutable solution has much more places where errors can be made. For example, the 'n.toInt' is only safe because we
+check right before that n is below a cache limit, which prevents the overflow.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../explanations/14.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../explanations/13.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../explanations/16.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -206,10 +281,13 @@ the carrying over.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../explanations/14.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../explanations/13.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../explanations/16.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

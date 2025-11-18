@@ -15,4 +15,5 @@
   - [Largest Product in a Grid](explanations/11.md)
   - [Highly Divisible Triangular Number](explanations/12.md)
   - [Large Sum](explanations/13.md)
+  - [Longest Collatz Sequence](explanations/14.md)
   - [Power Digit Sum](explanations/16.md)
