@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Longest Collatz Sequence - A Guide to Project Euler in Scala</title>
+        <title>Lattice Paths - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -177,101 +177,87 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="longest-collatz-sequence"><a class="header" href="#longest-collatz-sequence">Longest Collatz Sequence</a></h1>
-<p>The following iterative sequence is defined for the set of positive integers:</p>
-<p>\(n \to n/2\) (\(n\) is even)</br>
-\(n \to 3n + 1\) (\(n\) is odd)</p>
-<p>Using the rule above and starting with \(13\), we generate the following sequence:
-\begin{align}
-13 \to 40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1.
-\end{align}</p>
-<p>It can be seen that this sequence (starting at \(13\) and finishing at \(1\)) contains \(10\) terms.
-Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at \(1\).</p>
-<p>Which starting number, under one million, produces the longest chain?</p>
-<p><strong>NOTE:</strong> Once the chain starts the terms are allowed to go above one million.</p>
+                        <h1 id="lattice-paths"><a class="header" href="#lattice-paths">Lattice Paths</a></h1>
+<p>Starting in the top left corner of a \(20 \times 20\) grid, and only being able to move to the right and down,
+there are exactly \(6\) routes to the bottom right corner.</p>
+<p><img src="../assets/0015.png" alt="paths" /></p>
+<p>How many such routes are there through a \(20 \times 20\) grid?</p>
+<h2 id="lets-make-it-easier"><a class="header" href="#lets-make-it-easier">Let's make it easier</a></h2>
+<p>When I saw this problem for the first time my first thought was that I probably can calculate it with a pen and paper.</p>
+<p>But since we're coding in Scala here, let's try to make an application that will solve it for us.</p>
+<p>\(20 \times 20\) is a big array, too big to reason about it, while the \(2 \times 2\) is a bit too small. Let's
+then draw a \(3 \times 3\) one and mark the edges with dots. How many ways to we have to reach each of these dots?
+Exactly one way. That was the easiest part.</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="../assets/0015-1.png" style="height:150px">
+</div>
+<p>Now let's try a second row. If we know how to get to the dot above and to the dot on the left side, then we also know
+how to go to the dot in question, because from their positions there's just one way to continue (either left or down).</p>
+<p>So, we can fill the second row starting from the left side. First dot will be \(1 + 1 = 2\), second will be
+\(3 + 1 = 3\), third one will be \(3 + 1 = 4\)</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="../assets/0015-2.png" style="height:150px">
+</div>
+<p>The third row will be no different, let's continue the process:</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="../assets/0015-3.png" style="height:150px">
+</div>
+<p>And the same goes for the last one. The answer to a question in how many possible ways we can reach the last lattice
+can be found in the bottom right corner: 20.</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="../assets/0015-4.png" style="height:150px">
+</div>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
-<p>Let's make aa brute-force solution and see how it works.</p>
-<p>We can add one optimization that cuts the execution time in half. Due to how the sequences are calculated,
-a collatzLength(2n) is always bigger than collatzLength(n) by 1.</p>
-<p>So, we can check only the upper half of the range to get the maximum length of the sequence. Here's the code.</p>
+<p>The previous section shown us some properties of the lattice paths. We can now implement the algorithm that we used.
+I went for a functional, recursive solution, but a mutable one that's based on a simple 2-dimensional <code>Array</code> could do as well.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
-object Euler014 extends EulerApp {
+object Euler015 extends EulerApp {
+  override def execute(): Long = countLatticePaths(21, 21)
 
-  override def execute(): Any = (500_000 until 1_000_000).maxBy(collatzLength)
-
-  private def collatzLength(n: Int): Int = {
-    @tailrec
-    def collatzLength(n: Long, currentLength: Int): Int = n match {
-      case 1 =&gt; currentLength + 1
-      case n if n % 2 == 0 =&gt; collatzLength(n / 2, currentLength + 1)
-      case n =&gt; collatzLength(n * 3 + 1, currentLength + 1)
-    }
-
-    collatzLength(n, 0)
+  private def countLatticePaths(length: Int, height: Int): Long = {
+    val lattice = fillLatticeArray(length, height)
+    lattice(length - 1)(height - 1)
   }
+
+  @tailrec
+  private def fillLatticeArray(length: Int, height: Int, currentResult: Seq[Seq[Long]] = Seq.empty): Seq[Seq[Long]] =
+    currentResult match {
+      // First row, we'll fill it with ones
+      case Nil =&gt; fillLatticeArray(
+        length,
+        height,
+        Seq(Seq.fill(length)(1L))
+      )
+      // All rows filled, time to finish
+      case other if other.size == height =&gt; currentResult
+      // Filling the next row, but not the first one
+      case other =&gt;
+        val nextRowNum = currentResult.size
+        val previousRow = currentResult(nextRowNum - 1)
+        fillLatticeArray(
+          length,
+          height,
+          currentResult :+ previousRow.foldLeft(List.empty) {
+            case (result, previousRowNum) =&gt;
+              result :+ result.lastOption.getOrElse(0L) + previousRowNum
+          }
+        )
+    }
 }
 </code></pre>
-<p>My first though when seeing this problem was to use the dynamic programming. After all, we'll keep hitting the same
-sub-sequences (such as 16 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1) many times.</p>
-<p>I implemented it using a map while keeping it immutable, but it wasn't a great idea.
-The code ran much slower. In fact, even with a mutable map it was around 50% slower than the brute-force one.</p>
-<p>Often it's worth starting out from a basic solution. This way there's less room for mistake,
-and we have a baseline result that we can improve further.</p>
-<h2 id="mutable-solution"><a class="header" href="#mutable-solution">Mutable solution</a></h2>
-<p>Let's think for a while how can we improve the brute-force solution.</p>
-<p>As I've mentioned, some operations are done multiple times. We can memoize them, in an array-based cache for
-fast lookups. Why array? Because map would be much slowe, and we know its max size.</p>
-<p>In fact, we don't have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code>: to 100_000.
-It should be slower, but still faster than the brute-force solution.</p>
-<pre><code class="language-scala">import scala.annotation.tailrec
-
-object Euler014M extends EulerApp {
-
-  override def execute(): Any = (1 until 1_000_000).maxBy(collatzLength)
-
-  private val cacheLimit = 1_000_000
-  private val cache = new Array[Int](cacheLimit)
-  cache(1) = 1
-
-  private def collatzLength(base: Int): Int = {
-    @tailrec
-    def compute(n: Long, length: Int): Int = {
-      if (n &lt; cacheLimit &amp;&amp; cache(n.toInt) != 0) {
-        length + cache(n.toInt)
-      } else if (n % 2 == 0) {
-        compute(n / 2, length + 1)
-      } else {
-        compute(n * 3 + 1, length + 2)
-      }
-    }
-
-    val result = compute(base, 0)
-    if (base &lt; cacheLimit) cache(base) = result
-    result
-  }
-}
-</code></pre>
-<p>As you see we get rid of the optimization to start from 500_000. That's because, it turns out, it works slightly
-slower than starting from the beginning, because our cache has a lot of misses this way, and we don't backtrace the
-values to fill it.</p>
-<p>We could try to do it, but is it worth increasing the complexity of the solution even further, if it already runs in
-milliseconds? Sometimes it is, but here, I'll pass.</p>
-<h2 id="epilogue"><a class="header" href="#epilogue">Epilogue</a></h2>
-<p>If it wasn't a computational problem, but a business-oriented one, then the base, immutable solution would be the one
-preferred in almost all the cases, due to how simple and safe it is.</p>
-<p>The mutable solution has much more places where errors can be made. For example, the 'n.toInt' is only safe because we
-check right before that n is below a cache limit, which prevents the overflow.</p>
+<p>It does exactly what we did manually, but on a larger scale. It fills the first row and first column with ones, and then
+it calculates next elements from left to right, top to bottom. The answer is, as before, in the bottom right corner.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../explanations/13.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../explanations/14.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../explanations/15.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../explanations/16.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -281,11 +267,11 @@ check right before that n is below a cache limit, which prevents the overflow.</
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../explanations/13.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../explanations/14.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../explanations/15.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../explanations/16.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

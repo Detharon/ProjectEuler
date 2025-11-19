@@ -954,7 +954,7 @@ and we have a baseline result that we can improve further.</p>
 <p>Let's think for a while how can we improve the brute-force solution.</p>
 <p>As I've mentioned, some operations are done multiple times. We can memoize them, in an array-based cache for
 fast lookups. Why array? Because map would be much slowe, and we know its max size.</p>
-<p>In fact, we don't have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code> to 100_000.
+<p>In fact, we don't have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code>: to 100_000.
 It should be slower, but still faster than the brute-force solution.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
@@ -994,10 +994,81 @@ milliseconds? Sometimes it is, but here, I'll pass.</p>
 preferred in almost all the cases, due to how simple and safe it is.</p>
 <p>The mutable solution has much more places where errors can be made. For example, the 'n.toInt' is only safe because we
 check right before that n is below a cache limit, which prevents the overflow.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lattice-paths"><a class="header" href="#lattice-paths">Lattice Paths</a></h1>
+<p>Starting in the top left corner of a \(20 \times 20\) grid, and only being able to move to the right and down,
+there are exactly \(6\) routes to the bottom right corner.</p>
+<p><img src="explanations/../assets/0015.png" alt="paths" /></p>
+<p>How many such routes are there through a \(20 \times 20\) grid?</p>
+<h2 id="lets-make-it-easier-1"><a class="header" href="#lets-make-it-easier-1">Let's make it easier</a></h2>
+<p>When I saw this problem for the first time my first thought was that I probably can calculate it with a pen and paper.</p>
+<p>But since we're coding in Scala here, let's try to make an application that will solve it for us.</p>
+<p>\(20 \times 20\) is a big array, too big to reason about it, while the \(2 \times 2\) is a bit too small. Let's
+then draw a \(3 \times 3\) one and mark the edges with dots. How many ways to we have to reach each of these dots?
+Exactly one way. That was the easiest part.</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="explanations/../assets/0015-1.png" style="height:150px">
+</div>
+<p>Now let's try a second row. If we know how to get to the dot above and to the dot on the left side, then we also know
+how to go to the dot in question, because from their positions there's just one way to continue (either left or down).</p>
+<p>So, we can fill the second row starting from the left side. First dot will be \(1 + 1 = 2\), second will be
+\(3 + 1 = 3\), third one will be \(3 + 1 = 4\)</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="explanations/../assets/0015-2.png" style="height:150px">
+</div>
+<p>The third row will be no different, let's continue the process:</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="explanations/../assets/0015-3.png" style="height:150px">
+</div>
+<p>And the same goes for the last one. The answer to a question in how many possible ways we can reach the last lattice
+can be found in the bottom right corner: 20.</p>
+<div style="max-width: fit-content; margin-inline: auto;">
+<img src="explanations/../assets/0015-4.png" style="height:150px">
+</div>
+<h2 id="solution-14"><a class="header" href="#solution-14">Solution</a></h2>
+<p>The previous section shown us some properties of the lattice paths. We can now implement the algorithm that we used.
+I went for a functional, recursive solution, but a mutable one that's based on a simple 2-dimensional <code>Array</code> could do as well.</p>
+<pre><code class="language-scala">import scala.annotation.tailrec
+
+object Euler015 extends EulerApp {
+  override def execute(): Long = countLatticePaths(21, 21)
+
+  private def countLatticePaths(length: Int, height: Int): Long = {
+    val lattice = fillLatticeArray(length, height)
+    lattice(length - 1)(height - 1)
+  }
+
+  @tailrec
+  private def fillLatticeArray(length: Int, height: Int, currentResult: Seq[Seq[Long]] = Seq.empty): Seq[Seq[Long]] =
+    currentResult match {
+      // First row, we'll fill it with ones
+      case Nil =&gt; fillLatticeArray(
+        length,
+        height,
+        Seq(Seq.fill(length)(1L))
+      )
+      // All rows filled, time to finish
+      case other if other.size == height =&gt; currentResult
+      // Filling the next row, but not the first one
+      case other =&gt;
+        val nextRowNum = currentResult.size
+        val previousRow = currentResult(nextRowNum - 1)
+        fillLatticeArray(
+          length,
+          height,
+          currentResult :+ previousRow.foldLeft(List.empty) {
+            case (result, previousRowNum) =&gt;
+              result :+ result.lastOption.getOrElse(0L) + previousRowNum
+          }
+        )
+    }
+}
+</code></pre>
+<p>It does exactly what we did manually, but on a larger scale. It fills the first row and first column with ones, and then
+it calculates next elements from left to right, top to bottom. The answer is, as before, in the bottom right corner.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="power-digit-sum"><a class="header" href="#power-digit-sum">Power Digit Sum</a></h1>
 <p>\(2^{15} = 32768\) and the sum of its digits is \(3 + 2 + 7 + 6 + 8 = 26\).</p>
 <p>What is the sum of the digits of the number \(2^{1000}\)?</p>
-<h2 id="solution-14"><a class="header" href="#solution-14">Solution</a></h2>
+<h2 id="solution-15"><a class="header" href="#solution-15">Solution</a></h2>
 <p>Due to the rich standard library in Scala, this problem is extremely easy. We can solve it in one line only!</p>
 <pre><code class="language-scala">object Euler016 extends EulerApp {
   override def execute(): Int = (BigInt(2) ^ 1000).toString().map(_.asDigit).sum
