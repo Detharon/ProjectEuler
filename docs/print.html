@@ -13,21 +13,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -39,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex.js";
+            window.path_to_searchindex_js = "searchindex-e95ec6f1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="toc-57e8f475.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -56,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div id="body-container">
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -85,12 +84,12 @@
             html.classList.add("js");
         </script>
 
-        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             let sidebar = null;
-            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -105,39 +104,39 @@
             }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
             </noscript>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
                         </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -145,66 +144,68 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
                         <div class="search-wrapper">
-                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
                             <div class="spinner-wrapper">
-                                <i class="fa fa-spinner fa-spin"></i>
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
                             </div>
                         </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="about-this-guide"><a class="header" href="#about-this-guide">About this guide</a></h1>
 <p>This guide contains solutions for the first 100 problems from the Project Euler website.
 Full code, in a form of runnable classes, is available on GitHub: https://github.com/Detharon/ProjectEuler</p>
 <p>The code is shared for educational purposes, demonstrating how these problems can be approached using Scala.
 There are many other sites that discuss Project Euler problems, but here, the purpose it twofold:
-discuss the problem while emphasizing Scala's strengths of making efficient code that's easy to understand.</p>
+discuss the problem while emphasizing Scala’s strengths of making efficient code that’s easy to understand.</p>
 <p>So, whenever possible, a functional programming style is used, avoiding mutable state and vars. Some solutions
 intentionally deviate from this approach for performance comparison;
 these are marked with an ‘M’ suffix in their filenames.</p>
 <p>While the non-functional style may yield greater efficiency by reducing object allocations, it often results in less
 readable and more error-prone code, so it is included primarily for contrast and learning purposes.</p>
 <h2 id="how-to-use-this-guide"><a class="header" href="#how-to-use-this-guide">How to use this guide</a></h2>
-<p>My advice would be to read the solutions only when you've already solved the problem. It's normal to struggle at the
-beginning. The first solution can be unoptimized and too slow to give the final result, but it's a good starting
+<p>My advice would be to read the solutions only when you’ve already solved the problem. It’s normal to struggle at the
+beginning. The first solution can be unoptimized and too slow to give the final result, but it’s a good starting
 point to think what can be improved.</p>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
-<p>Even though it's an individual work, that's heavily influenced by my personal style, I'm open for contributions.
-If you want to add your some extra insights, you've found an error or a mistake, please send a pull request
+<p>Even though it’s an individual work, that’s heavily influenced by my personal style, I’m open for contributions.
+If you want to add your some extra insights, you’ve found an error or a mistake, please send a pull request
 or raise an issue in GitHub.</p>
 <h2 id="project-status"><a class="header" href="#project-status">Project status</a></h2>
 <p>The project it still in progress, with many problems missing.
 Some of them are solved but not described yet in this book.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="problem-solutions"><a class="header" href="#problem-solutions">Problem solutions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="problem-solutions"><a class="header" href="#problem-solutions">Problem solutions</a></h1>
 <p>You can find the code for all the problems in the project repository, in <code>src/main/scala</code> directory.
 All examples are runnable, and they only print the solution, along the execution time.</p>
 <p>A commonly used code can be found in <code>EulerHelper</code> class, but other than that, the solutions are self-contained.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="multiples-of-3-or-5"><a class="header" href="#multiples-of-3-or-5">Multiples of 3 or 5</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="multiples-of-3-or-5"><a class="header" href="#multiples-of-3-or-5">Multiples of 3 or 5</a></h1>
 <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these
 multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.</p>
@@ -212,7 +213,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.</p>
 <p>The only tricky part of this exercise comes from the fact that we cannot simply count the multiplies of 3,
 then calculate the multiplies of 5, and add these two numbers up. If we did that, then the numbers that are divisible
 by both 3 and 5 would be calculated twice.</p>
-<p>In this solution, we create three sets of numbers. If a number of divisible by both 3 and 5, then it's divisible by 15,
+<p>In this solution, we create three sets of numbers. If a number of divisible by both 3 and 5, then it’s divisible by 15,
 so we can find those numbers and subtract them from the two other sets.</p>
 <pre><code class="language-scala">object Euler001 extends EulerApp {
   override def execute(): Int = {
@@ -224,20 +225,21 @@ so we can find those numbers and subtract them from the two other sets.</p>
   }
 }
 </code></pre>
-<p>The problem can be also solved by checking all the numbers to see if they're divisible by 3 or 5.
+<p>The problem can be also solved by checking all the numbers to see if they’re divisible by 3 or 5.
 Shorter, nothing gets counted twice, but you may find it harder to read.</p>
 <pre><code class="language-scala">(3 until 1000).filter(n =&gt; n % 3 == 0 || n % 5 == 0).sum
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="even-fibonacci-numbers"><a class="header" href="#even-fibonacci-numbers">Even Fibonacci Numbers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="even-fibonacci-numbers"><a class="header" href="#even-fibonacci-numbers">Even Fibonacci Numbers</a></h1>
 <p>Each new term in the Fibonacci sequence is generated by adding the previous two terms.
-By starting with 1 and 2, the first 10 terms will be: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...</p>
+By starting with 1 and 2, the first 10 terms will be: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …</p>
 <p>By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 find the sum of the even-valued terms.</p>
 <h2 id="solution-1"><a class="header" href="#solution-1">Solution</a></h2>
 <p>The numbers are small enough to calculate it in a matter of milliseconds without any optimisations.
 Fibonacci implementation is done with a LazyList to make it infinite. Is this an efficient approach?
 Not really, because <code>LazyList</code> memoizes all the elements, but we need just the previous 2.</p>
-<p>In this case, due to how easy this task is, let's keep it as it is.</p>
+<p>In this case, due to how easy this task is, let’s keep it as it is.</p>
 <pre><code class="language-scala">object Euler002 extends EulerApp {
   override def execute(): Int =
     fibonacci.filter(_ % 2 == 0).takeWhile(_ &lt; 4_000_000).sum
@@ -248,20 +250,21 @@ Not really, because <code>LazyList</code> memoizes all the elements, but we need
     a #:: fibonacciFunction(b, a + b)
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="largest-prime-factor"><a class="header" href="#largest-prime-factor">Largest Prime Factor</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="largest-prime-factor"><a class="header" href="#largest-prime-factor">Largest Prime Factor</a></h1>
 <p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
 <p>What is the largest prime factor of the number 600851475143?</p>
 <h2 id="solution-2"><a class="header" href="#solution-2">Solution</a></h2>
-<p>Before implementing anything, let's think how finding the prime factors works.
-Let's consider the number from the description, 13195. We can just try all the numbers until we hit a prime, then
-check if it's divisible by this prime. Once we found a factor, we can just divide the original number by it.</p>
+<p>Before implementing anything, let’s think how finding the prime factors works.
+Let’s consider the number from the description, 13195. We can just try all the numbers until we hit a prime, then
+check if it’s divisible by this prime. Once we found a factor, we can just divide the original number by it.</p>
 <p>So, the 13195 turns into 13195 / 5 = 2639.</p>
 <p>Then 2639 / 7 = 377.</p>
 <p>Then 377 / 13 = 29.</p>
 <p>And finally 29 / 29 = 1.</p>
-<p>In fact, we could check each result to see if it's a prime, because if it is, then we know that we've found
+<p>In fact, we could check each result to see if it’s a prime, because if it is, then we know that we’ve found
 the biggest prime factor and can just return it.</p>
-<p>But there are some reasons not to do that as well. Let's take a look at a complete solution, without that final
+<p>But there are some reasons not to do that as well. Let’s take a look at a complete solution, without that final
 optimization:</p>
 <pre><code class="language-scala">import EulerHelper.naiveIsPrime
 
@@ -277,8 +280,8 @@ object Euler003 extends EulerApp {
     else primeFactors(n, i + 1, primesFound)
 }
 </code></pre>
-<p>The prime check is done in a naive way, by checking all the numbers. It's not efficient, and in the process we're
-checking multiple numbers over and over again, but it's still blazing fast.
+<p>The prime check is done in a naive way, by checking all the numbers. It’s not efficient, and in the process we’re
+checking multiple numbers over and over again, but it’s still blazing fast.
 Now, the reason why the final optimization was not done, because it would make the app run much slower: doing the same
 check on longs rather than integers, made the app run 5 times as long.</p>
 <pre><code class="language-scala">  extension (n: Int) {
@@ -288,22 +291,23 @@ check on longs rather than integers, made the app run 5 times as long.</p>
     }
   }
 </code></pre>
-<p>In the end, it doesn't make sense to overly optimize such a simple problem.
-Out solution solves it and is easy to understand, so let's move on.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="largest-palindrome-product"><a class="header" href="#largest-palindrome-product">Largest Palindrome Product</a></h1>
+<p>In the end, it doesn’t make sense to overly optimize such a simple problem.
+Out solution solves it and is easy to understand, so let’s move on.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="largest-palindrome-product"><a class="header" href="#largest-palindrome-product">Largest Palindrome Product</a></h1>
 <p>A palindromic number reads the same both ways. The largest palindrome made from the product of two
 2-digit numbers is 9009 = 91 * 99</p>
 <p>Find the largest palindrome made from the product of two 3-digit numbers.</p>
 <h2 id="solution-3"><a class="header" href="#solution-3">Solution</a></h2>
 <p>A brute-force solution would also work reasonably well, but we can actually reduce the number of numbers to be checked.</p>
 <p>We know that multiplying two 3-digit numbers will give us a 6-digit number at most,
-so the palindrome we're looking for has the "abccba" form, or: 100000a + 10000b + 1000c + 100c + 10b + a.</p>
-<p>If we add those numbers we get "100001a + 10010b + 1100c".
+so the palindrome we’re looking for has the “abccba” form, or: 100000a + 10000b + 1000c + 100c + 10b + a.</p>
+<p>If we add those numbers we get “100001a + 10010b + 1100c”.
 We can then factor out 11, which means that our palindrome has to be divisible by 11: 11(9091a + 910b + 100c)</p>
-<p>One of the numbers then has to be divisible by 11, because it's a prime number.
+<p>One of the numbers then has to be divisible by 11, because it’s a prime number.
 We can start from 990 instead of 999 and decrease the numbers checked by 11.</p>
 <p>As for checking if a string is a palindrome, there are many ways to do that. It can be done iteratively, recursively,
-or with built-in functions like here. Neither changes the run time, so it doesn't matter much for this problem.</p>
+or with built-in functions like here. Neither changes the run time, so it doesn’t matter much for this problem.</p>
 <pre><code class="language-scala">object Euler004 extends EulerApp {
   override def execute(): Int = (for {
     a &lt;- 990 to 100 by -11
@@ -315,19 +319,20 @@ or with built-in functions like here. Neither changes the run time, so it doesn'
   def isPalindrome(s: String): Boolean = s == s.reverse
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="smallest-multiple"><a class="header" href="#smallest-multiple">Smallest Multiple</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="smallest-multiple"><a class="header" href="#smallest-multiple">Smallest Multiple</a></h1>
 <p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
 <p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
-<h2 id="lets-make-it-easier"><a class="header" href="#lets-make-it-easier">Let's make it easier</a></h2>
-<p>First, let's try to decrease a bit the number of numbers we'll need to check. We can analyze the simpler problem for
+<h2 id="lets-make-it-easier"><a class="header" href="#lets-make-it-easier">Let’s make it easier</a></h2>
+<p>First, let’s try to decrease a bit the number of numbers we’ll need to check. We can analyze the simpler problem for
 which we already know the answer.</p>
 <p>The 2520 is divisible by all numbers from 1 to 10. We know that among those numbers, 2, 3, 5, 7 are primes. So, if the
-number we're looking for is divisible by all these prime numbers, then it must be a multiple of (2 × 3 × 5 × 7) = 210.</p>
+number we’re looking for is divisible by all these prime numbers, then it must be a multiple of (2 × 3 × 5 × 7) = 210.</p>
 <h2 id="solution-4"><a class="header" href="#solution-4">Solution</a></h2>
-<p>We can follow the same logic to find a number that's evenly divisible by all numbers from 1 to 20.</p>
-<p>Prime numbers in this set are: 2, 3, 5, 7, 11, 13, 17, 19. The number we're looking for, then, must be a multiple of
+<p>We can follow the same logic to find a number that’s evenly divisible by all numbers from 1 to 20.</p>
+<p>Prime numbers in this set are: 2, 3, 5, 7, 11, 13, 17, 19. The number we’re looking for, then, must be a multiple of
 2 × 3 × 5 × 7 × 11 × 13 × 17 × 19 = 9699690.</p>
-<p>Let's try to find that number!</p>
+<p>Let’s try to find that number!</p>
 <pre><code class="language-scala">object Euler005 extends EulerApp {
   // 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 = 9699690
   override def execute(): Int = Iterator
@@ -338,22 +343,23 @@ number we're looking for is divisible by all these prime numbers, then it must b
     .get
 }
 </code></pre>
-<p>If we wanted to improve it even further, then we can notice that we don't need to check again if our numbers are
+<p>If we wanted to improve it even further, then we can notice that we don’t need to check again if our numbers are
 divisible by all these prime numbers. Also, multiplies of these numbers, such as 6 (2 * 3), no need to be checked either.</p>
-<p>That's because every number that's divisible by both 2 and 3 must be divisible by 6.</p>
-<p>We don't need to make it more complex than necessary. The current solution already runs in 1-2 ms on my machine.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="sum-square-difference"><a class="header" href="#sum-square-difference">Sum Square Difference</a></h1>
+<p>That’s because every number that’s divisible by both 2 and 3 must be divisible by 6.</p>
+<p>We don’t need to make it more complex than necessary. The current solution already runs in 1-2 ms on my machine.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="sum-square-difference"><a class="header" href="#sum-square-difference">Sum Square Difference</a></h1>
 <p>The sum of the squares of the first ten natural numbers is,</p>
-<p>\(1^2 + 2^2 + ... + 10^2 = 385\)</p>
+<p>\(1^2 + 2^2 + … + 10^2 = 385\)</p>
 <p>The square of the sum of the first ten natural numbers is,</p>
-<p>\((1 + 2 + ... + 10)^2 = 55^2 = 3025\)</p>
+<p>\((1 + 2 + … + 10)^2 = 55^2 = 3025\)</p>
 <p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is</p>
 <p>\(3025 - 385 = 2640\)</p>
 <p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
 <h2 id="solution-5"><a class="header" href="#solution-5">Solution</a></h2>
-<p>It's a pretty straightforward problem. We can simply write down the problem literally, without any optimizations, and
-we're good to go. Scala's expressiveness makes this task a breeze and the resulting code is easy to understand.</p>
-<p>To make it extra concise, let's also define a "square" extension method.</p>
+<p>It’s a pretty straightforward problem. We can simply write down the problem literally, without any optimizations, and
+we’re good to go. Scala’s expressiveness makes this task a breeze and the resulting code is easy to understand.</p>
+<p>To make it extra concise, let’s also define a “square” extension method.</p>
 <pre><code class="language-scala">object Euler006 extends EulerApp {
   override def execute(): Int = squareOfSums(100) - sumOfSquares(100)
 
@@ -366,14 +372,15 @@ we're good to go. Scala's expressiveness makes this task a breeze and the result
   }
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="10-001st-prime"><a class="header" href="#10-001st-prime">10 001st Prime</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="10-001st-prime"><a class="header" href="#10-001st-prime">10 001st Prime</a></h1>
 <p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
 <p>What is the 10001st prime number?</p>
 <h2 id="solution-6"><a class="header" href="#solution-6">Solution</a></h2>
 <p>We can simply brute-force this problem by using the most naive prime check, since the 10001st prime will be a low
 number. This solution is pretty fast, even though the algorithm is not very efficient.</p>
-<p>As you can see, we don't even filter out even numbers higher than 2 (or all the multiplies of already found primes),
-but we'll need these methods later on. For now, a basic algorithm does pretty well.</p>
+<p>As you can see, we don’t even filter out even numbers higher than 2 (or all the multiplies of already found primes),
+but we’ll need these methods later on. For now, a basic algorithm does pretty well.</p>
 <pre><code class="language-scala">import EulerHelper.naiveIsPrime
 
 object Euler007 extends EulerApp {
@@ -384,7 +391,7 @@ object Euler007 extends EulerApp {
     .next()
 }
 </code></pre>
-<p>And for the reference, that's how we check if a number is a prime. A brute-force solution, that ran in 13 ms on my
+<p>And for the reference, that’s how we check if a number is a prime. A brute-force solution, that ran in 13 ms on my
 machine, which is pretty good already.</p>
 <pre><code class="language-scala">  extension (n: Int) {
     def naiveIsPrime: Boolean = n match {
@@ -393,12 +400,13 @@ machine, which is pretty good already.</p>
     }
   }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="largest-product-in-a-series"><a class="header" href="#largest-product-in-a-series">Largest Product in a Series</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="largest-product-in-a-series"><a class="header" href="#largest-product-in-a-series">Largest Product in a Series</a></h1>
 <p>The four adjacent digits in the 1000-digit number that have the greatest product are</p>
 <p>\(9 × 9 × 8 × 9 = 5832\)</p>
 <p>Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?</p>
 <h2 id="solution-7"><a class="header" href="#solution-7">Solution</a></h2>
-<p>The number might look daunting, but for any algorithm it's small enough that we don't need to optimize it much.
+<p>The number might look daunting, but for any algorithm it’s small enough that we don’t need to optimize it much.
 This is the shortest solution (code-wise), but also the least efficient. We split the string into 13-element sliding windows,
 then calculate the product of the digits in each window.</p>
 <p>Once we have the list of products, we simply take the maximum. Easy-peasy.
@@ -433,7 +441,7 @@ longer being functional?</p>
 </code></pre>
 <h2 id="mutable-solution"><a class="header" href="#mutable-solution">Mutable solution</a></h2>
 <p>In the earlier approach, the sliding windows were completely independent of one another, which made it immutable, but
-as I've also mentioned -- pretty inefficient.</p>
+as I’ve also mentioned – pretty inefficient.</p>
 <p>By calculating the product of 13 elements, we were performing 11 redundant multiplications in each neighboring window.</p>
 <p>Instead, we can maintain a running product — dividing by the digit that leaves the window
 and multiplying by the new digit that enters it. The only catch here are the zeroes that break the computation chain.</p>
@@ -445,22 +453,23 @@ For example, consider the following line:</p>
 Moreover, if the <code>.asDigit</code> call were omitted, the code would still compile and run,
 but it would silently produce an incorrect result. For such a small task, the optimization is not worth
 the effort, so treat it merely as a mental exercise.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="special-pythagorean-triplet"><a class="header" href="#special-pythagorean-triplet">Special Pythagorean Triplet</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="special-pythagorean-triplet"><a class="header" href="#special-pythagorean-triplet">Special Pythagorean Triplet</a></h1>
 <p>A Pythagorean triplet is a set of three natural numbers, a &lt; b &lt; c, for which,</p>
 <p>\(a^2 + b^2 = c^2\)</p>
 <p>For example \(3^2 + 4^2 = 9 + 16 = 25 = 5^2\).</p>
 <p>There exists exactly one Pythagorean triplet for which a + b + c = 1000.</p>
 <p>Find the product abc.</p>
 <h2 id="solution-8"><a class="header" href="#solution-8">Solution</a></h2>
-<p>The numbers are low enough for a naive approach, so let's use it, while keeping the code nice and clean.</p>
+<p>The numbers are low enough for a naive approach, so let’s use it, while keeping the code nice and clean.</p>
 <p>We need to check all combinations of a, b, c for which a + b + c = 1000 and find those that form a
 Pythagorean triplet.</p>
-<p>This naive algorithm starts from the highest possible 'c', keeps the sum of parameters at 1000, while gradually
-incrementing 'b' and decrementing 'c' until this it's possible. This condition (b == c - 2 || b == c - 1) indicates
-that the next triangle can't be created this way, so we need to increase the 'a' instead, while resetting the other
-two parameters: 'b' to the lowest possible one, 'c' to whatever will give a sum of 1000.</p>
-<p>It uses a LazyList which does keeps all the previous elements in memory. That's not something we need, but it makes
-the code pretty concise. Let's also try a mutable approach.</p>
+<p>This naive algorithm starts from the highest possible ‘c’, keeps the sum of parameters at 1000, while gradually
+incrementing ‘b’ and decrementing ‘c’ until this it’s possible. This condition (b == c - 2 || b == c - 1) indicates
+that the next triangle can’t be created this way, so we need to increase the ‘a’ instead, while resetting the other
+two parameters: ‘b’ to the lowest possible one, ‘c’ to whatever will give a sum of 1000.</p>
+<p>It uses a LazyList which does keeps all the previous elements in memory. That’s not something we need, but it makes
+the code pretty concise. Let’s also try a mutable approach.</p>
 <pre><code class="language-scala">object Euler009 extends EulerApp {
   override def execute(): Any = {
     triangles.dropWhile(!isPythagorean(_)).head.product
@@ -487,9 +496,9 @@ the code pretty concise. Let's also try a mutable approach.</p>
 }
 </code></pre>
 <h2 id="mutable-solution-1"><a class="header" href="#mutable-solution-1">Mutable solution</a></h2>
-<p>This time let's aim for maximum efficiency. Even though the idiomatic solution found the solution pretty fast
+<p>This time let’s aim for maximum efficiency. Even though the idiomatic solution found the solution pretty fast
 on my machine, the optimized one is about 10 to 15 times faster, even though they share the same algorithm.</p>
-<p>It's also more concise. It looks rather enigmatic, which is the usual pitfalls for the optimized solutions, but
+<p>It’s also more concise. It looks rather enigmatic, which is the usual pitfalls for the optimized solutions, but
 in this case the difference in performance was quite substantial.</p>
 <pre><code class="language-scala">object Euler009M extends EulerApp {
   override def execute(): Any = {
@@ -516,22 +525,23 @@ in this case the difference in performance was quite substantial.</p>
   }
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="summation-of-primes"><a class="header" href="#summation-of-primes">Summation of Primes</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="summation-of-primes"><a class="header" href="#summation-of-primes">Summation of Primes</a></h1>
 <p>The sum of the primes below \(10\) is \(2 + 3 + 5 + 7 = 17\).</p>
 <p>Find the sum of all the primes below two million.</p>
 <h2 id="solution-9"><a class="header" href="#solution-9">Solution</a></h2>
-<p>We could use the brute-force method to check all the numbers up to two million, one by one, to see if they're primes,
+<p>We could use the brute-force method to check all the numbers up to two million, one by one, to see if they’re primes,
 exactly how we did that before.</p>
-<p>It would eventually finish, because we don't run out of memory, but we wouldn't learn anything useful this way.</p>
-<p>This is the perfect problem to use the sieve of Eratosthenes. If you've never heard about it, then I
+<p>It would eventually finish, because we don’t run out of memory, but we wouldn’t learn anything useful this way.</p>
+<p>This is the perfect problem to use the sieve of Eratosthenes. If you’ve never heard about it, then I
 suggest looking it up, as it will be used in the future problems as
 well: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</p>
-<p>Unfortunately, the sieve itself doesn't go along well with immutable data structures because its creation is done
-iteratively, by small incremental changes. This time I'll only present a mutable version.</p>
-<p>In this solution, we're filling the sieve, which initially considers all numbers to be primes (true) and marks the
+<p>Unfortunately, the sieve itself doesn’t go along well with immutable data structures because its creation is done
+iteratively, by small incremental changes. This time I’ll only present a mutable version.</p>
+<p>In this solution, we’re filling the sieve, which initially considers all numbers to be primes (true) and marks the
 multiples of existing primes as non-primes (false). Once we hit next number, we know that if its factors were not
-found already, then it's a prime. No need for any another check!</p>
-<p>While filling the sieve, we'll also calculate the <code>primeSum</code> to avoid iterating the array again.
+found already, then it’s a prime. No need for any another check!</p>
+<p>While filling the sieve, we’ll also calculate the <code>primeSum</code> to avoid iterating the array again.
 It makes it even more mutable with a global state, but also faster.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
@@ -567,12 +577,13 @@ object Euler010M extends EulerApp {
   }
 }
 </code></pre>
-<p>We could also cut the numbers of elements stored by twice if we don't check the even numbers, we know that they are
+<p>We could also cut the numbers of elements stored by twice if we don’t check the even numbers, we know that they are
 not primes, but that would make the solution more complex. We could also use a more memory-efficient structure, such
 as BitSet, which requires 1 bit to store 1 number, as compared to array of booleans where we need 1 byte to store a
 boolean. It would also increase the complexity, since BitSets are a bit more tricky to handle. Could also decrease
-the performance, but I haven't checked that.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="largest-product-in-a-grid"><a class="header" href="#largest-product-in-a-grid">Largest Product in a Grid</a></h1>
+the performance, but I haven’t checked that.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="largest-product-in-a-grid"><a class="header" href="#largest-product-in-a-grid">Largest Product in a Grid</a></h1>
 <p>In the \(20 × 20\) grid below, four numbers along a diagonal line have been marked in red.</p>
 <p style="text-align: center;">
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08<br>
@@ -595,19 +606,20 @@ the performance, but I haven't checked that.</p>
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16<br>
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54<br>
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48<br></p>
+
 <p>The product of these numbers is \(26 × 63 × 78 × 14 = 1788696\).</p>
 <p>What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally)
 in the \(20 × 20\) grid?</p>
 <h2 id="solution-10"><a class="header" href="#solution-10">Solution</a></h2>
 <p>This large blocks of numbers may look daunting, but in reality the number of cases we have to check is pretty small.
-It's small enough that we can check all of them and then take the maximum.</p>
-<p>First, we'll load the data line by line and then create a 2d array of integers that represents the problem data set:</p>
+It’s small enough that we can check all of them and then take the maximum.</p>
+<p>First, we’ll load the data line by line and then create a 2d array of integers that represents the problem data set:</p>
 <pre><code class="language-scala">def prepareData(): Array[Array[Int]] =
   loadFileAsLines().map(_.split(" ").map(_.toInt)).toArray
 </code></pre>
 <p>The <code>loadFileAsLines()</code> is a helper method that does exactly what its name says: it loads the file as a list of strings,
 where each string is a line.</p>
-<p>Let's define our search function like that:</p>
+<p>Let’s define our search function like that:</p>
 <pre><code class="language-scala">private def findLargestProduct(matrix: Array[Array[Int]]): Long = ???
 </code></pre>
 <p>Because of how the data was loaded, <code>matrix(0)</code> would return the first row, and <code>matrix(0)(0)</code> will give us the first
@@ -615,29 +627,29 @@ element within the first row.</p>
 <p>So, we can iterate over all the elements like that:</p>
 <pre><code class="language-scala">for (col &lt;- matrix.indices; row &lt;- matrix(col).indices)
 </code></pre>
-<p>The <code>.indices</code> method is pretty convenient as it returns a range that corresponds to the array length, so we don't
+<p>The <code>.indices</code> method is pretty convenient as it returns a range that corresponds to the array length, so we don’t
 need to worry about going out of bounds.</p>
-<p>If we're at the element of (0, 0), then naturally we can only check the product in three directions: down,
-right and diagonally (right, down). If we're going from left to right, do we ever need to check the left direction?</p>
-<p>Not really. Because if we're checking the right direction at (0, 0), it will be the same as checking the left direction
-at (0, 3). In both cases we're multiplying these elements: (0, 0), (0, 1), (0, 2), (0, 3).</p>
+<p>If we’re at the element of (0, 0), then naturally we can only check the product in three directions: down,
+right and diagonally (right, down). If we’re going from left to right, do we ever need to check the left direction?</p>
+<p>Not really. Because if we’re checking the right direction at (0, 0), it will be the same as checking the left direction
+at (0, 3). In both cases we’re multiplying these elements: (0, 0), (0, 1), (0, 2), (0, 3).</p>
 <p>Likewise, when checking the diagonals, we can check only those going down. Overall, this gives us four directions
-to check: "right", "down", "right-down", "left-down".</p>
-<p>Checking each direction is a matter of defining right constraints, so we don't go out of bounds. Let's analyze how
-would that look for the "right" direction.</p>
+to check: “right”, “down”, “right-down”, “left-down”.</p>
+<p>Checking each direction is a matter of defining right constraints, so we don’t go out of bounds. Let’s analyze how
+would that look for the “right” direction.</p>
 <p>First, we need to define a condition: <code>col &lt; matrix(row).length - 3</code>. The <code>matrix(row).length</code> returns the length of
-the first row. We could as well define a constant of 20, but let's keep it dynamic as a good practice. With this
-check, we're making sure that the last column we're checking will be 16, so we can check elements 16, 17, 18, 19.
-Our array has 20 elements, but they're indexed from 0, so the last element has index 19.</p>
-<p>Let's summarize it then. Our check for the "right" direction will look as follows:</p>
+the first row. We could as well define a constant of 20, but let’s keep it dynamic as a good practice. With this
+check, we’re making sure that the last column we’re checking will be 16, so we can check elements 16, 17, 18, 19.
+Our array has 20 elements, but they’re indexed from 0, so the last element has index 19.</p>
+<p>Let’s summarize it then. Our check for the “right” direction will look as follows:</p>
 <pre><code class="language-scala">var max: Long = 0
 if (col &lt; matrix(row).length - 3) {
    max = Math.max(max, matrix(row)(col) * matrix(row)(col + 1) * matrix(row)(col + 2) * matrix(row)(col + 3))
 }
 </code></pre>
-<p>Now we just need to define the checks for other 3 directions and that's it, we'll have our solution.</p>
-<p>Here's the complete solution. It's a mutable one, but just a little bit. We maintain a mutable, local <code>max</code> that keeps
-the maximum product we've found so far.</p>
+<p>Now we just need to define the checks for other 3 directions and that’s it, we’ll have our solution.</p>
+<p>Here’s the complete solution. It’s a mutable one, but just a little bit. We maintain a mutable, local <code>max</code> that keeps
+the maximum product we’ve found so far.</p>
 <pre><code class="language-scala">object Euler011M extends EulerApp {
 
   override def execute(): Long = findLargestProduct(prepareData())
@@ -676,7 +688,8 @@ the maximum product we've found so far.</p>
   }
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="highly-divisible-triangular-number"><a class="header" href="#highly-divisible-triangular-number">Highly Divisible Triangular Number</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="highly-divisible-triangular-number"><a class="header" href="#highly-divisible-triangular-number">Highly Divisible Triangular Number</a></h1>
 <p>The sequence of triangle numbers is generated by adding the natural numbers. So the \(7^{th}\) triangle number would
 be
 \(1 + 2 + 3 + 4 + 5 + 6 + 7 = 28\). The first ten terms would be:</p>
@@ -695,7 +708,7 @@ be
 <p>What is the value of the first triangle number to have over five hundred divisors?</p>
 <h2 id="solution-11"><a class="header" href="#solution-11">Solution</a></h2>
 <p>Generating the triangle numbers is very easy. The real challenge is to find the number of divisors in an efficient way.</p>
-<p>The naive method wouldn't work. You can try it, but it will take too long to finish, because the number that has 500
+<p>The naive method wouldn’t work. You can try it, but it will take too long to finish, because the number that has 500
 divisors will be quite large.</p>
 <p>Any number can be represented as a product of prime factors. For example, \(28\) is \(2^2 × 7^1\).</p>
 <p>We can get these factors by dividing the 28 by its prime factors:</p>
@@ -704,15 +717,15 @@ divisors will be quite large.</p>
 14 ÷ 2 = 7\\
 7 ÷ 7 = 1\\
 \end{align}</p>
-<p>The next interesting thing is, that if we take increase those factors by one and multiply them with each other, we'll
+<p>The next interesting thing is, that if we take increase those factors by one and multiply them with each other, we’ll
 get a total number of factors: \((2+1)(1+1) = 6\).</p>
 <p>We can leverage those facts to quickly find the number of divisors, the only thing we need is a list of primes to use.</p>
-<p>Let's assume that our number will fit as a regular integer, in that case, we can get all primes like that:</p>
+<p>Let’s assume that our number will fit as a regular integer, in that case, we can get all primes like that:</p>
 <pre><code class="language-scala">  private val primes: Seq[Int] =
   (2 to Math.sqrt(Integer.MAX_VALUE).toInt)
     .filter(EulerHelper.naiveIsPrime)
 </code></pre>
-<p>We could also use a sieve of Eratosthenes here, but let's keep it simple instead.</p>
+<p>We could also use a sieve of Eratosthenes here, but let’s keep it simple instead.</p>
 <p>Getting next triangle numbers is easy, we can do it with a simple recursive function that keeps the current triangle
 number as <code>n</code> and the addend that was used to create it as <code>k</code>. Each iteration we increase <code>k</code> by one and calculate
 <code>n</code> from <code>n + k</code>.</p>
@@ -722,7 +735,7 @@ private def findTriangleNumber(n: Int = 1, k: Int = 2): Int =
   else findTriangleNumber(n + k, k + 1)
 </code></pre>
 <p>The missing part is to implement the <code>divisors(n)</code> function that calculates the number of divisors of <code>n</code>.</p>
-<p>We've already discussed the algorithm, let's think about the method signature:</p>
+<p>We’ve already discussed the algorithm, let’s think about the method signature:</p>
 <pre><code class="language-scala">  @tailrec
 private def divisors(
                       n: Int,
@@ -736,7 +749,7 @@ private def divisors(
 <li><code>divisorsFound</code> is how we can represent the prime factors. Map key is a prime, and value is a factor.</li>
 <li>the return value is the number of divisors</li>
 </ul>
-<p>Let's take a look at the whole solution:</p>
+<p>Let’s take a look at the whole solution:</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
 object Euler012 extends EulerApp {
@@ -780,26 +793,27 @@ object Euler012 extends EulerApp {
 <p>It covers three cases:</p>
 <pre><code class="language-scala">if (n % prime == 0)
 </code></pre>
-<p>This condition is met when we're processing a prime that can divide a number.
+<p>This condition is met when we’re processing a prime that can divide a number.
 It will result in the <code>divisorsFound</code> being updated.</p>
 <pre><code class="language-scala">else if (prime &gt; n) 
 </code></pre>
-<p>If we hit a prime that's higher or equal than n, then it's time to calculate the divisors
+<p>If we hit a prime that’s higher or equal than n, then it’s time to calculate the divisors
 based on the <code>divisorsFound</code> map. Keep in mind that <code>n</code> decreases every time we find a new divisor.</p>
 <p>In fact, we could also use a <code>(n == 1)</code> condition here.</p>
 <pre><code class="language-scala">else divisors(n, primes.tail, divisorsFound)
 </code></pre>
 <p>If previous conditions are both false, then it means that we simply need to check the next prime, because the current
-one is not a divisor and we're not finished yet.</p>
+one is not a divisor and we’re not finished yet.</p>
 <h2 id="closing-notes"><a class="header" href="#closing-notes">Closing notes</a></h2>
-<p>The solution is functional, it doesn't mutate any of the collections it uses, but despite that it's still pretty fast.</p>
+<p>The solution is functional, it doesn’t mutate any of the collections it uses, but despite that it’s still pretty fast.</p>
 <p>Obviously it could be faster, if, for example, instead of calling the <code>primes.tail</code> every time we want to move to the
-next prime number we simply maintained an index of which prime we're processing.</p>
+next prime number we simply maintained an index of which prime we’re processing.</p>
 <p>Likewise, creating a new <code>divisorsFound</code> map after every change will be less efficient than reusing a single map
 and mutating it.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="large-sum"><a class="header" href="#large-sum">Large Sum</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="large-sum"><a class="header" href="#large-sum">Large Sum</a></h1>
 <p>Work out the first ten digits of the sum of the following one-hundred-digit numbers.</p>
-<div style="text-align: center !important; font-family: "Lucida Consolas", "Consolas", "Courier New", monospace;">
+<div style="text-align: center !important; font-family: &#39;Consolas&#39;, &#39;Courier New&#39;, monospace;">
 37107287533902102798797998220837590246510135740250<br>
 46376937677490009712648124896970078050417018260538<br>
 74324986199524741059474233309513058123726617309629<br>
@@ -899,19 +913,22 @@ and mutating it.</p>
 77158542502016545090413245809786882778948721859617<br>
 72107838435069186155435662884062257473692284509516<br>
 20849603980134001723930671666823555245252804609722<br>
-53503534226472524250874054075591789781264330331690<br></div>
+53503534226472524250874054075591789781264330331690<br>
+</div>
+
 <h2 id="solution-12"><a class="header" href="#solution-12">Solution</a></h2>
-<p>That's a lot of long numbers! Fortunately for us, the standard library in Scala makes this task very easy.
-Code should be self-explanatory, there isn't much to add.</p>
+<p>That’s a lot of long numbers! Fortunately for us, the standard library in Scala makes this task very easy.
+Code should be self-explanatory, there isn’t much to add.</p>
 <pre><code class="language-scala">object Euler013 extends EulerApp {
   override def execute(): String =
     loadFileAsLines().map(BigInt.apply).sum.toString().take(10)
 }
 </code></pre>
 <p>The <code>loadFileAsLines()</code> loads the numbers from a text file, lime by line.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="longest-collatz-sequence"><a class="header" href="#longest-collatz-sequence">Longest Collatz Sequence</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="longest-collatz-sequence"><a class="header" href="#longest-collatz-sequence">Longest Collatz Sequence</a></h1>
 <p>The following iterative sequence is defined for the set of positive integers:</p>
-<p>\(n \to n/2\) (\(n\) is even)</br>
+<p>\(n \to n/2\) (\(n\) is even)&lt;\br&gt;
 \(n \to 3n + 1\) (\(n\) is odd)</p>
 <p>Using the rule above and starting with \(13\), we generate the following sequence:
 \begin{align}
@@ -922,10 +939,10 @@ Although it has not been proved yet (Collatz Problem), it is thought that all st
 <p>Which starting number, under one million, produces the longest chain?</p>
 <p><strong>NOTE:</strong> Once the chain starts the terms are allowed to go above one million.</p>
 <h2 id="solution-13"><a class="header" href="#solution-13">Solution</a></h2>
-<p>Let's make aa brute-force solution and see how it works.</p>
+<p>Let’s make aa brute-force solution and see how it works.</p>
 <p>We can add one optimization that cuts the execution time in half. Due to how the sequences are calculated,
 a collatzLength(2n) is always bigger than collatzLength(n) by 1.</p>
-<p>So, we can check only the upper half of the range to get the maximum length of the sequence. Here's the code.</p>
+<p>So, we can check only the upper half of the range to get the maximum length of the sequence. Here’s the code.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
 object Euler014 extends EulerApp {
@@ -944,17 +961,17 @@ object Euler014 extends EulerApp {
   }
 }
 </code></pre>
-<p>My first though when seeing this problem was to use the dynamic programming. After all, we'll keep hitting the same
+<p>My first though when seeing this problem was to use the dynamic programming. After all, we’ll keep hitting the same
 sub-sequences (such as 16 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1) many times.</p>
-<p>I implemented it using a map while keeping it immutable, but it wasn't a great idea.
+<p>I implemented it using a map while keeping it immutable, but it wasn’t a great idea.
 The code ran much slower. In fact, even with a mutable map it was around 50% slower than the brute-force one.</p>
-<p>Often it's worth starting out from a basic solution. This way there's less room for mistake,
+<p>Often it’s worth starting out from a basic solution. This way there’s less room for mistake,
 and we have a baseline result that we can improve further.</p>
 <h2 id="mutable-solution-2"><a class="header" href="#mutable-solution-2">Mutable solution</a></h2>
-<p>Let's think for a while how can we improve the brute-force solution.</p>
-<p>As I've mentioned, some operations are done multiple times. We can memoize them, in an array-based cache for
+<p>Let’s think for a while how can we improve the brute-force solution.</p>
+<p>As I’ve mentioned, some operations are done multiple times. We can memoize them, in an array-based cache for
 fast lookups. Why array? Because map would be much slowe, and we know its max size.</p>
-<p>In fact, we don't have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code>: to 100_000.
+<p>In fact, we don’t have to cache all the values. You can try it out yourself by limiting the <code>cacheLimit</code>: to 100_000.
 It should be slower, but still faster than the brute-force solution.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
@@ -984,49 +1001,54 @@ object Euler014M extends EulerApp {
   }
 }
 </code></pre>
-<p>As you see we get rid of the optimization to start from 500_000. That's because, it turns out, it works slightly
-slower than starting from the beginning, because our cache has a lot of misses this way, and we don't backtrace the
+<p>As you see we get rid of the optimization to start from 500_000. That’s because, it turns out, it works slightly
+slower than starting from the beginning, because our cache has a lot of misses this way, and we don’t backtrace the
 values to fill it.</p>
 <p>We could try to do it, but is it worth increasing the complexity of the solution even further, if it already runs in
-milliseconds? Sometimes it is, but here, I'll pass.</p>
+milliseconds? Sometimes it is, but here, I’ll pass.</p>
 <h2 id="epilogue"><a class="header" href="#epilogue">Epilogue</a></h2>
-<p>If it wasn't a computational problem, but a business-oriented one, then the base, immutable solution would be the one
+<p>If it wasn’t a computational problem, but a business-oriented one, then the base, immutable solution would be the one
 preferred in almost all the cases, due to how simple and safe it is.</p>
-<p>The mutable solution has much more places where errors can be made. For example, the 'n.toInt' is only safe because we
+<p>The mutable solution has much more places where errors can be made. For example, the ‘n.toInt’ is only safe because we
 check right before that n is below a cache limit, which prevents the overflow.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="lattice-paths"><a class="header" href="#lattice-paths">Lattice Paths</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="lattice-paths"><a class="header" href="#lattice-paths">Lattice Paths</a></h1>
 <p>Starting in the top left corner of a \(20 \times 20\) grid, and only being able to move to the right and down,
 there are exactly \(6\) routes to the bottom right corner.</p>
-<p><img src="explanations/../assets/0015.png" alt="paths" /></p>
+<p><img src="assets/0015.png" alt="paths"></p>
 <p>How many such routes are there through a \(20 \times 20\) grid?</p>
-<h2 id="lets-make-it-easier-1"><a class="header" href="#lets-make-it-easier-1">Let's make it easier</a></h2>
+<h2 id="lets-make-it-easier-1"><a class="header" href="#lets-make-it-easier-1">Let’s make it easier</a></h2>
 <p>When I saw this problem for the first time my first thought was that I probably can calculate it with a pen and paper.</p>
-<p>But since we're coding in Scala here, let's try to make an application that will solve it for us.</p>
-<p>\(20 \times 20\) is a big array, too big to reason about it, while the \(2 \times 2\) is a bit too small. Let's
+<p>But since we’re coding in Scala here, let’s try to make an application that will solve it for us.</p>
+<p>\(20 \times 20\) is a big array, too big to reason about it, while the \(2 \times 2\) is a bit too small. Let’s
 then draw a \(3 \times 3\) one and mark the edges with dots. How many ways to we have to reach each of these dots?
 Exactly one way. That was the easiest part.</p>
 <div style="max-width: fit-content; margin-inline: auto;">
-<img src="explanations/../assets/0015-1.png" style="height:150px">
+<img src="assets/0015-1.png" style="height:150px">
 </div>
-<p>Now let's try a second row. If we know how to get to the dot above and to the dot on the left side, then we also know
-how to go to the dot in question, because from their positions there's just one way to continue (either left or down).</p>
+
+<p>Now let’s try a second row. If we know how to get to the dot above and to the dot on the left side, then we also know
+how to go to the dot in question, because from their positions there’s just one way to continue (either left or down).</p>
 <p>So, we can fill the second row starting from the left side. First dot will be \(1 + 1 = 2\), second will be
 \(3 + 1 = 3\), third one will be \(3 + 1 = 4\)</p>
 <div style="max-width: fit-content; margin-inline: auto;">
-<img src="explanations/../assets/0015-2.png" style="height:150px">
+<img src="assets/0015-2.png" style="height:150px">
 </div>
-<p>The third row will be no different, let's continue the process:</p>
+
+<p>The third row will be no different, let’s continue the process:</p>
 <div style="max-width: fit-content; margin-inline: auto;">
-<img src="explanations/../assets/0015-3.png" style="height:150px">
+<img src="assets/0015-3.png" style="height:150px">
 </div>
+
 <p>And the same goes for the last one. The answer to a question in how many possible ways we can reach the last lattice
 can be found in the bottom right corner: 20.</p>
 <div style="max-width: fit-content; margin-inline: auto;">
-<img src="explanations/../assets/0015-4.png" style="height:150px">
+<img src="assets/0015-4.png" style="height:150px">
 </div>
+
 <h2 id="solution-14"><a class="header" href="#solution-14">Solution</a></h2>
 <p>The previous section shown us some properties of the lattice paths. We can now implement the algorithm that we used.
-I went for a functional, recursive solution, but a mutable one that's based on a simple 2-dimensional <code>Array</code> could do as well.</p>
+I went for a functional, recursive solution, but a mutable one that’s based on a simple 2-dimensional <code>Array</code> could do as well.</p>
 <pre><code class="language-scala">import scala.annotation.tailrec
 
 object Euler015 extends EulerApp {
@@ -1065,7 +1087,52 @@ object Euler015 extends EulerApp {
 </code></pre>
 <p>It does exactly what we did manually, but on a larger scale. It fills the first row and first column with ones, and then
 it calculates next elements from left to right, top to bottom. The answer is, as before, in the bottom right corner.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="power-digit-sum"><a class="header" href="#power-digit-sum">Power Digit Sum</a></h1>
+<p>It’s a bit robust, but works pretty fast. What could you improve there?</p>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p>Before continuing, think about how can we improve the solution.
+Can we make it more memory efficient? Can we make it faster? Do we calculate something that’s not needed for the answer?</p>
+</blockquote>
+<h2 id="mutable-solution-3"><a class="header" href="#mutable-solution-3">Mutable solution</a></h2>
+<p>It’s not a surprise that making it mutable will make it faster. Just keep in mind that in non-algorithmic tasks the
+performance gainst might be miniscule, completely outweighed by all the downsides of making it mutable.</p>
+<p>So, the first change would be to switch the <code>Seq</code> to an <code>Array</code>. What else can we do?</p>
+<p>Previously, we stored all the intermediate results and created a complete, large array with all the values. In fact,
+we can calculate the next row knowing the previous row. We don’t need to remember all the other ones. Which means that
+there’s no need to maintain a 2-dimensional <code>Array</code>.</p>
+<p>My first thought was that we need two arrays, for the current and the previous row. Can we use just one?</p>
+<p>In the example with four lattices, the second row contained the following values: \(1, 2, 3, 4\)</p>
+<p>If we wanted to calculate the third row by mutating the \(1, 2, 3, 4\) one, then:</p>
+<ul>
+<li>Nothing changes for the first element. It stays as one.</li>
+<li>We add the previous element to the next element, that is, \(1 + 2\), and the second element is \(3\). Our row is now \(1, 3, 3, 4\).</li>
+<li>We do the same for the third element, our row is now \(1, 3, 6, 4\)</li>
+<li>And the last element is calculated with \(6 + 4 = 10\), the row is now equal to \(1, 3, 6, 10\)</li>
+<li>For the next row, we do the same again. \(1\) stays unchanged, the second number if \(4\), another one is \(9\), and so on…</li>
+</ul>
+<p>In short, now we only need to keep one row in the memory. Here’s the implementation:</p>
+<pre><code class="language-scala">object Euler015M extends EulerApp {
+  override def execute(): Long = countLatticePaths(21, 21)
+
+  private def countLatticePaths(length: Int, height: Int): Long = {
+    val prevRow = Array.fill(length)(1L)
+
+    for (_ &lt;- 1 until height) {
+      for (col &lt;- 1 until length) {
+        prevRow(col) += prevRow(col - 1)
+      }
+    }
+
+    prevRow(length - 1)
+  }
+}
+</code></pre>
+<h2 id="epilogue-1"><a class="header" href="#epilogue-1">Epilogue</a></h2>
+<p>Going forward, we could also use this finding to improve the original, immutable solution. But maybe there’s
+no need to run this iterative computation at all? If you look at those numbers, they seem to be following a
+certain pattern.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="power-digit-sum"><a class="header" href="#power-digit-sum">Power Digit Sum</a></h1>
 <p>\(2^{15} = 32768\) and the sum of its digits is \(3 + 2 + 7 + 6 + 8 = 26\).</p>
 <p>What is the sum of the digits of the number \(2^{1000}\)?</p>
 <h2 id="solution-15"><a class="header" href="#solution-15">Solution</a></h2>
@@ -1074,8 +1141,8 @@ it calculates next elements from left to right, top to bottom. The answer is, as
   override def execute(): Int = (BigInt(2) ^ 1000).toString().map(_.asDigit).sum
 }
 </code></pre>
-<p>It even runs very fast. If we wanted to avoid using <code>BigInt</code>, then it wouldn't be much harder. We could store the
-individual digits in an array and each multiplication would double all the indexes by two. We'd also need to handle
+<p>It even runs very fast. If we wanted to avoid using <code>BigInt</code>, then it wouldn’t be much harder. We could store the
+individual digits in an array and each multiplication would double all the indexes by two. We’d also need to handle
 the carrying over.</p>
 <p>Still pretty straightforward, not really worth the effort to go through it.</p>
 
@@ -1096,6 +1163,11 @@ the carrying over.</p>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -1104,13 +1176,13 @@ the carrying over.</p>
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
