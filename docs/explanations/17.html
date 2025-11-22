@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Problem solutions - A Guide to Project Euler in Scala</title>
+        <title>Number Letter Counts - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a148dd6c.js";
+            window.path_to_searchindex_js = "../searchindex-a148dd6c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-55b52ac8.js"></script>
+        <script src="../toc-55b52ac8.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">A Guide to Project Euler in Scala</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,22 +176,202 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="problem-solutions"><a class="header" href="#problem-solutions">Problem solutions</a></h1>
-<p>You can find the code for all the problems in the project repository, in <code>src/main/scala</code> directory.
-All examples are runnable, and they only print the solution, along the execution time.</p>
-<p>A commonly used code can be found in <code>EulerHelper</code> class, but other than that, the solutions are self-contained.</p>
+                        <h1 id="number-letter-counts"><a class="header" href="#number-letter-counts">Number Letter Counts</a></h1>
+<p>If the numbers \(1\) to \(5\) are written out in words: one, two, three, four, five, then there are
+\(3 + 3 + 5 + 4 + 4 = 19\) letters used in total.</p>
+<p>If all the numbers from \(1\) to \(1000\) (one thousand) inclusive were written out in words,
+how many letters would be used?</p>
+<p><strong>Note:</strong> Do not count spaces or hyphens. For example, \(342\) (three hundred and forty-two) contains \(23\)
+letters and \(115\) (one hundred and fifteen) contains \(20\) letters.
+The use of “and” when writing out numbers is in compliance with British usage.</p>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
+<p>Well, that’s a lot of numbers to cover. Let’s start with something easy, changing one-digit numbers to strings:</p>
+<pre><code class="language-scala">private def writeDigit(i: Int): String = i match {
+  case 0 =&gt; "zero"
+  case 1 =&gt; "one"
+  case 2 =&gt; "two"
+  case 3 =&gt; "three"
+  case 4 =&gt; "four"
+  case 5 =&gt; "five"
+  case 6 =&gt; "six"
+  case 7 =&gt; "seven"
+  case 8 =&gt; "eight"
+  case 9 =&gt; "nine"
+  case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+}
+</code></pre>
+<p>Plenty of code, but it’s very straightforward. We could make it more concise by using an <code>Array</code>, but I like this very
+explicit pattern match. What’s next? We can write numbers from 10 to 19:</p>
+<pre><code class="language-scala">private def writeTenToNineteen(i: Int): String = i match {
+  case 10 =&gt; "ten"
+  case 11 =&gt; "eleven"
+  case 12 =&gt; "twelve"
+  case 13 =&gt; "thirteen"
+  case 14 =&gt; "fourteen"
+  case 15 =&gt; "fifteen"
+  case 16 =&gt; "sixteen"
+  case 17 =&gt; "seventeen"
+  case 18 =&gt; "eighteen"
+  case 19 =&gt; "nineteen"
+  case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+}
+</code></pre>
+<p>There’s not much to simplify there yet, because too many words are irregular. 17 is regular, it consists of
+“seven” + “teen”, so it might seem appealing to pick the last digit to form a prefix, and add “teen” as a suffix, but
+due to the fact that it’s not very regular, we’d end up with such oddities as 11 represented as “oneteen” :)</p>
+<p>Higher numbers, fortunately, are much more regular. For all the numbers between 20 and 99, we can separate the last
+digit from those numbers, convert it to a string using the previously defined <code>writeDigit</code> function, and append it
+to a string representation of the two-digit number like 20 or 30. Finally, we can reuse some of our previous functions.</p>
+<p>If the number is divisible by 10, then we don’t need the output of <code>writeDigit</code>, or we’ll end up with numbers like
+20 being written out as “twenty-zero”.</p>
+<pre><code class="language-scala">private def writeTens(i: Int): String = {
+  val remainder = i % 10
+  val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+  val tens = i - remainder match {
+    case 20 =&gt; "twenty"
+    case 30 =&gt; "thirty"
+    case 40 =&gt; "forty"
+    case 50 =&gt; "fifty"
+    case 60 =&gt; "sixty"
+    case 70 =&gt; "seventy"
+    case 80 =&gt; "eighty"
+    case 90 =&gt; "ninety"
+    case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+  
+  maybeRemainder match {
+    case Some(digits) =&gt; s"$tens-$digits"
+    case None         =&gt; tens
+  }
+}
+</code></pre>
+<p>What’s <code>writeInt</code> in the code above? It’s a function that writes any int. That’s where we put the guards not to pass
+the int into a function that wouldn’t be able to process it. Right now it looks like that:</p>
+<pre><code class="language-scala">private def writeInt(i: Int): String = i match {
+  case i if i &gt;= 0 &amp;&amp; i &lt; 10     =&gt; writeDigit(i)
+  case i if i &gt;= 10 &amp;&amp; i &lt; 20    =&gt; writeTenToNineteen(i)
+  case i if i &gt;= 20 &amp;&amp; i &lt; 100   =&gt; writeTens(i)
+}
+</code></pre>
+<p>The last part are the hundreds. They’re the most regular, we’ll be able to reuse almost everything we’ve written so far.
+A number like 123 consists of:</p>
+<ul>
+<li>Written digit (1), using the <code>writeDigit</code> function</li>
+<li>“hundred” word</li>
+<li>Written last two digits, using the <code>writeInt</code> function, since we don’t know if we should use <code>writeDigit</code>,<code>writeTenToNineteen</code> or <code>writeTens</code></li>
+</ul>
+<p>And here’s the code for hundreds:</p>
+<pre><code class="language-scala">private def writeHundreds(i: Int): String = {
+  val remainder = i % 100
+  val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+  val hundred = s"${writeDigit((i - remainder) / 100)} hundred"
+
+  maybeRemainder match {
+    case Some(tens) =&gt; s"$hundred and $tens"
+    case None       =&gt; hundred
+  }
+}
+</code></pre>
+<p>We also need to handle 1000 as “one thousand” and we’re almost done. Here’s the complete solution that convers numbers
+to strings and counts the letters:</p>
+<pre><code class="language-scala">object Euler017 extends EulerApp {
+  override def execute(): Any = (1 to 1000)
+    .map(writeInt)
+    .map(_.count(_.isLetter))
+    .sum
+
+  private def writeInt(i: Int): String = i match {
+    case i if i &gt;= 0 &amp;&amp; i &lt; 10     =&gt; writeDigit(i)
+    case i if i &gt;= 10 &amp;&amp; i &lt; 20    =&gt; writeTenToNineteen(i)
+    case i if i &gt;= 20 &amp;&amp; i &lt; 100   =&gt; writeTens(i)
+    case i if i &gt;= 100 &amp;&amp; i &lt; 1000 =&gt; writeHundreds(i)
+    case 1000                      =&gt; "one thousand"
+  }
+
+  private def writeDigit(i: Int): String = i match {
+    case 0 =&gt; "zero"
+    case 1 =&gt; "one"
+    case 2 =&gt; "two"
+    case 3 =&gt; "three"
+    case 4 =&gt; "four"
+    case 5 =&gt; "five"
+    case 6 =&gt; "six"
+    case 7 =&gt; "seven"
+    case 8 =&gt; "eight"
+    case 9 =&gt; "nine"
+    case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+
+  private def writeTenToNineteen(i: Int): String = i match {
+    case 10 =&gt; "ten"
+    case 11 =&gt; "eleven"
+    case 12 =&gt; "twelve"
+    case 13 =&gt; "thirteen"
+    case 14 =&gt; "fourteen"
+    case 15 =&gt; "fifteen"
+    case 16 =&gt; "sixteen"
+    case 17 =&gt; "seventeen"
+    case 18 =&gt; "eighteen"
+    case 19 =&gt; "nineteen"
+    case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+
+  private def writeTens(i: Int): String = {
+    val remainder = i % 10
+    val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+    val tens = i - remainder match {
+      case 20 =&gt; "twenty"
+      case 30 =&gt; "thirty"
+      case 40 =&gt; "forty"
+      case 50 =&gt; "fifty"
+      case 60 =&gt; "sixty"
+      case 70 =&gt; "seventy"
+      case 80 =&gt; "eighty"
+      case 90 =&gt; "ninety"
+      case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+    }
+
+    maybeRemainder match {
+      case Some(digits) =&gt; s"$tens-$digits"
+      case None         =&gt; tens
+    }
+  }
+
+  private def writeHundreds(i: Int): String = {
+    val remainder = i % 100
+    val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+    val hundred = s"${writeDigit((i - remainder) / 100)} hundred"
+
+    maybeRemainder match {
+      case Some(tens) =&gt; s"$hundred and $tens"
+      case None       =&gt; hundred
+    }
+  }
+}
+</code></pre>
+<h2 id="epilogue"><a class="header" href="#epilogue">Epilogue</a></h2>
+<p>Was it necessary to convert everything to a string? Not at all. We were asked to count the letters only, so if we
+wanted to be more efficient, the pattern matching could look like that:</p>
+<pre><code class="language-scala">case 8 =&gt; 5
+</code></pre>
+<p>There are \(5\) letters in the word “eight”. There’s one problem with that approach. Debugging it would be a nightmare.
+It would be not reusable for anything. The program runs fast already, after all.</p>
+<p>There’s one improvement that we could make, though. Those cases aren’t good:</p>
+<pre><code class="language-scala">case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+</code></pre>
+<p>Due to them, our functions aren’t pure. They have a very nasty side effect. Even though they all accept <code>Int</code> parameter,
+they can only operate on a subset of numbers. That’s a risky, error-prone design. A much better solution would use
+refined types. For example, a separate <code>Digit</code> type that could be only created from numbers 0 to 9. Such types can be
+also checked by compiler, so a <code>Digit(10)</code> throws a compilation error rather than a runtime exception.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="about.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../explanations/16.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="explanations/1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -199,13 +379,10 @@ All examples are runnable, and they only print the solution, along the execution
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="about.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../explanations/16.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="explanations/1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>
@@ -223,13 +400,13 @@ All examples are runnable, and they only print the solution, along the execution
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 

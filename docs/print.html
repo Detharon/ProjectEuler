@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e95ec6f1.js";
+            window.path_to_searchindex_js = "searchindex-a148dd6c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-57e8f475.js"></script>
+        <script src="toc-55b52ac8.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1145,6 +1145,194 @@ certain pattern.</p>
 individual digits in an array and each multiplication would double all the indexes by two. We’d also need to handle
 the carrying over.</p>
 <p>Still pretty straightforward, not really worth the effort to go through it.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="number-letter-counts"><a class="header" href="#number-letter-counts">Number Letter Counts</a></h1>
+<p>If the numbers \(1\) to \(5\) are written out in words: one, two, three, four, five, then there are
+\(3 + 3 + 5 + 4 + 4 = 19\) letters used in total.</p>
+<p>If all the numbers from \(1\) to \(1000\) (one thousand) inclusive were written out in words,
+how many letters would be used?</p>
+<p><strong>Note:</strong> Do not count spaces or hyphens. For example, \(342\) (three hundred and forty-two) contains \(23\)
+letters and \(115\) (one hundred and fifteen) contains \(20\) letters.
+The use of “and” when writing out numbers is in compliance with British usage.</p>
+<h2 id="solution-16"><a class="header" href="#solution-16">Solution</a></h2>
+<p>Well, that’s a lot of numbers to cover. Let’s start with something easy, changing one-digit numbers to strings:</p>
+<pre><code class="language-scala">private def writeDigit(i: Int): String = i match {
+  case 0 =&gt; "zero"
+  case 1 =&gt; "one"
+  case 2 =&gt; "two"
+  case 3 =&gt; "three"
+  case 4 =&gt; "four"
+  case 5 =&gt; "five"
+  case 6 =&gt; "six"
+  case 7 =&gt; "seven"
+  case 8 =&gt; "eight"
+  case 9 =&gt; "nine"
+  case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+}
+</code></pre>
+<p>Plenty of code, but it’s very straightforward. We could make it more concise by using an <code>Array</code>, but I like this very
+explicit pattern match. What’s next? We can write numbers from 10 to 19:</p>
+<pre><code class="language-scala">private def writeTenToNineteen(i: Int): String = i match {
+  case 10 =&gt; "ten"
+  case 11 =&gt; "eleven"
+  case 12 =&gt; "twelve"
+  case 13 =&gt; "thirteen"
+  case 14 =&gt; "fourteen"
+  case 15 =&gt; "fifteen"
+  case 16 =&gt; "sixteen"
+  case 17 =&gt; "seventeen"
+  case 18 =&gt; "eighteen"
+  case 19 =&gt; "nineteen"
+  case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+}
+</code></pre>
+<p>There’s not much to simplify there yet, because too many words are irregular. 17 is regular, it consists of
+“seven” + “teen”, so it might seem appealing to pick the last digit to form a prefix, and add “teen” as a suffix, but
+due to the fact that it’s not very regular, we’d end up with such oddities as 11 represented as “oneteen” :)</p>
+<p>Higher numbers, fortunately, are much more regular. For all the numbers between 20 and 99, we can separate the last
+digit from those numbers, convert it to a string using the previously defined <code>writeDigit</code> function, and append it
+to a string representation of the two-digit number like 20 or 30. Finally, we can reuse some of our previous functions.</p>
+<p>If the number is divisible by 10, then we don’t need the output of <code>writeDigit</code>, or we’ll end up with numbers like
+20 being written out as “twenty-zero”.</p>
+<pre><code class="language-scala">private def writeTens(i: Int): String = {
+  val remainder = i % 10
+  val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+  val tens = i - remainder match {
+    case 20 =&gt; "twenty"
+    case 30 =&gt; "thirty"
+    case 40 =&gt; "forty"
+    case 50 =&gt; "fifty"
+    case 60 =&gt; "sixty"
+    case 70 =&gt; "seventy"
+    case 80 =&gt; "eighty"
+    case 90 =&gt; "ninety"
+    case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+  
+  maybeRemainder match {
+    case Some(digits) =&gt; s"$tens-$digits"
+    case None         =&gt; tens
+  }
+}
+</code></pre>
+<p>What’s <code>writeInt</code> in the code above? It’s a function that writes any int. That’s where we put the guards not to pass
+the int into a function that wouldn’t be able to process it. Right now it looks like that:</p>
+<pre><code class="language-scala">private def writeInt(i: Int): String = i match {
+  case i if i &gt;= 0 &amp;&amp; i &lt; 10     =&gt; writeDigit(i)
+  case i if i &gt;= 10 &amp;&amp; i &lt; 20    =&gt; writeTenToNineteen(i)
+  case i if i &gt;= 20 &amp;&amp; i &lt; 100   =&gt; writeTens(i)
+}
+</code></pre>
+<p>The last part are the hundreds. They’re the most regular, we’ll be able to reuse almost everything we’ve written so far.
+A number like 123 consists of:</p>
+<ul>
+<li>Written digit (1), using the <code>writeDigit</code> function</li>
+<li>“hundred” word</li>
+<li>Written last two digits, using the <code>writeInt</code> function, since we don’t know if we should use <code>writeDigit</code>,<code>writeTenToNineteen</code> or <code>writeTens</code></li>
+</ul>
+<p>And here’s the code for hundreds:</p>
+<pre><code class="language-scala">private def writeHundreds(i: Int): String = {
+  val remainder = i % 100
+  val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+  val hundred = s"${writeDigit((i - remainder) / 100)} hundred"
+
+  maybeRemainder match {
+    case Some(tens) =&gt; s"$hundred and $tens"
+    case None       =&gt; hundred
+  }
+}
+</code></pre>
+<p>We also need to handle 1000 as “one thousand” and we’re almost done. Here’s the complete solution that convers numbers
+to strings and counts the letters:</p>
+<pre><code class="language-scala">object Euler017 extends EulerApp {
+  override def execute(): Any = (1 to 1000)
+    .map(writeInt)
+    .map(_.count(_.isLetter))
+    .sum
+
+  private def writeInt(i: Int): String = i match {
+    case i if i &gt;= 0 &amp;&amp; i &lt; 10     =&gt; writeDigit(i)
+    case i if i &gt;= 10 &amp;&amp; i &lt; 20    =&gt; writeTenToNineteen(i)
+    case i if i &gt;= 20 &amp;&amp; i &lt; 100   =&gt; writeTens(i)
+    case i if i &gt;= 100 &amp;&amp; i &lt; 1000 =&gt; writeHundreds(i)
+    case 1000                      =&gt; "one thousand"
+  }
+
+  private def writeDigit(i: Int): String = i match {
+    case 0 =&gt; "zero"
+    case 1 =&gt; "one"
+    case 2 =&gt; "two"
+    case 3 =&gt; "three"
+    case 4 =&gt; "four"
+    case 5 =&gt; "five"
+    case 6 =&gt; "six"
+    case 7 =&gt; "seven"
+    case 8 =&gt; "eight"
+    case 9 =&gt; "nine"
+    case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+
+  private def writeTenToNineteen(i: Int): String = i match {
+    case 10 =&gt; "ten"
+    case 11 =&gt; "eleven"
+    case 12 =&gt; "twelve"
+    case 13 =&gt; "thirteen"
+    case 14 =&gt; "fourteen"
+    case 15 =&gt; "fifteen"
+    case 16 =&gt; "sixteen"
+    case 17 =&gt; "seventeen"
+    case 18 =&gt; "eighteen"
+    case 19 =&gt; "nineteen"
+    case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+  }
+
+  private def writeTens(i: Int): String = {
+    val remainder = i % 10
+    val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+    val tens = i - remainder match {
+      case 20 =&gt; "twenty"
+      case 30 =&gt; "thirty"
+      case 40 =&gt; "forty"
+      case 50 =&gt; "fifty"
+      case 60 =&gt; "sixty"
+      case 70 =&gt; "seventy"
+      case 80 =&gt; "eighty"
+      case 90 =&gt; "ninety"
+      case _  =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+    }
+
+    maybeRemainder match {
+      case Some(digits) =&gt; s"$tens-$digits"
+      case None         =&gt; tens
+    }
+  }
+
+  private def writeHundreds(i: Int): String = {
+    val remainder = i % 100
+    val maybeRemainder = if (remainder != 0) Some(writeInt(remainder)) else None
+    val hundred = s"${writeDigit((i - remainder) / 100)} hundred"
+
+    maybeRemainder match {
+      case Some(tens) =&gt; s"$hundred and $tens"
+      case None       =&gt; hundred
+    }
+  }
+}
+</code></pre>
+<h2 id="epilogue-2"><a class="header" href="#epilogue-2">Epilogue</a></h2>
+<p>Was it necessary to convert everything to a string? Not at all. We were asked to count the letters only, so if we
+wanted to be more efficient, the pattern matching could look like that:</p>
+<pre><code class="language-scala">case 8 =&gt; 5
+</code></pre>
+<p>There are \(5\) letters in the word “eight”. There’s one problem with that approach. Debugging it would be a nightmare.
+It would be not reusable for anything. The program runs fast already, after all.</p>
+<p>There’s one improvement that we could make, though. Those cases aren’t good:</p>
+<pre><code class="language-scala">case _ =&gt; throw IllegalArgumentException(s"Received unexpected input: $i")
+</code></pre>
+<p>Due to them, our functions aren’t pure. They have a very nasty side effect. Even though they all accept <code>Int</code> parameter,
+they can only operate on a subset of numbers. That’s a risky, error-prone design. A much better solution would use
+refined types. For example, a separate <code>Digit</code> type that could be only created from numbers 0 to 9. Such types can be
+also checked by compiler, so a <code>Digit(10)</code> throws a compilation error rather than a runtime exception.</p>
 
                     </main>
 

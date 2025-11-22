@@ -18,3 +18,4 @@
   - [Longest Collatz Sequence](explanations/14.md)
   - [Lattice Paths](explanations/15.md)
   - [Power Digit Sum](explanations/16.md)
+  - [Number Letter Counts](explanations/17.md)
