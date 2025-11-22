@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e0ee07b7.js";
+            window.path_to_searchindex_js = "searchindex-8a67c7d0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-55b52ac8.js"></script>
+        <script src="toc-8ea2179a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1333,6 +1333,116 @@ It would be not reusable for anything. The program runs fast already, after all.
 they can only operate on a subset of numbers. That’s a risky, error-prone design. A much better solution would use
 refined types. For example, a separate <code>Digit</code> type that could be only created from numbers 0 to 9. Such types can be
 also checked by compiler, so a <code>Digit(10)</code> throws a compilation error rather than a runtime exception.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="maximum-path-sum-i"><a class="header" href="#maximum-path-sum-i">Maximum Path Sum I</a></h1>
+<p>By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total
+from top to bottom is \(23\).</p>
+<p style="text-align: center; font-family: monospace;">
+    <span style="color: #a00;"><b>3</b></span><br>
+    <span style="color: #a00;"><b>7</b></span> 4<br>
+    2 <span style="color: #a00;"><b>4</b></span> 6<br>
+    8 5 <span style="color: #a00;"><b>9</b></span> 3
+</p>
+
+<p>That is, \(3 + 7 + 4 + 9 = 23\).</p>
+<p>Find the maximum total from top to bottom of the triangle below:</p>
+<p style="text-align: center; font-family: monospace;">75<br>
+95 64<br>
+17 47 82<br>
+18 35 87 10<br>
+20 04 82 47 65<br>
+19 01 23 75 03 34<br>
+88 02 77 73 07 63 67<br>
+99 65 04 28 06 16 70 92<br>
+41 41 26 56 83 40 80 70 33<br>
+41 48 72 33 47 32 37 16 94 29<br>
+53 71 44 65 25 43 91 52 97 51 14<br>
+70 11 33 28 77 73 17 78 39 68 17 57<br>
+91 71 52 38 17 14 91 43 58 50 27 29 48<br>
+63 66 04 68 89 53 67 30 73 16 69 87 40 31<br>
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23</p>
+
+<p><strong>NOTE</strong>: As there are only \(16384\) routes, it is possible to solve this problem by trying every route.
+However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute
+force, and requires a clever method! ;o)</p>
+<h2 id="lets-make-it-easier-2"><a class="header" href="#lets-make-it-easier-2">Let’s make it easier</a></h2>
+<p>We could indeed try to brute-force it, but I did not come up with any elegant brute-force in terms of implementation, so
+I’ve decided to instead think about solving this problem the ‘intended way’. As usual, let’s think about a nice
+algorithm that will save us from the necessity of checking all these possibilities.
+The small triangle will be perfect to plan it.</p>
+<p style="text-align: center; font-family: monospace;">3<br>
+7 4<br>
+2 4 6<br>
+8 5 9 3<br>
+</p>
+
+<p>Instead of plotting a route from the top, we could try to do it from the bottom. Can we do something with the last row?
+Not really. We can’t take the maximum since we don’t know what’s ahead of us, exactly as if we started from the top.</p>
+<p>Moving to the row before last, that is, \(2 4 6\), we notice that each of those numbers have exactly two
+children-numbers. For \(2\), that will be \(8\) and \(5\), for 4, it is \(5\) and \(9\), and so on.
+If our question was to find the best path for those small sub-problems, with 3-number triangles, then naturally we’d
+simply pick the bigger children. We can then add it to the parent. That’s how the triangle now looks like:</p>
+<p style="text-align: center; font-family: monospace;">3<br>
+7 4<br>
+10 13 15<br>
+</p>
+
+<p>We can do the same folding to the next row. Just need to pick the “bigger” children. Eventually we’ll end up with that:</p>
+<p style="text-align: center; font-family: monospace;">3<br>
+20 19<br>
+</p>
+
+<p>And then we fold it once again, leaving us with a single value: \(23\). That’s the maximum path sum.</p>
+<h2 id="solution-17"><a class="header" href="#solution-17">Solution</a></h2>
+<p>For a big triangle, the algorithm remains exactly the same. A natural way to implement it is to mutate the arrays that
+represent the subsequent rows.</p>
+<pre><code class="language-scala">object Euler018M extends EulerApp {
+  override def execute(): Int = {
+    val dataArray: Array[Array[Int]] = prepareData()
+    var rowIndex = dataArray.length - 2
+
+    while (rowIndex &gt;= 0) {
+      dataArray(rowIndex).zipWithIndex.foreach { case (value, columnIndex) =&gt;
+        val childrenRow = dataArray(rowIndex + 1)
+        val maxChildValue = Math.max(childrenRow(columnIndex), childrenRow(columnIndex + 1))
+        dataArray(rowIndex)(columnIndex) = dataArray(rowIndex)(columnIndex) + maxChildValue
+      }
+      rowIndex -= 1
+    }
+
+    dataArray.head.head
+  }
+
+  private def prepareData(): Array[Array[Int]] =
+    loadFileAsLines().toArray.map(_.split(" ").map(_.toInt).toArray)
+}
+</code></pre>
+<p>Very straightforward to implement, as it closely follows what we did on paper with the small triangle, but
+unfortunately it mutates both the <code>dataArray</code> and the <code>rowIndex</code>.</p>
+<p>For an immutable solution, we need to fold our triangle from the bottom. We can represent it as a
+<code>List[List[Int]]</code> and reverse it so we start from the end.</p>
+<pre><code class="language-scala">val reversedData = prepareData().reverse
+reversedData.tail.foldLeft(reversedData.head) { case (previousRow, currentRow) =&gt; ... }
+</code></pre>
+<p>This part starts from the second row (<code>.tail</code>), while the first one goes into the accumulator. Since we always have two
+rows available, all we need to do is pick the bigger child and build the next accumulator, which will be our
+new <code>previousRow</code>. Here’s the complete solution:</p>
+<pre><code class="language-scala">object Euler018 extends EulerApp {
+  override def execute(): Int = {
+    val reversedData = prepareData().reverse
+    reversedData.tail
+      .foldLeft(reversedData.head) { case (previousRow, currentRow) =&gt;
+        currentRow.zipWithIndex.map { case (element, index) =&gt;
+          element + Math.max(previousRow(index), previousRow(index + 1))
+        }
+      }.head
+  }
+
+  private def prepareData(): List[List[Int]] =
+    loadFileAsLines().map(_.split(" ").map(_.toInt).toList)
+}
+</code></pre>
+<p>That’s it! Very concise, fully functional and with a similar run time.</p>
 
                     </main>
 
