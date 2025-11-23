@@ -38,7 +38,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-3f0d9375.js";
+            window.path_to_searchindex_js = "searchindex-7b7efe6a.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-ec2dc315.js"></script>
@@ -1593,6 +1593,30 @@ object Euler019 extends EulerApp {
   }
 }
 </code></pre>
+<h2 id="mutable-solution-4"><a class="header" href="#mutable-solution-4">Mutable solution</a></h2>
+<p>While reading the previous solution you might be thinking… why don’t we just use the standard library? Indeed, we can!
+In fact, this problem is completely trivialized once we do so. We can simply encode the start date and the end date,
+the condition is easily expressed with API for <code>java.time.LocalDate</code>.</p>
+<pre><code class="language-scala">import java.time.{ DayOfWeek, LocalDate }
+
+object Euler019M extends EulerApp {
+  override def execute(): Int = {
+    val endDate = LocalDate.of(2000, 12, 31)
+    var currentDate = LocalDate.of(1901, 1, 1)
+    var sundays = 0
+
+    while (currentDate.isBefore(endDate)) {
+      if (currentDate.getDayOfMonth == 1 &amp;&amp; currentDate.getDayOfWeek == DayOfWeek.SUNDAY) sundays += 1
+      currentDate = currentDate.plusDays(1)
+    }
+
+    sundays
+  }
+}
+</code></pre>
+<p>Easier, cleaner, better. But in this case, most of the information present in the problem description is not used.
+We don’t need to check if the year is leap or how many days are in a month. In any project using the standard library
+would be obviously the way to go, but since we’re just practicing, it makes sense to try to attempt doing it ourselves.</p>
 
                     </main>
 

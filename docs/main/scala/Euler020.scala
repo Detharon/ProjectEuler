@@ -26,5 +26,4 @@ object Euler020 extends EulerApp {
   private def sumDigits(n: BigInt, result: BigInt = 0): BigInt =
     if (n == 0) result
     else sumDigits(n / 10, result + n % 10)
-
 }
