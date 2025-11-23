@@ -20,3 +20,4 @@
   - [Power Digit Sum](explanations/16.md)
   - [Number Letter Counts](explanations/17.md)
   - [Maximum Path Sum I](explanations/18.md)
+  - [Counting Sundays](explanations/19.md)

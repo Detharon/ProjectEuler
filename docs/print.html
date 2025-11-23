@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-8a67c7d0.js";
+            window.path_to_searchindex_js = "searchindex-3f0d9375.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-8ea2179a.js"></script>
+        <script src="toc-ec2dc315.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1443,6 +1443,156 @@ new <code>previousRow</code>. Here’s the complete solution:</p>
 }
 </code></pre>
 <p>That’s it! Very concise, fully functional and with a similar run time.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="counting-sundays"><a class="header" href="#counting-sundays">Counting Sundays</a></h1>
+<p>You are given the following information, but you may prefer to do some research for yourself.</p>
+<ul>
+<li>1 Jan 1900 was a Monday.</li>
+<li>Thirty days has September,<br>
+April, June and November.<br>
+All the rest have thirty-one,<br>
+Saving February alone,<br>
+Which has twenty-eight, rain or shine.<br>
+And on leap years, twenty-nine.</li>
+<li>A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?</li>
+</ul>
+<p>How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
+<h2 id="solution-18"><a class="header" href="#solution-18">Solution</a></h2>
+<p>I’m afraid there’s no clever way to solve this without writing plenty of code. On the other hand, this problem is
+pretty straightforward; all we need is some domain modelling. Let’s do it then.</p>
+<p>We can start by encoding some simple facts about the calendar. We need to know how many days are in a given month,
+as well as if the year is leap or not. Let’s also add two helper functions to let us quickly check the century:</p>
+<pre><code class="language-scala">private type Year = Int
+
+private def daysPerMonth(year: Year): Array[Int] = Array(
+  31, // January
+  if (isLeapYear(year)) 29 else 28, // February
+  31, // March
+  30, // April
+  31, // May
+  30, // June
+  31, // July
+  31, // August
+  30, // September
+  31, // October
+  30, // November
+  31 // December
+)
+
+private def isLeapYear(year: Year): Boolean =
+  (year % 4 == 0) &amp;&amp; (year % 100 != 0 || year % 400 == 0)
+
+def isInTwentiethCentury: Boolean = year &gt;= 1901 &amp;&amp; year &lt;= 2000
+
+def isInTwentyFirstCentury: Boolean = year &gt;= 2001
+</code></pre>
+<p>Having those facts laid out, we can try constructing a crude model of a calendar:</p>
+<pre><code class="language-scala">case class Calendar(
+     dayNumber: Int,
+     dayOfWeekNumber: Int,
+     monthNumber: Int,
+     year: Year
+ ) 
+</code></pre>
+<p>In this case:</p>
+<ul>
+<li><code>dayNumber</code> represents a number of a day in a month, as in June 10</li>
+<li><code>dayOfWeekNumber</code> is an internal counter for a day of the week, 0 being Monday and 6 Sunday</li>
+<li><code>monthNumber</code> is a number of the month, 0 being January</li>
+<li><code>year</code> is a year type that we’ve defined before</li>
+</ul>
+<p>Our calendar needs a way to progress the day while keeping the state of other variables consistent.
+It’s not difficult since we have some data to use. Once the <code>dayOfWeekNumber</code> reaches 7 we go back to 0.
+Every time we reach a day that’s higher than the <code>daysPerMonth(year)(monthNumber)</code>, we either progress the month
+or a whole year if we’re at the last month (11 on our case, since we count from 0).</p>
+<p>If neither of these checks is met, we simply progress the day.</p>
+<pre><code class="language-scala">def nextDay(): Calendar = {
+  val newDay = dayNumber + 1
+  val newDayOfWeek = if (dayOfWeekNumber + 1 == 7) 0 else dayOfWeekNumber + 1
+
+  if (newDay &gt; daysPerMonth(year)(monthNumber)) {
+    if (monthNumber == 11) Calendar(1, newDayOfWeek, 0, year + 1)
+    else Calendar(1, newDayOfWeek, monthNumber + 1, year)
+  } else Calendar(newDay, newDayOfWeek, monthNumber, year)
+}
+
+val dayOfWeek: DayOfWeek = daysOfWeek(dayOfWeekNumber)
+
+val isSunday: Boolean = dayOfWeekNumber == 6
+</code></pre>
+<p>And that’s all we need to calculate it. The condition that we’ll be checking is pretty simple:
+<code>if (calendar.isSunday &amp;&amp; calendar.dayNumber == 1)</code>
+If it’s met, then we’ve found the Sunday we’re looking for. If not, we progress the calendar further, until
+<code>(calendar.isInTwentyFirstCentury)</code> – that’s the termination condition.</p>
+<p>Here’s the whole code:</p>
+<pre><code class="language-scala">import scala.annotation.tailrec
+
+object Euler019 extends EulerApp {
+
+  private type DayOfWeek = String
+  private type Year = Int
+
+  override def execute(): Any = {
+    @tailrec
+    def sundaysInTwentyCentury(calendar: Calendar, sundays: Int): Int = {
+      if (calendar.isInTwentyFirstCentury) sundays
+      else if (calendar.isInTwentiethCentury) {
+        val newSundays =
+          if (calendar.isSunday &amp;&amp; calendar.dayNumber == 1) sundays + 1 else sundays
+        sundaysInTwentyCentury(calendar.nextDay(), newSundays)
+      } else sundaysInTwentyCentury(calendar.nextDay(), sundays)
+    }
+
+    sundaysInTwentyCentury(Calendar.StartDate, 0)
+  }
+
+  case class Calendar(
+      dayNumber: Int,
+      dayOfWeekNumber: Int,
+      monthNumber: Int,
+      year: Year
+  ) {
+    private def daysPerMonth(year: Year): Array[Int] = Array(
+      31, // January
+      if (isLeapYear(year)) 29 else 28, // February
+      31, // March
+      30, // April
+      31, // May
+      30, // June
+      31, // July
+      31, // August
+      30, // September
+      31, // October
+      30, // November
+      31 // December
+    )
+
+    private def isLeapYear(year: Year): Boolean =
+      (year % 4 == 0) &amp;&amp; (year % 100 != 0 || year % 400 == 0)
+
+    def nextDay(): Calendar = {
+      val newDay = dayNumber + 1
+      val newDayOfWeek = if (dayOfWeekNumber + 1 == 7) 0 else dayOfWeekNumber + 1
+
+      if (newDay &gt; daysPerMonth(year)(monthNumber)) {
+        if (monthNumber == 11) Calendar(1, newDayOfWeek, 0, year + 1)
+        else Calendar(1, newDayOfWeek, monthNumber + 1, year)
+      } else Calendar(newDay, newDayOfWeek, monthNumber, year)
+    }
+
+    val isSunday: Boolean = dayOfWeekNumber == 6
+
+    def isInTwentiethCentury: Boolean = year &gt;= 1901 &amp;&amp; year &lt;= 2000
+
+    def isInTwentyFirstCentury: Boolean = year &gt;= 2001
+  }
+
+  object Calendar {
+    val StartDate: Calendar = Calendar(dayNumber = 1, dayOfWeekNumber = 0, monthNumber = 0, year = 1900)
+  }
+}
+</code></pre>
 
                     </main>
 
