@@ -1,0 +1,3 @@
+object Euler067 {
+
+}
