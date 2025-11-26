@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-7b7efe6a.js";
+            window.path_to_searchindex_js = "searchindex-84583db7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-ec2dc315.js"></script>
+        <script src="toc-958a22c7.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1617,6 +1617,31 @@ object Euler019M extends EulerApp {
 <p>Easier, cleaner, better. But in this case, most of the information present in the problem description is not used.
 We don’t need to check if the year is leap or how many days are in a month. In any project using the standard library
 would be obviously the way to go, but since we’re just practicing, it makes sense to try to attempt doing it ourselves.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="factorial-digit-sum"><a class="header" href="#factorial-digit-sum">Factorial Digit Sum</a></h1>
+<p>\(n!\) means \(n \times (n - 1) \times … \times 3 \times 2 \times 1\).</p>
+<p>For example, \(10! = 10\times 9 \times … \times 3 \times 2 \times 1 = 3628800\),
+and the sum of the digits in the number \(10!\) is \(3 + 6 + 2 + 8 + 8 + 0 + 0 = 27\).</p>
+<p>Find the sum of the digits in the number \(100!\).</p>
+<h2 id="solution-19"><a class="header" href="#solution-19">Solution</a></h2>
+<p>Explanation: Thanks to Scala’s extensive standard library, we can represent the factorial in question as a regular
+<code>BigInt</code>. It even has a convenient <code>.factorial</code> method.</p>
+<p>Once we have the result of \(100!\), we can recursively read it, digit by digit, using the modulo division.</p>
+<pre><code class="language-scala">import EulerHelper.*
+
+import scala.annotation.tailrec
+
+object Euler020 extends EulerApp {
+  override def execute(): Any = {
+    sumDigits(BigInt(100).factorial)
+  }
+
+  @tailrec
+  private def sumDigits(n: BigInt, result: BigInt = 0): BigInt =
+    if (n == 0) result
+    else sumDigits(n / 10, result + n % 10)
+}
+</code></pre>
 
                     </main>
 
