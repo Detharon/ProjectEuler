@@ -37,7 +37,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-84583db7.js";
+            window.path_to_searchindex_js = "../searchindex-b3e734ed.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-958a22c7.js"></script>
@@ -202,9 +202,9 @@ object Euler014 extends EulerApp {
   private def collatzLength(n: Int): Int = {
     @tailrec
     def collatzLength(n: Long, currentLength: Int): Int = n match {
-      case 1 =&gt; currentLength + 1
+      case 1               =&gt; currentLength + 1
       case n if n % 2 == 0 =&gt; collatzLength(n / 2, currentLength + 1)
-      case n =&gt; collatzLength(n * 3 + 1, currentLength + 1)
+      case n               =&gt; collatzLength(n * 3 + 1, currentLength + 1)
     }
 
     collatzLength(n, 0)

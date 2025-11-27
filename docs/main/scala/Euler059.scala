@@ -10,8 +10,7 @@ object Euler059 extends EulerApp {
       third <- a to z
     } yield Array(first, second, third)
 
-    possibleCiphers
-      .view
+    possibleCiphers.view
       .map(cipher => decrypt(originalData, cipher))
       .find(containsManyWords)
       .get
@@ -36,7 +35,6 @@ object Euler059 extends EulerApp {
     }
     output
   }
-
 
   private def readFile(): Array[Int] =
     loadFileAsLines().head.split(",").map(c => c.toInt)

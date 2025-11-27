@@ -1,4 +1,4 @@
-import java.time.{ DayOfWeek, LocalDate }
+import java.time.{DayOfWeek, LocalDate}
 
 object Euler019M extends EulerApp {
   override def execute(): Int = {

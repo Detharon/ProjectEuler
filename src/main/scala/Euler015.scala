@@ -12,11 +12,12 @@ object Euler015 extends EulerApp {
   private def fillLatticeArray(length: Int, height: Int, currentResult: Seq[Seq[Long]] = Seq.empty): Seq[Seq[Long]] =
     currentResult match {
       // First row, we'll fill it with ones
-      case Nil => fillLatticeArray(
-        length,
-        height,
-        Seq(Seq.fill(length)(1L))
-      )
+      case Nil =>
+        fillLatticeArray(
+          length,
+          height,
+          Seq(Seq.fill(length)(1L))
+        )
       // All rows filled, time to finish
       case other if other.size == height => currentResult
       // Filling the next row, but not the first one
@@ -26,9 +27,8 @@ object Euler015 extends EulerApp {
         fillLatticeArray(
           length,
           height,
-          currentResult :+ previousRow.foldLeft(List.empty) {
-            case (result, previousRowNum) =>
-              result :+ result.lastOption.getOrElse(0L) + previousRowNum
+          currentResult :+ previousRow.foldLeft(List.empty) { case (result, previousRowNum) =>
+            result :+ result.lastOption.getOrElse(0L) + previousRowNum
           }
         )
     }

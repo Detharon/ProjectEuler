@@ -6,7 +6,8 @@ object Euler018 extends EulerApp {
         currentRow.zipWithIndex.map { case (element, index) =>
           element + Math.max(previousRow(index), previousRow(index + 1))
         }
-      }.head
+      }
+      .head
   }
 
   private def prepareData(): List[List[Int]] =

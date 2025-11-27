@@ -38,7 +38,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-84583db7.js";
+            window.path_to_searchindex_js = "searchindex-b3e734ed.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-958a22c7.js"></script>
@@ -952,9 +952,9 @@ object Euler014 extends EulerApp {
   private def collatzLength(n: Int): Int = {
     @tailrec
     def collatzLength(n: Long, currentLength: Int): Int = n match {
-      case 1 =&gt; currentLength + 1
+      case 1               =&gt; currentLength + 1
       case n if n % 2 == 0 =&gt; collatzLength(n / 2, currentLength + 1)
-      case n =&gt; collatzLength(n * 3 + 1, currentLength + 1)
+      case n               =&gt; collatzLength(n * 3 + 1, currentLength + 1)
     }
 
     collatzLength(n, 0)
@@ -1063,11 +1063,12 @@ object Euler015 extends EulerApp {
   private def fillLatticeArray(length: Int, height: Int, currentResult: Seq[Seq[Long]] = Seq.empty): Seq[Seq[Long]] =
     currentResult match {
       // First row, we'll fill it with ones
-      case Nil =&gt; fillLatticeArray(
-        length,
-        height,
-        Seq(Seq.fill(length)(1L))
-      )
+      case Nil =&gt;
+        fillLatticeArray(
+          length,
+          height,
+          Seq(Seq.fill(length)(1L))
+        )
       // All rows filled, time to finish
       case other if other.size == height =&gt; currentResult
       // Filling the next row, but not the first one
@@ -1077,9 +1078,8 @@ object Euler015 extends EulerApp {
         fillLatticeArray(
           length,
           height,
-          currentResult :+ previousRow.foldLeft(List.empty) {
-            case (result, previousRowNum) =&gt;
-              result :+ result.lastOption.getOrElse(0L) + previousRowNum
+          currentResult :+ previousRow.foldLeft(List.empty) { case (result, previousRowNum) =&gt;
+            result :+ result.lastOption.getOrElse(0L) + previousRowNum
           }
         )
     }
@@ -1435,7 +1435,8 @@ new <code>previousRow</code>. Here’s the complete solution:</p>
         currentRow.zipWithIndex.map { case (element, index) =&gt;
           element + Math.max(previousRow(index), previousRow(index + 1))
         }
-      }.head
+      }
+      .head
   }
 
   private def prepareData(): List[List[Int]] =
@@ -1597,7 +1598,7 @@ object Euler019 extends EulerApp {
 <p>While reading the previous solution you might be thinking… why don’t we just use the standard library? Indeed, we can!
 In fact, this problem is completely trivialized once we do so. We can simply encode the start date and the end date,
 the condition is easily expressed with API for <code>java.time.LocalDate</code>.</p>
-<pre><code class="language-scala">import java.time.{ DayOfWeek, LocalDate }
+<pre><code class="language-scala">import java.time.{DayOfWeek, LocalDate}
 
 object Euler019M extends EulerApp {
   override def execute(): Int = {
@@ -1624,7 +1625,7 @@ would be obviously the way to go, but since we’re just practicing, it makes se
 and the sum of the digits in the number \(10!\) is \(3 + 6 + 2 + 8 + 8 + 0 + 0 = 27\).</p>
 <p>Find the sum of the digits in the number \(100!\).</p>
 <h2 id="solution-19"><a class="header" href="#solution-19">Solution</a></h2>
-<p>Explanation: Thanks to Scala’s extensive standard library, we can represent the factorial in question as a regular
+<p>Thanks to Scala’s extensive standard library, we can represent the factorial in question as a regular
 <code>BigInt</code>. It even has a convenient <code>.factorial</code> method.</p>
 <p>Once we have the result of \(100!\), we can recursively read it, digit by digit, using the modulo division.</p>
 <pre><code class="language-scala">import EulerHelper.*
