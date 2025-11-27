@@ -8,5 +8,6 @@ object Euler022 extends EulerApp {
       .zipWithIndex
       .map { case (name, index) =>
         name.map(c => (c - 'A') + 1).sum * (index + 1)
-      }.sum
+      }
+      .sum
 }
