@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-b3e734ed.js";
+            window.path_to_searchindex_js = "searchindex-03bae5c3.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-958a22c7.js"></script>
+        <script src="toc-efb3617e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1643,6 +1643,66 @@ object Euler020 extends EulerApp {
     else sumDigits(n / 10, result + n % 10)
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="amicable-numbers"><a class="header" href="#amicable-numbers">Amicable Numbers</a></h1>
+<p>Let \(d(n)\) be defined as the sum of proper divisors of \(n\) (numbers less than \(n\) which divide evenly
+into \(n\). If \(d(a) = b\) and \(d(b) = a\), where \(a \neq b\), then \(a\) and \(b\) are an
+amicable pair and each of \(a\) and \(b\) are called amicable numbers.</p>
+<p>For example, the proper divisors of \(220\) are \(1,2,4,5,10,11,20,22,44,55\) and \(110\); therefore
+\(d(220) = 284\). The proper divisors of \(284\) are \(1,2,4,71\) and \(142\); so \(d(284) = 220\).</p>
+<p>Evaluate the sum of all the amicable numbers under \(10000\).</p>
+<h2 id="lets-make-it-easier-3"><a class="header" href="#lets-make-it-easier-3">Let’s make it easier</a></h2>
+<p>First thing to crack is how to calculate the divisors efficiently. Should we use prime factors? Perhaps, but as a
+rule of thumb I always start with a simpler approach and move on to a more advanced one if the simple one is not
+good enough.</p>
+<p>If we wanted to find all the divisors of 220, how many numbers do we need to check? We can check from \(2\)
+to \(110 (220 / 2))), but there’s a better way. Logically, if \(220\) is divisible by \(2\) and we get 110 as
+a result, then it must be divisible by \(110\) as well. That’s a strong hint that we don’t need to check all the
+numbers.</p>
+<p>How many do we need to check? \(220\) isn’t a great example, so, let’s switch to \(100\), this will be more
+intuitive. We know that it’s divisible by \(2\), the result of the division is \(50\). We have our first two
+divisors. Next divisor is \(4\), the result is \(25\). Now we have four divisors: \(2, 4, 25, 50).</p>
+<p>Next divisor is \(5\) and \(20\), because \(100 ÷ 5 = 20\). Another one is \(10\). Now that’s a pretty
+interesting coincidence, that \(100 ÷ 10\) is also \(10\). We no longer have two numbers, just one. Something
+to keep in mind when designing the algorithm.</p>
+<p>Do we need to check further? Let’s pretend that 100 is divisible by \(11\). Obviously it isn’t, but let’s just
+pretend for a while! In order to get the second number we’d divide \(100\) by \(11\) and it would be a number
+smaller than \(10\). Which means that it’s a number that we should’ve already found before. The conclusion is, then,
+that we don’t need to check anything past \(10\).</p>
+<p>\(10\) is a square root of \(100\). As long as we keep adding two divisors at once, there’s no need to go past the
+square root.</p>
+<h2 id="solution-20"><a class="header" href="#solution-20">Solution</a></h2>
+<p>Let’s try to write a function that calculates the divisors based on our previous findings. We also need to keep in mind
+that every number is divisible by one, so we can start the iteration from \(2\).</p>
+<pre><code class="language-scala">private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+  case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+  case _ =&gt; List()
+}
+</code></pre>
+<p>The code above does exactly what was described before. If <code>i</code> is a divisor, <code>n % i == 0</code>, then we’ve found two of them,
+the: <code>List(i, n / i)</code>.</p>
+<p>We’re not very close to the complete solution. All we have to do left is to calculate the sum of divisors of
+numbers under \(10000\), then use that information to find the amicable numbers.</p>
+<pre><code class="language-scala">object Euler021 extends EulerApp {
+  override def execute(): Any = {
+    val divisorSums = (0 to 10000).map(n =&gt; divisors(n).sum)
+    divisorSums.zipWithIndex.collect {
+      case (sum, index) if sum &lt; 10000 &amp;&amp; sum != index &amp;&amp; index == divisorSums(sum) =&gt;
+        index
+    }.sum
+  }
+
+  private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+    case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+    case _ =&gt; List()
+  }
+}
+</code></pre>
+<p>In my solution, I’m storing the sum of divisors in a <code>Seq</code>, where <code>Seq(1)</code> represents the sum of divisors of <code>1</code>.</p>
+<p>If you think about the signature of <code>divisors(n: Int): Seq[Int]</code>, we don’t need to return the <code>Seq[Int]</code> at all here.
+We’re interested in the sum, so <code>Int</code> is enough. But with sums alone, debugging would get much more difficult if you
+made a mistake in calculating the divisors. It’s up to you though.</p>
+<p>In the end, the current solution is pretty fast, so we can stop here and keep it as it is.</p>
 
                     </main>
 

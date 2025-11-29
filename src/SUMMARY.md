@@ -22,3 +22,4 @@
   - [Maximum Path Sum I](explanations/18.md)
   - [Counting Sundays](explanations/19.md)
   - [Factorial Digit Sum](explanations/20.md)
+  - [Amicable Numbers](explanations/21.md)
