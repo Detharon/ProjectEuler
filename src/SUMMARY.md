@@ -23,3 +23,4 @@
   - [Counting Sundays](explanations/19.md)
   - [Factorial Digit Sum](explanations/20.md)
   - [Amicable Numbers](explanations/21.md)
+  - [Names Scores](explanations/22.md)
