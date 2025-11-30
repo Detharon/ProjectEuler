@@ -22,10 +22,13 @@ readable and more error-prone code, so it is included primarily for contrast and
 
 ## The book format
 
-Problem solutions and the explanations can be viewed as a webpage:
-https://detharon.github.io/ProjectEuler/about.html
+Problem solutions and the explanations are published on the following site: https://euler.detharon.com
 
-All the code is present in `src/main/scala` while the associated files can be found in `src/main/resources`.
+## The Scala project
+
+Every takes form of a runnable Scala object. They're present in `src/main/scala`, while the associated files can be 
+found in `src/main/resources`. By convention, all resources are expected to have the same name as the problem they
+belong to.
 
 ## About Project Euler
 
