@@ -26,9 +26,9 @@ Problem solutions and the explanations are published on the following site: http
 
 ## The Scala project
 
-Every takes form of a runnable Scala object. They're present in `src/main/scala`, while the associated files can be 
-found in `src/main/resources`. By convention, all resources are expected to have the same name as the problem they
-belong to.
+Every solution is implemented as a runnable Scala object, located in the `src/main/scala` directory. 
+The corresponding resource files are stored in src/main/resources. 
+By convention, each resource file shares the same name as the problem it belongs to.
 
 ## About Project Euler
 
