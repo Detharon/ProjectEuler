@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-afa07728.js";
+            window.path_to_searchindex_js = "searchindex-b2bf3814.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-bd67cea4.js"></script>
+        <script src="toc-89c2b06d.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1709,8 +1709,8 @@ made a mistake in calculating the divisors. It’s up to you though.</p>
 alphabetical order. Then working out the alphabetical value for each name, multiply this value by its
 alphabetical position in the list to obtain a name score.</p>
 <p>For example, when the list is sorted into alphabetical order, COLIN, which is worth
-\(3 + 15 + 12 + 9 + 14 = 53)), is the \(938th\) name in the list. So, COLIN would obtain a score of
-\(938 \time 53 = 49714\).</p>
+\(3 + 15 + 12 + 9 + 14 = 53\), is the \(938th\) name in the list. So, COLIN would obtain a score of
+\(938 \times 53 = 49714\).</p>
 <p>What is the total of all the name scores in the file?</p>
 <h2 id="solution-21"><a class="header" href="#solution-21">Solution</a></h2>
 <p>It’s a rather easy problem due to a small dataset. No need to use any tricks to solve it.</p>
@@ -1741,6 +1741,67 @@ alphabetical position in the list to obtain a name score.</p>
 <p>The <code>c</code> here is a character, like <code>A</code>, and if we remove <code>A</code> from it then we get 0. So we need to add 1 to it, since <code>A</code>
 is the first letter of the alphabet. Once we get this score, it needs to be multiplied by <code>(index + 1)</code> because the name
 indices start from 0. Score of the first name needs to be multiplied by 1, not 0.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="non-abundant-sums"><a class="header" href="#non-abundant-sums">Non-Abundant Sums</a></h1>
+<p>A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
+For example, the sum of the proper divisors of \(28\) would be \(1 + 2 + 4 + 7 + 14 = 28\), which means that
+\(28\) is a perfect number.</p>
+<p>A number \(n\) is called deficient if the sum of its proper divisors is less than \(n\) and it is called
+abundant if this sum exceeds \(n\).</p>
+<p>As \(12\) is the smallest abundant number, \(1 + 2 + 3 + 4 + 6 = 16\), the smallest number that can be written as
+the sum of two abundant numbers is \(24\). By mathematical analysis, it can be shown that all integers greater
+than \(28123\) can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any
+further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two
+abundant numbers is less than this limit.</p>
+<p>Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.</p>
+<h2 id="solution-22"><a class="header" href="#solution-22">Solution</a></h2>
+<p>We can obtain the divisors by reusing the code from Problem 21:</p>
+<pre><code class="language-scala">private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+  case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+  case _               =&gt; List()
+}
+</code></pre>
+<p>Now it is easy to check whether a number is abundant. Simply compare the sum of its divisors with the number itself:</p>
+<pre><code class="language-scala">private def isAbundant(n: Int): Boolean = divisors(n).sum &gt; n
+</code></pre>
+<p>But how do we tell if a number is the sum of two abundant numbers? Checking all possibilities would be
+inefficient. In the worst case, we would need to check every pair of numbers, which leads to \(O(n^2))\)
+complexity. But there’s a way to make it linear!</p>
+<p>If we subtract an abundant number \(a\) of ouf the number \(n\) we’re checking, then we only need to see whether
+the different is also abundant. There is one problem, however, with our simple <code>isAbundant</code> method. It recomputes the
+divisors every time, which is wasteful.</p>
+<p>Once we know all the abundant numbers within a given range, we determine whether a number is abundant
+(within that range) by simply checking if it’s inside the set of known abundant numbers.
+The wording here is crucial, string <code>Set</code> rather than a <code>List</code> to do that search is crucial.</p>
+<p>Here’s the complete solution:</p>
+<pre><code class="language-scala">object Euler023 extends EulerApp {
+  override def execute(): Any = {
+    val limit = 28123
+    val abundantNumbers = (1 to limit).filter(isAbundant)
+    val abundantNumbersSet = abundantNumbers.toSet
+    (1 to limit).filterNot { n =&gt;
+      isSumOfTwoAbundant(n, abundantNumbers, abundantNumbersSet)
+    }.sum
+  }
+
+  private def isSumOfTwoAbundant(
+      n: Int,
+      abundantNumbers: Seq[Int],
+      abundantNumbersSet: Set[Int]
+  ): Boolean =
+    abundantNumbers.takeWhile(_ &lt;= n).exists { a =&gt;
+      abundantNumbersSet.contains(n - a)
+    }
+
+  private def isAbundant(n: Int): Boolean = divisors(n).sum &gt; n
+
+  private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+    case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+    case _               =&gt; List()
+  }
+}
+</code></pre>
+<p>On my notebook it runs in less than a second.</p>
 
                     </main>
 

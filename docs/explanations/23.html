@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Page not found - A Guide to Project Euler in Scala</title>
-        <base href="/">
+        <title>Non-Abundant Sums - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -13,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -35,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-b2bf3814.js";
+            window.path_to_searchindex_js = "../searchindex-b2bf3814.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-89c2b06d.js"></script>
+        <script src="../toc-89c2b06d.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -108,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -143,7 +142,7 @@
                     <h1 class="menu-title">A Guide to Project Euler in Scala</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -177,13 +176,74 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1 id="non-abundant-sums"><a class="header" href="#non-abundant-sums">Non-Abundant Sums</a></h1>
+<p>A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
+For example, the sum of the proper divisors of \(28\) would be \(1 + 2 + 4 + 7 + 14 = 28\), which means that
+\(28\) is a perfect number.</p>
+<p>A number \(n\) is called deficient if the sum of its proper divisors is less than \(n\) and it is called
+abundant if this sum exceeds \(n\).</p>
+<p>As \(12\) is the smallest abundant number, \(1 + 2 + 3 + 4 + 6 = 16\), the smallest number that can be written as
+the sum of two abundant numbers is \(24\). By mathematical analysis, it can be shown that all integers greater
+than \(28123\) can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any
+further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two
+abundant numbers is less than this limit.</p>
+<p>Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.</p>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
+<p>We can obtain the divisors by reusing the code from Problem 21:</p>
+<pre><code class="language-scala">private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+  case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+  case _               =&gt; List()
+}
+</code></pre>
+<p>Now it is easy to check whether a number is abundant. Simply compare the sum of its divisors with the number itself:</p>
+<pre><code class="language-scala">private def isAbundant(n: Int): Boolean = divisors(n).sum &gt; n
+</code></pre>
+<p>But how do we tell if a number is the sum of two abundant numbers? Checking all possibilities would be
+inefficient. In the worst case, we would need to check every pair of numbers, which leads to \(O(n^2))\)
+complexity. But there’s a way to make it linear!</p>
+<p>If we subtract an abundant number \(a\) of ouf the number \(n\) we’re checking, then we only need to see whether
+the different is also abundant. There is one problem, however, with our simple <code>isAbundant</code> method. It recomputes the
+divisors every time, which is wasteful.</p>
+<p>Once we know all the abundant numbers within a given range, we determine whether a number is abundant
+(within that range) by simply checking if it’s inside the set of known abundant numbers.
+The wording here is crucial, string <code>Set</code> rather than a <code>List</code> to do that search is crucial.</p>
+<p>Here’s the complete solution:</p>
+<pre><code class="language-scala">object Euler023 extends EulerApp {
+  override def execute(): Any = {
+    val limit = 28123
+    val abundantNumbers = (1 to limit).filter(isAbundant)
+    val abundantNumbersSet = abundantNumbers.toSet
+    (1 to limit).filterNot { n =&gt;
+      isSumOfTwoAbundant(n, abundantNumbers, abundantNumbersSet)
+    }.sum
+  }
+
+  private def isSumOfTwoAbundant(
+      n: Int,
+      abundantNumbers: Seq[Int],
+      abundantNumbersSet: Set[Int]
+  ): Boolean =
+    abundantNumbers.takeWhile(_ &lt;= n).exists { a =&gt;
+      abundantNumbersSet.contains(n - a)
+    }
+
+  private def isAbundant(n: Int): Boolean = divisors(n).sum &gt; n
+
+  private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
+    case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
+    case _               =&gt; List()
+  }
+}
+</code></pre>
+<p>On my notebook it runs in less than a second.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../explanations/22.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
 
 
                         <div style="clear: both"></div>
@@ -192,6 +252,9 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../explanations/22.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
 
             </nav>
 
@@ -210,13 +273,13 @@
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
