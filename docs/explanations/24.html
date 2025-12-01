@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Amicable Numbers - A Guide to Project Euler in Scala</title>
+        <title>Lexicographic Permutations - A Guide to Project Euler in Scala</title>
 
 
         <!-- Custom HTML head -->
@@ -176,77 +176,32 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="amicable-numbers"><a class="header" href="#amicable-numbers">Amicable Numbers</a></h1>
-<p>Let \(d(n)\) be defined as the sum of proper divisors of \(n\) (numbers less than \(n\) which divide evenly
-into \(n\). If \(d(a) = b\) and \(d(b) = a\), where \(a \neq b\), then \(a\) and \(b\) are an
-amicable pair and each of \(a\) and \(b\) are called amicable numbers.</p>
-<p>For example, the proper divisors of \(220\) are \(1,2,4,5,10,11,20,22,44,55\) and \(110\); therefore
-\(d(220) = 284\). The proper divisors of \(284\) are \(1,2,4,71\) and \(142\); so \(d(284) = 220\).</p>
-<p>Evaluate the sum of all the amicable numbers under \(10000\).</p>
-<h2 id="lets-make-it-easier"><a class="header" href="#lets-make-it-easier">Let’s make it easier</a></h2>
-<p>First thing to crack is how to calculate the divisors efficiently. Should we use prime factors? Perhaps, but as a
-rule of thumb I always start with a simpler approach and move on to a more advanced one if the simple one is not
-good enough.</p>
-<p>If we wanted to find all the divisors of 220, how many numbers do we need to check? We can check from \(2\)
-to \(110 (220 / 2))), but there’s a better way. Logically, if \(220\) is divisible by \(2\) and we get 110 as
-a result, then it must be divisible by \(110\) as well. That’s a strong hint that we don’t need to check all the
-numbers.</p>
-<p>How many do we need to check? \(220\) isn’t a great example, so, let’s switch to \(100\), this will be more
-intuitive. We know that it’s divisible by \(2\), the result of the division is \(50\). We have our first two
-divisors. Next divisor is \(4\), the result is \(25\). Now we have four divisors: \(2, 4, 25, 50).</p>
-<p>Next divisor is \(5\) and \(20\), because \(100 ÷ 5 = 20\). Another one is \(10\). Now that’s a pretty
-interesting coincidence, that \(100 ÷ 10\) is also \(10\). We no longer have two numbers, just one. Something
-to keep in mind when designing the algorithm.</p>
-<p>Do we need to check further? Let’s pretend that 100 is divisible by \(11\). Obviously it isn’t, but let’s just
-pretend for a while! In order to get the second number we’d divide \(100\) by \(11\) and it would be a number
-smaller than \(10\). Which means that it’s a number that we should’ve already found before. The conclusion is, then,
-that we don’t need to check anything past \(10\).</p>
-<p>\(10\) is a square root of \(100\). As long as we keep adding two divisors at once, there’s no need to go past the
-square root.</p>
+                        <h1 id="lexicographic-permutations"><a class="header" href="#lexicographic-permutations">Lexicographic Permutations</a></h1>
+<p>A permutation is an ordered arrangement of objects. For example, \(3124\) is one possible permutation of the digits
+\(1, 2, 3\) and \(4\). If all of the permutations are listed numerically or alphabetically, we call it
+lexicographic order. The lexicographic permutations of \(0\), \(1\) and \(2\) are:</p>
+<p>\begin{align}
+012, 021, 102, 120, 201, 210
+\end{align}</p>
+<p>What is the millionth lexicographic permutation of the digits \(0, 1, 2, 3, 4, 5, 6, 7, 8\) and \(9\)?</p>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
-<p>Let’s try to write a function that calculates the divisors based on our previous findings. We also need to keep in mind
-that every number is divisible by one, so we can start the iteration from \(2\).</p>
-<pre><code class="language-scala">private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
-  case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
-  case _ =&gt; List()
+<p>Scala’s standard library is so good that this problem can be solved in just a single line.
+The <code>.permutations</code> create permutations, already in lexicographic order, so we just need to find the millionth one.</p>
+<pre><code class="language-scala">object Euler024 extends EulerApp {
+  override def execute(): String = "0123456789".permutations.drop(999_999).next()
 }
 </code></pre>
-<p>The code above does exactly what was described before. If <code>i</code> is a divisor, <code>n % i == 0</code>, then we’ve found two of them,
-the: <code>List(i, n / i)</code>.</p>
-<p>We’re not very close to the complete solution. All we have to do left is to calculate the sum of divisors of
-numbers under \(10000\), then use that information to find the amicable numbers.</p>
-<pre><code class="language-scala">object Euler021 extends EulerApp {
-  override def execute(): Any = {
-    val divisorSums = (0 to 10000).map(n =&gt; divisors(n).sum)
-    divisorSums.zipWithIndex.collect {
-      case (sum, index) if sum &lt; 10000 &amp;&amp; sum != index &amp;&amp; index == divisorSums(sum) =&gt;
-        index
-    }.sum
-  }
-
-  private def divisors(n: Int): Seq[Int] = 1 +: (2 to Math.sqrt(n).toInt).flatMap {
-    case i if n % i == 0 =&gt; if (i != n / i) List(i, n / i) else List(i)
-    case _ =&gt; List()
-  }
-}
-</code></pre>
-<p>In my solution, I’m storing the sum of divisors in a <code>Seq</code>, where <code>Seq(1)</code> represents the sum of divisors of <code>1</code>.</p>
-<p>If you think about the signature of <code>divisors(n: Int): Seq[Int]</code>, we don’t need to return the <code>Seq[Int]</code> at all here.
-We’re interested in the sum, so <code>Int</code> is enough. But with sums alone, debugging would get much more difficult if you
-made a mistake in calculating the divisors. It’s up to you though.</p>
-<p>In the end, the current solution is pretty fast, so we can stop here and keep it as it is.</p>
+<p>It’s all <code>Iterator</code>-based, which means that there’s no need to store all the million permutations in the memory.
+Perfectly readable and efficient. I wish all problems could be solved like that!</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../explanations/20.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../explanations/23.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../explanations/22.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -254,13 +209,10 @@ made a mistake in calculating the divisors. It’s up to you though.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../explanations/20.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../explanations/23.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../explanations/22.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>

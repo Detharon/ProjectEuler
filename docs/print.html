@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-b2bf3814.js";
+            window.path_to_searchindex_js = "searchindex-95903a80.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-89c2b06d.js"></script>
+        <script src="toc-9a6d0af9.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1802,6 +1802,24 @@ The wording here is crucial, string <code>Set</code> rather than a <code>List</c
 }
 </code></pre>
 <p>On my notebook it runs in less than a second.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="lexicographic-permutations"><a class="header" href="#lexicographic-permutations">Lexicographic Permutations</a></h1>
+<p>A permutation is an ordered arrangement of objects. For example, \(3124\) is one possible permutation of the digits
+\(1, 2, 3\) and \(4\). If all of the permutations are listed numerically or alphabetically, we call it
+lexicographic order. The lexicographic permutations of \(0\), \(1\) and \(2\) are:</p>
+<p>\begin{align}
+012, 021, 102, 120, 201, 210
+\end{align}</p>
+<p>What is the millionth lexicographic permutation of the digits \(0, 1, 2, 3, 4, 5, 6, 7, 8\) and \(9\)?</p>
+<h2 id="solution-23"><a class="header" href="#solution-23">Solution</a></h2>
+<p>Scala’s standard library is so good that this problem can be solved in just a single line.
+The <code>.permutations</code> create permutations, already in lexicographic order, so we just need to find the millionth one.</p>
+<pre><code class="language-scala">object Euler024 extends EulerApp {
+  override def execute(): String = "0123456789".permutations.drop(999_999).next()
+}
+</code></pre>
+<p>It’s all <code>Iterator</code>-based, which means that there’s no need to store all the million permutations in the memory.
+Perfectly readable and efficient. I wish all problems could be solved like that!</p>
 
                     </main>
 

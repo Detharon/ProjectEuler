@@ -25,3 +25,4 @@
   - [Amicable Numbers](explanations/21.md)
   - [Names Scores](explanations/22.md)
   - [Non-Abundant Sums](explanations/23.md)
+  - [Lexicographic Permutations](explanations/24.md)
