@@ -6,3 +6,4 @@ title = "A Guide to Project Euler in Scala"
 
 [output.html]
 mathjax-support = true
+cname = "euler.detharon.com"
