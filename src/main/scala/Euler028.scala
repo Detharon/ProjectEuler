@@ -1,7 +1,8 @@
 object Euler028 extends EulerApp {
 
   override def execute(): Long = {
-    1 + Iterator.from(3, 2)
+    1 + Iterator
+      .from(3, 2)
       .takeWhile(_ <= 1001)
       .map(sumForDiagonal(_))
       .sum
