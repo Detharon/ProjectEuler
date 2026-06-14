@@ -27,3 +27,4 @@
   - [Non-Abundant Sums](explanations/23.md)
   - [Lexicographic Permutations](explanations/24.md)
   - [1000-digit Fibonacci Number](explanations/25.md)
+  - [Reciprocal Cycles](explanations/26.md)
