@@ -1,7 +1,7 @@
 import scala.annotation.tailrec
 
 object Euler026 extends EulerApp {
-  override def execute(): Any = (1 to 1000).maxBy(findCycleLength)
+  override def execute(): Any = (1 until 1000).maxBy(findCycleLength)
 
   private type Index = Int
   private type Remainder = Int
@@ -15,7 +15,7 @@ object Euler026 extends EulerApp {
         case Some(index) => pastResults.size - index
         case None        =>
           remainder match {
-            case 0                        => pastResults.size
+            case 0                        => 0
             case r if remainder < divisor =>
               val newRemainder = remainder * 10
               findCycleLength(newRemainder, pastResults + (remainder -> pastResults.size))
@@ -29,6 +29,6 @@ object Euler026 extends EulerApp {
       }
     }
 
-    findCycleLength(remainder = 10, pastResults = Map.empty)
+    findCycleLength(remainder = 1 % divisor, pastResults = Map.empty)
   }
 }
