@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4d9fb6ba.js";
+            window.path_to_searchindex_js = "searchindex-18ee6855.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-b9e1f227.js"></script>
+        <script src="toc-47f0259e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2085,6 +2085,78 @@ not what we need, right? To keep it clean, one could write a small helper like t
   }
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="number-spiral-diagonals"><a class="header" href="#number-spiral-diagonals">Number Spiral Diagonals</a></h1>
+<p>Starting with the number \(1\) and moving to the right in a clockwise direction a \(5\) by \(5\) spiral is formed
+as follows:</p>
+<div style="
+    display: flex;
+    justify-content: center;
+">
+    
+<div style="
+        display: grid;
+        grid-template-columns: repeat(5, 2ch);
+        gap: 0.3em;
+        font-family: monospace;
+        text-align: center;
+        line-height: 1.4;
+    ">
+        <span style="color:red;font-weight:bold;">21</span><span>22</span><span>23</span><span>24</span><span style="color:red;font-weight:bold;">25</span>
+        <span>20</span><span style="color:red;font-weight:bold;">7</span><span>8</span><span style="color:red;font-weight:bold;">9</span><span>10</span>
+        <span>19</span><span>6</span><span style="color:red;font-weight:bold;">1</span><span>2</span><span>11</span>
+        <span>18</span><span style="color:red;font-weight:bold;">5</span><span>4</span><span style="color:red;font-weight:bold;">3</span><span>12</span>
+        <span style="color:red;font-weight:bold;">17</span><span>16</span><span>15</span><span>14</span><span style="color:red;font-weight:bold;">13</span>
+    </div>
+
+</div>
+
+<p>It can be verified that the sum of the numbers on the diagonals is \(101\).</p>
+<p>What is the sum of the numbers on the diagonals in a \(1001\) by \(1001\) spiral formed in the same way?</p>
+<h1 id="solution-27"><a class="header" href="#solution-27">Solution</a></h1>
+<p>In that kind of problems I usually try to figure out the formula of how the numbers increase. We could try to draw the
+whole array, but Project Euler problems aren’t about brute strength. Let’s try it!</p>
+<p>The first fact: all sums of the diagonals will eventually end up in the middle, where we have 1. So, we’ll always need
+to add 1 to our result.</p>
+<p>Each “layer” of the array grows proportionally. They always have 4 numbers on each diagonal.</p>
+<p>On the first “layer”, the outermost numbers of the 3x3 spiral, we have: \(3, 5, 7, 9\).</p>
+<p>On the next one, for a 5x5 spiral: \(13, 17, 21, 25\).
+Is there any pattern they follow?</p>
+<p>There are always 4 numbers, and they increase linearly.</p>
+<p>In the 3x3 spiral, they increase by 2.</p>
+<p>In a 5x5 spiral, they increase by 4.</p>
+<p>If you draw a 7x7 spiral, you could see that they increase by 6. It’s kind of logical, that the increase depends
+on the length of the spiral: it’s just length - 1.</p>
+<p>What about the initial number? What I noticed is that for a 3x3 spiral, the biggest number is 9.
+For a 5x5 spiral it’s 25. That looks like a square. So, if we use <code>n</code> for the length of the spiral, the numbers that
+it’s composed of are as follows:</p>
+<ul>
+<li>n * n</li>
+<li>n * n - (n - 1)</li>
+<li>n * n - 2 * (n - 1)</li>
+<li>n * n - 3 * (n - 1)</li>
+</ul>
+<p>All we need to do is to substitute the <code>n</code> with the spiral length, starting from 3. We increase <code>n</code> by two until we
+hit 1001. And don’t forget about the initial 1.</p>
+<pre><code class="language-scala">object Euler028 extends EulerApp {
+
+  override def execute(): Long = {
+    1 + Iterator
+      .from(3, 2)
+      .takeWhile(_ &lt;= 1001)
+      .map(sumForDiagonal)
+      .sum
+  }
+
+  private def sumForDiagonal(n: Int): Int = {
+    n * n +
+      n * n - (n - 1) +
+      n * n - 2 * (n - 1) +
+      n * n - 3 * (n - 1)
+  }
+}
+</code></pre>
+<p>That’s all. The solution is pretty neat, it does exactly what we did in a pen and paper approach.</p>
 
                     </main>
 
