@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-662f2391.js";
+            window.path_to_searchindex_js = "searchindex-6a8c98d1.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-a88be35b.js"></script>
+        <script src="toc-b9e1f227.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2018,6 +2018,73 @@ object Euler026 extends EulerApp {
 <p>The implementation itself is pretty straightforward. There’s nothing worth discussing that wasn’t covered before,
 as it’s a standard tail recursive solution, that could’ve been a simple loop in other languages.
 d</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="quadratic-primes"><a class="header" href="#quadratic-primes">Quadratic Primes</a></h1>
+<p>Euler discovered the remarkable quadratic formula:</p>
+<p>\begin{align}
+n^{2} + n + 41
+\end{align}</p>
+<p>It turns out that the formula will produce \(40\) primes for the consecutive integer values \(0 \leq n \leq 39\).
+However, when \(n = 40, 40^{2} + 40 + 41 = 40(40 + 1) + 41\) is divisible by \(41\), and certainly when
+\(n = 41, 41^{2} + 41 + 41\) is clearly divisible by \(41\).</p>
+<p>The incredible formula \(n^{2} - 79n + 1601\) was discovered, which produces \(80\) primes for the consecutive
+values \(0 \leq n \leq 79\). The product of the coefficients, \(-79\) and \(1601\), is \(-126479\).</p>
+<p>Considering quadratics of the form:</p>
+<p>     \(n^2 + an + b\), where \(|a| &lt; 1000\) and \(|b| \leq 1000\)</p>
+<p>     e.g. \(|11| = 11\) and \(|-4| = 4\)</p>
+<p>Find the product of the coefficients, \(a\) and \(b\), for the quadratic expression that produces the
+maximum number of primes for consecutive values of \(n\), starting with \(n = 0\) .</p>
+<h1 id="solution-26"><a class="header" href="#solution-26">Solution</a></h1>
+<p>That’s a long problem description for a relatively easy task. It looks daunting, but in reality it’s quite simple</p>
+<p>We need to find <code>a</code> and <code>b</code> for which the consecutive values of <code>n</code> produce the largest amount of primes.
+Because the constraints are relatively low, we don’t need to optimize much, a brute-force solution will work just fine.</p>
+<p>Oh well, maybe let’s just do one! Take a look at the formula here: \(n^2 + an + b\)</p>
+<p>Try substituting <code>n</code> and think if you can spot a certain property of <code>a</code> or <code>b</code> that can limit what we need to check.</p>
+<p>Can you see it? Hint, try: <code>n = 0</code></p>
+<p>If the <code>n = 0</code>, then we’re left with just <code>b</code>. It means that if we’re looking for consecutive values of primes,
+the first prime must be a number when <code>n = 0</code>, and in the formula there’s just <code>b</code>. So, <code>b</code> must be a prime!</p>
+<pre><code class="language-scala">import EulerHelper.naiveIsPrime
+
+object Euler027 extends EulerApp {
+
+  override def execute(): Int = {
+    val coefficients = for {
+      a &lt;- -999 until 1000
+      b &lt;- 2 to 1000 if b.naiveIsPrime
+    } yield (a, b)
+
+    val (a, b) = coefficients.maxBy { case (a, b) =&gt;
+      consecutivePrimes(a, b)
+    }
+
+    a * b
+  }
+
+  private def consecutivePrimes(a: Int, b: Int): Int =
+    Iterator.from(0).takeWhile { n =&gt;
+      (n * n + n * a + b).naiveIsPrime
+    }.length
+
+}
+</code></pre>
+<h2 id="final-notes"><a class="header" href="#final-notes">Final notes</a></h2>
+<p>The solution works relatively fast. If we had longer prime sequences, this part could’ve been a bit troublesome:</p>
+<pre><code class="language-scala">Iterator.from(0).takeWhile { n =&gt;
+  (n * n + n * a + b).naiveIsPrime
+}.length
+</code></pre>
+<p>As you can see, we check <code>.length</code> at the very end, meaning that all the primes are collected to a list. That’s
+not what we need, right? To keep it clean, one could write a small helper like this one:</p>
+<pre><code class="language-scala">extension[A] (i: Iterator[A]) {
+  private def countWhile(f: A =&gt; Boolean): Int = {
+    var count = 0
+    while (i.hasNext &amp;&amp; f(i.next())) {
+      count += 1
+    }
+    count
+  }
+}
+</code></pre>
 
                     </main>
 
