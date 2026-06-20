@@ -30,3 +30,4 @@
   - [Reciprocal Cycles](explanations/26.md)
   - [Quadratic Primes](explanations/27.md)
   - [Number Spiral Diagonals](explanations/28.md)
+  - [Distinct Powers](explanations/29.md)
