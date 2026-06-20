@@ -31,3 +31,4 @@
   - [Quadratic Primes](explanations/27.md)
   - [Number Spiral Diagonals](explanations/28.md)
   - [Distinct Powers](explanations/29.md)
+  - [Digit Fifth Powers](explanations/30.md)
