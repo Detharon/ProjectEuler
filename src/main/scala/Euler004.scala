@@ -6,5 +6,5 @@ object Euler004 extends EulerApp {
     .filter(n => isPalindrome(n.toString))
     .max
 
-  def isPalindrome(s: String): Boolean = s == s.reverse
+  private def isPalindrome(s: String): Boolean = s == s.reverse
 }

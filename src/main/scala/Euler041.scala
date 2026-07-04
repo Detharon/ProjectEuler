@@ -1,3 +1,5 @@
+import EulerHelper.naiveIsPrime
+
 object Euler041 extends EulerApp {
 
   /** Problem 41: We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly
@@ -14,7 +16,7 @@ object Euler041 extends EulerApp {
     * We also need to make sure that the generated permutations are sorted by a descending order, so the first prime
     * number found is the biggest one.
     */
-  override def execute(): Any = generatePandigitals("987654321").find(isPrime)
+  override def execute(): Any = generatePandigitals("987654321").find(naiveIsPrime)
 
   private def generatePandigitals(from: String): LazyList[Int] =
     if (from.isEmpty) LazyList.empty
@@ -22,8 +24,4 @@ object Euler041 extends EulerApp {
       LazyList
         .from(from.permutations.map(_.toInt))
         .sorted(using Ordering[Int].reverse) #::: generatePandigitals(from.tail)
-
-  private def isPrime(n: Int): Boolean = n match
-    case n if n < 2 => false
-    case _          => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
 }
