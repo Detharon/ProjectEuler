@@ -1,3 +1,5 @@
+import EulerHelper.naiveIsPrime
+
 import scala.annotation.tailrec
 import scala.collection.mutable
 
@@ -11,7 +13,6 @@ object Euler047 extends EulerApp {
 
     while (consecutiveUnique < consecutiveRequirement) {
       val factors = factorsFor(n).distinct
-      println(s"Factors of $n are $factors")
 
       if (factors.size == consecutiveRequirement) {
         consecutiveUnique += 1
@@ -29,10 +30,21 @@ object Euler047 extends EulerApp {
 
   private def factorsFor(n: Int): List[Int] = {
     @tailrec
-    def factorsHelper(n: Int, currentPrime: Int, primesIterator: Iterator[Int], factors: List[Int]): List[Int] = {
-      if (isPrime(n)) factors :+ n
+    def factorsHelper(
+        n: Int,
+        currentPrime: Int,
+        primesIterator: Iterator[Int],
+        factors: List[Int]
+    ): List[Int] = {
+      if (naiveIsPrime(n)) factors :+ n
       else {
-        if (n % currentPrime == 0) factorsHelper(n / currentPrime, currentPrime, primesIterator, factors :+ currentPrime)
+        if (n % currentPrime == 0)
+          factorsHelper(
+            n / currentPrime,
+            currentPrime,
+            primesIterator,
+            factors :+ currentPrime
+          )
         else {
           factorsHelper(n, primesIterator.next(), primesIterator, factors)
         }
@@ -46,12 +58,8 @@ object Euler047 extends EulerApp {
   private def primes: LazyList[Int] = 2 #:: nextPrime(3)
 
   private def nextPrime(from: Int): LazyList[Int] = {
-    if (isPrime(from)) from #:: nextPrime(from + 1)
+    if (naiveIsPrime(from)) from #:: nextPrime(from + 1)
     else nextPrime(from + 1)
   }
-
-  private def isPrime(n: Long): Boolean = n match
-    case n if n < 2 => false
-    case _ => (2 to Math.sqrt(n.toDouble).toInt).forall(n % _ != 0)
 
 }
